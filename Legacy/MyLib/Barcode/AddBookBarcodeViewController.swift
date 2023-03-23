@@ -72,7 +72,6 @@ extension AddBookBarcodeViewController {
     
     func showConfirmBook(isbn: String) {
         let confirmView = ConfirmBookViewController()
-        confirmView.isbnValue = isbn
         self.navigationController?.pushViewController(confirmView, animated: true)
     }
 }

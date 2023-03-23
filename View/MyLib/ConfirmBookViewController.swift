@@ -8,23 +8,71 @@
 import SnapKit
 import UIKit
 import Kingfisher
+import RxCocoa
+import RxSwift
 
 // MARK: - 책 확인 view controller
 class ConfirmBookViewController: UIViewController {
-    let pageInputPopUp = AllPageInputPopUp()
-    let bookDetailVC = BookDetailViewController()
-    var totalPage: Int = 0
+    let registerButton = UIBarButtonItem(title: "등록")
+    let layout_main = ConfirmBookView()
+    let confirmBookViewModel = ConfirmBookViewModel()
+    var disposeBag = DisposeBag()
     
-    let stopWatchView = ReadingTime()
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setUpView()
-        setConstraints()    
-        getBookSearchAPI()
-        pageInputPopUp.submitButton.addTarget(self, action: #selector(submitPopUp), for: .touchUpInside)
+        
+        self.setNavigationCustom(title: "")
+        self.registerButton.tintColor = .textOrange
+        self.navigationItem.rightBarButtonItem = registerButton
+        
+        self.layout_main.initViews(superView: self.view)
+        self.setupBindings()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.disposeBag = DisposeBag()
+    }
+    
+    private func setupBindings() {
+        self.registerButton.rx
+            .tap
+            .subscribe(onNext: { [weak self] in
+                self?.navigationController?.popToRootViewController(animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        self.confirmBookViewModel.bookTitle
+            .observe(on: MainScheduler.instance)
+            .bind(to: self.layout_main.titleLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        self.confirmBookViewModel.bookAuthor
+            .observe(on: MainScheduler.instance)
+            .bind(to: self.layout_main.authorLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        self.confirmBookViewModel.bookImage
+            .observe(on: MainScheduler.instance)
+            .filter { $0 != nil }
+            .bind(to: self.layout_main.imageView.rx.image)
+            .disposed(by: disposeBag)
+        
+        self.confirmBookViewModel.bookPubAndDate
+            .observe(on: MainScheduler.instance)
+            .bind(to: self.layout_main.publisherLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        self.confirmBookViewModel.bookSummary
+            .observe(on: MainScheduler.instance)
+            .bind(to: self.layout_main.descriptionTextView.rx.text)
+            .disposed(by: disposeBag)
+    }
+
+}
+
+// MARK: - 레이아웃 용 extension
+class ConfirmBookView {
     let layout_book = UIView()
     let imageView = UIImageView()
     let titleLabel = UILabel()
@@ -44,120 +92,21 @@ class ConfirmBookViewController: UIViewController {
     let divideView = UIView()
     let upperDivideView = UIView()
     
-    let network = Network()
-    
-    var isbnValue: String = "9788995151204"
-    var bookTitle: String = ""
-    var bookImageURL: String = ""
-    var bookAuthor: String = ""
-    var bookPublisher: String = ""
-    var bookDate: String = ""
-    var bookDes: String = ""
-    var bookIsbn: String = ""
-
-}
-
-// MARK: - event 처리용 extension
-extension ConfirmBookViewController {
-    @objc func allPageInputPopUp(_ selector: UIBarButtonItem) {
-        pageInputPopUp.showPopUp(with: "책갈피",
-                              message: "이 책의 총 페이지를 입력해주세요",
-                              on: self)
-    }
-    
-    @objc func submitPopUp(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.25,
-                       animations: {
-            self.pageInputPopUp.popUpView.frame = CGRect(x: 40,
-                                                         y: self.view.frame.size.height,
-                                                         width: self.view.frame.size.width-80,
-                                                         height: 200)
-        }, completion: { done in
-            if done {
-                UIView.animate(withDuration: 0.25, animations: {
-                    self.pageInputPopUp.backgroundView.alpha = 0
-                }, completion: { done in
-                    self.pageInputPopUp.popUpView.removeFromSuperview()
-                    self.pageInputPopUp.backgroundView.removeFromSuperview()
-                    
-                    guard let page = self.pageInputPopUp.allPageTextField.text else {return}
-                    if (page.isEmpty) {return}
-                    
-                    self.totalPage = Int(page) ?? -2
-                    self.stopWatchView.totalPage = self.totalPage
-                    self.addToCell()
-                    
-                })
-            }
-        })
-    }
-    
-    func addToCell() {
-    if (self.bookTitle.isEmpty || self.bookAuthor.isEmpty) {
-            self.view.makeToast("책 정보가 정확하지 않습니다.", duration: 2, position: .bottom)
-            return
-        }
+    func initViews(superView: UIView) {
+        superView.addSubview(scrollView)
+        superView.backgroundColor = .white
         
-        network.postRegisterBooks(title: self.bookTitle, img_url: self.bookImageURL, author: self.bookAuthor, pubilsher: self.bookPublisher, isbn: self.bookIsbn, totalPage: self.totalPage, completion: {
-            self.navigationController?.popToRootViewController(animated: true)
-        })
-    }
-    
-    @objc func didTapShowAll(_ sender: UIButton) {
-        self.showShortButton.isHidden = false
-        sender.isHidden = true
-        self.descriptionTextView.snp.remakeConstraints() { make in
-            make.leading.trailing.equalToSuperview().inset(23)
-            make.top.equalTo(label_summary.snp.bottom).offset(15)
-            make.height.equalTo(self.descriptionTextView.intrinsicContentSize.height)
-        }
-        scrollView.contentLayoutGuide.snp.remakeConstraints() { make in
-            make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(self.scrollView.frame.height + self.descriptionTextView.frame.height + 30)
-        }
-    }
-    
-    @objc func didTapShowShort(_ sender: UIButton) {
-        self.showallButton.isHidden = false
-        sender.isHidden = true
-        self.descriptionTextView.snp.remakeConstraints() { make in
-            make.leading.trailing.equalToSuperview().inset(23)
-            make.top.equalTo(label_summary.snp.bottom).offset(15)
-            make.height.equalTo(100)
-        }
-        scrollView.contentLayoutGuide.snp.remakeConstraints() { make in
-            make.edges.equalTo(self.view.safeAreaLayoutGuide)
-        }
-    }
-
-}
-
-
-// MARK: - 레이아웃 용 extension
-extension ConfirmBookViewController {
-    // Set Up Functions
-    func setUpView() {
-        self.view.addSubview(scrollView)
-        self.view.backgroundColor = .white
         scrollView.addSubview(contentView)
         contentView.addSubviews(layout_book, titleLabel, authorLabel, publisherLabel, descriptionTextView, showallButton, showShortButton, divideView, upperDivideView, label_summary)
-        setNavCustom()
-    }
-    
-    func setNavCustom() {
-        self.setNavigationCustom(title: "")
-        self.setNavigationLabelButton(title: "등록", action: #selector(allPageInputPopUp))
-    }
-    
-    func setConstraints() {
+        
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.snp.makeConstraints() { make in
-            make.edges.equalTo(self.view.safeAreaLayoutGuide)
+            make.edges.equalTo(superView.safeAreaLayoutGuide)
         }
         scrollView.contentLayoutGuide.snp.makeConstraints() { make in
-            make.edges.equalTo(self.view.safeAreaLayoutGuide)
+            make.edges.equalTo(superView.safeAreaLayoutGuide)
         }
-
+        
         contentView.snp.makeConstraints() { make in
             make.edges.equalTo(scrollView.contentLayoutGuide)
         }
@@ -169,7 +118,7 @@ extension ConfirmBookViewController {
             make.centerX.equalTo(contentView.snp.centerX)
         }
         upperDivideView.layer.cornerRadius = 2
-        upperDivideView.backgroundColor = UIColor(red: 0.875, green: 0.875, blue: 0.875, alpha: 1)
+        upperDivideView.backgroundColor = .semiLightGray
         
         layout_book.snp.makeConstraints() { make in
             make.top.equalTo(upperDivideView.snp.bottom).offset(11)
@@ -199,59 +148,50 @@ extension ConfirmBookViewController {
         imageView.backgroundColor = .textLightGray
         
         titleLabel.snp.makeConstraints { make in
-            make.width.equalTo(260)
-            make.centerX.equalTo(imageView.snp.centerX)
+            make.horizontalEdges.equalToSuperview().inset(60)
+            make.centerX.equalToSuperview()
             make.top.equalTo(imageView.snp.bottom).offset(24)
         }
-        titleLabel.text = "제목 정보가 없습니다."
+        titleLabel.setTxtAttribute("제목 정보가 없습니다.", size: 18, weight: .w600, txtColor: .black)
         titleLabel.numberOfLines = 0
-        titleLabel.font = .boldSystemFont(ofSize: 18)
-        titleLabel.textColor = .black
         titleLabel.textAlignment = .center
         
         authorLabel.snp.makeConstraints { make in
-            make.width.equalTo(260)
-            make.centerX.equalTo(titleLabel.snp.centerX)
+            make.horizontalEdges.equalToSuperview().inset(60)
+            make.centerX.equalToSuperview()
             make.top.equalTo(titleLabel.snp.bottom).offset(13)
         }
-        authorLabel.text = "작가 정보가 없습니다."
-        authorLabel.font = .boldSystemFont(ofSize: 15)
-        authorLabel.textColor = UIColor(red: 113/256, green: 113/256, blue: 113/256, alpha: 1)
+        authorLabel.setTxtAttribute("작가 정보가 없습니다.", size: 15, weight: .w600, txtColor: .textGray)
+        authorLabel.numberOfLines = 0
         authorLabel.textAlignment = .center
         
         publisherLabel.snp.makeConstraints { make in
-            make.width.equalTo(260)
-            make.centerX.equalTo(authorLabel.snp.centerX)
+            make.horizontalEdges.equalToSuperview().inset(20)
+            make.centerX.equalToSuperview()
             make.top.equalTo(authorLabel.snp.bottom).offset(8)
         }
-        publisherLabel.text = "출판사 정보가 없습니다."
-        publisherLabel.font = .systemFont(ofSize: 14)
-        publisherLabel.textColor = UIColor(red: 113/256, green: 113/256, blue: 113/256, alpha: 1)
+        publisherLabel.setTxtAttribute("출판사 정보가 없습니다.", size: 14, weight: .w500, txtColor: .textGray)
         publisherLabel.textAlignment = .center
         
         divideView.snp.makeConstraints { make in
-            make.leading.equalTo(contentView)
-            make.trailing.equalTo(contentView)
-            make.height.equalTo(15)
-            make.top.equalTo(publisherLabel.snp.bottom).offset(49)
+            make.horizontalEdges.equalToSuperview()
+            make.height.equalTo(13)
+            make.top.equalTo(publisherLabel.snp.bottom).offset(47)
         }
-        divideView.backgroundColor = UIColor(red: 0.961, green: 0.961, blue: 0.961, alpha: 1)
+        divideView.backgroundColor = .semiLightGray
         
         label_summary.snp.makeConstraints() { make in
             make.top.equalTo(divideView.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(23)
         }
-        label_summary.sizeToFit()
-        label_summary.numberOfLines = 0
-        label_summary.setTxtAttribute("줄거리", size: 15, weight: .semibold, txtColor: .textBoldGray)
+        label_summary.setTxtAttribute("줄거리", size: 15, weight: .w600, txtColor: .black)
         
         descriptionTextView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(23)
             make.top.equalTo(label_summary.snp.bottom).offset(15)
             make.height.equalTo(100)
         }
-        descriptionTextView.sizeToFit()
-        descriptionTextView.setTxtAttribute("설명이 없습니다", size: 14, weight: .regular, txtColor: .black)
+        descriptionTextView.setTxtAttribute("설명이 없습니다", size: 14, weight: .w500, txtColor: .textBoldGray)
         descriptionTextView.textAlignment = .justified
         descriptionTextView.numberOfLines = 0
         
@@ -259,60 +199,42 @@ extension ConfirmBookViewController {
             make.trailing.equalTo(descriptionTextView.snp.trailing)
             make.top.equalTo(descriptionTextView.snp.bottom).offset(7)
         }
-        showallButton.setTitle("전체보기", size: 11, weight: .medium, color: .textGray)
+        showallButton.setTitle("전체보기", size: 11, weight: .w500, color: .textGray)
         showallButton.addTarget(self, action: #selector(didTapShowAll), for: .touchUpInside)
         
         showShortButton.snp.makeConstraints() { make in
             make.trailing.equalTo(descriptionTextView.snp.trailing)
             make.top.equalTo(descriptionTextView.snp.bottom).offset(7)
         }
-        showShortButton.setTitle("닫기", size: 11, weight: .medium, color: .textGray)
+        showShortButton.setTitle("닫기", size: 11, weight: .w500, color: .textGray)
         showShortButton.addTarget(self, action: #selector(didTapShowShort), for: .touchUpInside)
         showShortButton.isHidden = true
     }
     
-    func showContents() {
-        titleLabel.text = self.bookTitle
-        authorLabel.text = self.bookAuthor
-        
-        bookDate.insert(".", at: bookDate.index(bookDate.startIndex, offsetBy: 4))
-        bookDate.insert(".", at: bookDate.index(bookDate.startIndex, offsetBy: 7))
-        publisherLabel.text = "출판사  " + self.bookPublisher + "     발행일  " + bookDate
-        
-        descriptionTextView.text = self.bookDes
-        imageView.kf.indicatorType = .activity
-        imageView.kf.setImage(with: URL(string: self.bookImageURL), placeholder: nil, options: [.transition(.fade(0.5)), .forceRefresh], completionHandler: nil)
+    @objc func didTapShowAll(_ sender: UIButton) {
+        self.showShortButton.isHidden = false
+        sender.isHidden = true
+        self.descriptionTextView.snp.remakeConstraints() { make in
+            make.leading.trailing.equalToSuperview().inset(23)
+            make.top.equalTo(label_summary.snp.bottom).offset(15)
+            make.height.equalTo(self.descriptionTextView.intrinsicContentSize.height)
+        }
+        scrollView.contentLayoutGuide.snp.remakeConstraints() { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.height.equalTo(self.scrollView.frame.height + self.descriptionTextView.frame.height + 50)
+        }
     }
-}
-
-// MARK: - 네트워크 용 extension
-extension ConfirmBookViewController {
-    func getBookSearchAPI() {
-        network.getBookSearch(isbn: self.isbnValue) { response in
-            switch response {
-            case .success(let bookSearchData):
-                if let data = bookSearchData as? BookSearch {
-                    self.bookTitle = data.myData[0].title
-                    self.bookImageURL = data.myData[0].image
-                    self.bookAuthor = data.myData[0].author
-                    self.bookPublisher = data.myData[0].publisher
-                    self.bookDate = data.myData[0].pubdate
-                    self.bookDes = data.myData[0].description
-                    self.bookIsbn = data.myData[0].isbn
-                    
-                    self.showContents()
-                }
-            case .requestErr(let message):
-                print("requestErr: \(message)")
-            case .pathErr:
-                print("pathErr")
-            case .serverErr:
-                print("serverErr")
-            case .networkFail:
-                print("networkFail")
-            case .decodeFail:
-                print("decodeFail")
-            }
+    
+    @objc func didTapShowShort(_ sender: UIButton) {
+        self.showallButton.isHidden = false
+        sender.isHidden = true
+        self.descriptionTextView.snp.remakeConstraints() { make in
+            make.leading.trailing.equalToSuperview().inset(23)
+            make.top.equalTo(label_summary.snp.bottom).offset(15)
+            make.height.equalTo(100)
+        }
+        scrollView.contentLayoutGuide.snp.remakeConstraints() { make in
+            make.edges.equalTo(scrollView.frameLayoutGuide)
         }
     }
 }
