@@ -1,5 +1,5 @@
 //
-//  MyLibTab.swift
+//  MainView.swift
 //  BookMark
 //
 //  Created by JOSUEYEON on 2023/01/08.
@@ -10,14 +10,17 @@ import SnapKit
 import Kingfisher
 
 // MARK: - 나의 서재 탭
-class MyLibTab: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+class MainView: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     let layout = MyLibTabView()
+    let failLayout = NetworkFailMainView()
     
     var books = [[String]]()
     var userImgUrl: String?
     var userStreak: Int?
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        failLayout.initViews(superView: self.view)
         
         layout.layout_collection.layout_books.delegate = self
         layout.layout_collection.layout_books.dataSource = self
@@ -72,7 +75,7 @@ class MyLibTab: UIViewController, UICollectionViewDelegate, UICollectionViewDele
 //}
 
 // MARK: - collection view 데이터 연결: data source
-extension MyLibTab {
+extension MainView {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bookcell", for: indexPath) as? BookCollectionCell else {
             return BookCollectionCell()
@@ -104,7 +107,7 @@ extension MyLibTab {
 }
 
 // MARK: - collection view 반응 연결: delegate
-extension MyLibTab {
+extension MainView {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let item = collectionView.cellForItem(at: indexPath) as? BookCollectionCell else {
             return
