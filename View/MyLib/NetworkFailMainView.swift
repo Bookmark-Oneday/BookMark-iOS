@@ -10,29 +10,46 @@ import SnapKit
 
 // MARK: - MyLibTab 네트워크 연결 실패 view
 class NetworkFailMainView {
-    let img_networkFail = UIImageView()
     let label_title = UILabel()
+    let line = UIView()
+    let img_networkFail = UIImageView()
+    let label_explain = UILabel()
     let label_description = UILabel()
     let btn_retry = UIButton()
     
     func initViews(superView: UIView) {
-        superView.addSubviews(img_networkFail, label_title, label_description, btn_retry)
+        superView.addSubviews(label_title, line, img_networkFail, label_explain, label_description, btn_retry)
         
-        label_title.snp.makeConstraints { make in
+        label_title.snp.makeConstraints() { make in
+            make.top.equalTo(superView.safeAreaLayoutGuide)
+            make.leading.equalToSuperview().offset(23)
+            make.width.equalToSuperview()
+            make.height.equalTo(44)
+        }
+        label_title.setTxtAttribute("책갈피 : 나의 서재", size: 18, weight: .w500, txtColor: .black)
+        
+        line.snp.makeConstraints() { make in
+            make.top.equalTo(label_title.snp.bottom)
+            make.width.equalToSuperview()
+            make.height.equalTo(1)
+        }
+        line.backgroundColor = .lightGray
+        
+        label_explain.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
-        label_title.setTxtAttribute("인터넷 연결이 불안정합니다.", size: 20, weight: .w600, txtColor: .black)
+        label_explain.setTxtAttribute("인터넷 연결이 불안정합니다.", size: 20, weight: .w600, txtColor: .black)
         
         img_networkFail.snp.makeConstraints { make in
             make.size.equalTo(80)
-            make.bottom.equalTo(label_title.snp.top).offset(-32)
+            make.bottom.equalTo(label_explain.snp.top).offset(-32)
             make.centerX.equalToSuperview()
         }
         img_networkFail.image = UIImage(named: "networkFailImg")
         
         label_description.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(label_title.snp.bottom).offset(10)
+            make.top.equalTo(label_explain.snp.bottom).offset(10)
         }
         label_description.numberOfLines = 0
         label_description.textAlignment = .center
