@@ -100,7 +100,7 @@ class MyLibTabMainView: UIViewController {
                 
                 switch cell?.tag {
                 case 0:
-                    self?.navigationController?.pushViewControllerTabHidden(AddBookBarcodeViewController(), animated: true)
+                    self?.navigationController?.pushViewControllerTabHidden(ConfirmBookViewController(), animated: true)
                 default:
                     self?.navigationController?.pushViewControllerTabHidden(BookDetailViewController(), animated: true)
                 }

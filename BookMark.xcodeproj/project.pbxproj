@@ -55,6 +55,8 @@
 		E89F6E5129CC0F9700602075 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E5029CC0F9700602075 /* UIColor+Extension.swift */; };
 		E89F6E5429CC139900602075 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E5329CC139900602075 /* MainViewModel.swift */; };
 		E89F6E5629CC344400602075 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E5529CC344400602075 /* Book.swift */; };
+		E89F6E5829CC48D600602075 /* ConfirmBookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E5729CC48D600602075 /* ConfirmBookViewModel.swift */; };
+		E89F6E5A29CC4F1900602075 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E5929CC4F1900602075 /* UIImage+Extension.swift */; };
 		E8C0535F299896A400CA5D8E /* UserClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C0535E299896A400CA5D8E /* UserClass.swift */; };
 		E8C05366299C7EFB00CA5D8E /* Network_Sueyeon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C05362299C7EFA00CA5D8E /* Network_Sueyeon.swift */; };
 		E8C05367299C7EFB00CA5D8E /* DataClass_sueyeon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C05363299C7EFB00CA5D8E /* DataClass_sueyeon.swift */; };
@@ -131,6 +133,8 @@
 		E89F6E5029CC0F9700602075 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		E89F6E5329CC139900602075 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		E89F6E5529CC344400602075 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		E89F6E5729CC48D600602075 /* ConfirmBookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmBookViewModel.swift; sourceTree = "<group>"; };
+		E89F6E5929CC4F1900602075 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		E8C0535D2998535000CA5D8E /* BookMark.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BookMark.entitlements; sourceTree = "<group>"; };
 		E8C0535E299896A400CA5D8E /* UserClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserClass.swift; sourceTree = "<group>"; };
 		E8C05362299C7EFA00CA5D8E /* Network_Sueyeon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network_Sueyeon.swift; sourceTree = "<group>"; };
@@ -308,6 +312,7 @@
 		E89F6E3929CC0A7100602075 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E89F6E5529CC344400602075 /* Book.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -336,6 +341,7 @@
 				E89F6E4C29CC0F4200602075 /* UIImageView+Extension.swift */,
 				E89F6E4E29CC0F7700602075 /* UIScrollView+Extension.swift */,
 				E89F6E5029CC0F9700602075 /* UIColor+Extension.swift */,
+				E89F6E5929CC4F1900602075 /* UIImage+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -344,7 +350,7 @@
 			isa = PBXGroup;
 			children = (
 				E89F6E5329CC139900602075 /* MainViewModel.swift */,
-				E89F6E5529CC344400602075 /* Book.swift */,
+				E89F6E5729CC48D600602075 /* ConfirmBookViewModel.swift */,
 			);
 			path = MyLib;
 			sourceTree = "<group>";
@@ -592,6 +598,7 @@
 				24A21A392976EA2400AE8BF9 /* DataClass.swift in Sources */,
 				E89F6E4329CC0E9000602075 /* UILabel+Extension.swift in Sources */,
 				24D01FCC299395DB0045DC68 /* BookDetailViewController.swift in Sources */,
+				E89F6E5829CC48D600602075 /* ConfirmBookViewModel.swift in Sources */,
 				E89F6E2A29B5E54C00602075 /* SearchCommunityViewController.swift in Sources */,
 				E8C2B4FB296A8F40000E2030 /* CommunityTab.swift in Sources */,
 				245FED6E2983971100EE02B6 /* JoinCommunityRequest.swift in Sources */,
@@ -637,6 +644,7 @@
 				24D01FC7299395BE0045DC68 /* AddBookBarcodeViewController.swift in Sources */,
 				E8C05369299C7EFB00CA5D8E /* NetworkTintin.swift in Sources */,
 				86C3C2D3296E69630035CFFE /* ConfirmBookViewController.swift in Sources */,
+				E89F6E5A29CC4F1900602075 /* UIImage+Extension.swift in Sources */,
 				E8C2B4FD296A8F6A000E2030 /* ScrapTab.swift in Sources */,
 				E8C2B4F7296A8CC5000E2030 /* OneLineTab.swift in Sources */,
 				E82079462990B72A00B36FC9 /* LoginView.swift in Sources */,
