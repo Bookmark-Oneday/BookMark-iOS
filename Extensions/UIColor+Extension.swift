@@ -1,14 +1,12 @@
 //
-//  Colors.swift
+//  UIColor+Extension.swift
 //  BookMark
 //
-//  Created by JOSUEYEON on 2023/01/08.
+//  Created by JOSUEYEON on 2023/03/23.
 //
 
-import Foundation
 import UIKit
 
-//MARK: - 색 extension
 extension UIColor {
     convenience init(red: Int, green: Int, blue:Int, a:Int = 1){
         self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0,
@@ -26,7 +24,6 @@ extension UIColor {
     
     // MARK: 텍스트 색상
     static let textOrange = UIColor(Hex: 0xF99030)
-    
     static let textLightGray = UIColor(Hex: 0x979797)
     static let textGray = UIColor(Hex: 0x717171)
     static let textBoldGray = UIColor(Hex: 0x434343)
