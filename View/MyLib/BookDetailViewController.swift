@@ -10,8 +10,6 @@ import SnapKit
 
 // MARK: - 책 세부 내용 화면 뷰 컨트롤러
 class BookDetailViewController: UIViewController {
-    let network = NetworkTintin()
-    
     var layout_bookdetail = BookDetailView()
     var bookData: BookDetail?
     
@@ -30,31 +28,6 @@ class BookDetailViewController: UIViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(pageInput(_:)))
         layout_bookdetail.btn_pageinput.addGestureRecognizer(tapGestureRecognizer)
         pageInputPopUp.submitButton.addTarget(self, action: #selector(submitPopUp), for: .touchUpInside)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        setBookData()
-    }
-    
-    // MARK: 책 세부 내용 데이터 바인딩
-    func setBookData() {
-        self.layout_bookdetail.label_title.text = bookData?.title
-        self.layout_bookdetail.label_author.text = bookData?.author
-        
-        if let url = bookData?.imgURL {
-            self.layout_bookdetail.img_book.setImageUrl(url: url)
-        }
-        else {
-            self.layout_bookdetail.img_book.image = UIImage(named: "noBookImg")
-        }
-        self.layout_bookdetail.label_totaltime_data.text = String(describing: bookData?.totalReadingTime ?? 0)
-        self.layout_bookdetail.label_nowpage_data.text = String(describing: bookData?.currentReadingPage ?? 0)
-        self.layout_bookdetail.label_totalpage_data.text = "/ " + String(describing: bookData?.totalPage ?? 0)
-        
-        self.bookID = bookData?.bookID ?? 0
-        self.userID = bookData?.userID ?? 0
-        
-        setProgress(readingPage: bookData?.currentReadingPage ?? 10, animated: false)
     }
     
     private func setProgress(readingPage: Int, totalPage: Int = 354, animated: Bool) {
@@ -93,33 +66,10 @@ class BookDetailViewController: UIViewController {
                     guard let page = self.pageInputPopUp.currentPageTextField.text else {return}
                     if (page.isEmpty) {return}
                     
-                    self.postCurrentPage(curReadPage: Int(page) ?? 0)
-                    
                     self.layout_bookdetail.label_nowpage_data.text = page
                     
                     self.setProgress(readingPage: Int(self.layout_bookdetail.label_nowpage_data.text ?? "0") ?? 10, animated: true)
                 })
-            }
-        })
-    }
-}
-
-extension BookDetailViewController {
-    func postCurrentPage(curReadPage: Int) {
-        network.postTimerStopFixed(bookID: self.bookID, userID: self.userID, totalReadTime: 0, curReadPage: curReadPage, completion: { res in
-            switch res {
-            case .success:
-                print("---[POST] TIMER STOP---")
-            case .decodeFail:
-                print("decode Fail")
-            case .networkFail:
-                print("network Fail")
-            case .pathErr:
-                print("path Err")
-            case .serverErr:
-                print("server Err")
-            default:
-                print("failed")
             }
         })
     }
