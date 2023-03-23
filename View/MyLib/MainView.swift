@@ -12,7 +12,6 @@ import Kingfisher
 // MARK: - 나의 서재 탭
 class MyLibTab: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     let layout = MyLibTabView()
-    let network = Network()
     
     var books = [[String]]()
     var userImgUrl: String?
@@ -27,50 +26,50 @@ class MyLibTab: UIViewController, UICollectionViewDelegate, UICollectionViewDele
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
-        dataReload()
+        //dataReload()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.isNavigationBarHidden = false
     }
-    
-    func dataReload() {
-        getShelfData(completion: {
-            self.layout.bookCount = self.books.count
-            self.layout.initViews(view: self.view, img_url: (self.userImgUrl ?? ""), streaks: (self.userStreak ?? 0))
-        })
-    }
+//
+//    func dataReload() {
+//        getShelfData(completion: {
+//            self.layout.bookCount = self.books.count
+//            self.layout.initViews(view: self.view, img_url: (self.userImgUrl ?? ""), streaks: (self.userStreak ?? 0))
+//        })
+//    }
 }
 
-// MARK: - 네트워크 용 extension
-extension MyLibTab {
-    // 서재 데이터 get
-    func getShelfData(completion: @escaping () -> Void) {
-        self.books.removeAll()
-        self.books.append(["0", "addbook", "", ""])
-        network.getShelf { response in
-            switch response {
-            case .success(let shelf):
-                if let user = (shelf as? Shelf)?.User {
-                    self.userImgUrl = user.img_url
-                    self.userStreak = user.streak
-                }
-                
-                if let book = (shelf as? Shelf)?.Book {
-                    book.forEach({ item in
-                        self.books.append(["\(item.book_id)", item.img_url, item.title, item.author])
-                        self.layout.layout_collection.layout_books.reloadData()
-                    })
-                }
-                completion()
-            default:
-                self.layout.layout_collection.layout_books.reloadData()
-                print("failed")
-            }
-        }
-    }
-}
+//// MARK: - 네트워크 용 extension
+//extension MyLibTab {
+//    // 서재 데이터 get
+//    func getShelfData(completion: @escaping () -> Void) {
+//        self.books.removeAll()
+//        self.books.append(["0", "addbook", "", ""])
+//        network.getShelf { response in
+//            switch response {
+//            case .success(let shelf):
+//                if let user = (shelf as? Shelf)?.User {
+//                    self.userImgUrl = user.img_url
+//                    self.userStreak = user.streak
+//                }
+//
+//                if let book = (shelf as? Shelf)?.Book {
+//                    book.forEach({ item in
+//                        self.books.append(["\(item.book_id)", item.img_url, item.title, item.author])
+//                        self.layout.layout_collection.layout_books.reloadData()
+//                    })
+//                }
+//                completion()
+//            default:
+//                self.layout.layout_collection.layout_books.reloadData()
+//                print("failed")
+//            }
+//        }
+//    }
+//}
 
 // MARK: - collection view 데이터 연결: data source
 extension MyLibTab {
@@ -120,17 +119,17 @@ extension MyLibTab {
         else {
             let vc = BookDetailViewController()
             
-            network.getBookDetail(bookId: item.bookid, completion: { response in
-                switch response {
-                case .success(let book):
-                    if let book = book as? BookDetail {
-                        vc.bookData = book
-                    }
-                    self.navigationController?.pushViewControllerTabHidden(vc, animated: true)
-                default:
-                    print("failed")
-                }
-            })
+//            network.getBookDetail(bookId: item.bookid, completion: { response in
+//                switch response {
+//                case .success(let book):
+//                    if let book = book as? BookDetail {
+//                        vc.bookData = book
+//                    }
+//                    self.navigationController?.pushViewControllerTabHidden(vc, animated: true)
+//                default:
+//                    print("failed")
+//                }
+//            })
         }
     }
 }
