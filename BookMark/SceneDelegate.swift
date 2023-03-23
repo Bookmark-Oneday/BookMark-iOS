@@ -16,64 +16,69 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        guard let _ = UserDefaults.standard.string(forKey: "Tutorial") else {
-            let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = TutorialViewController()
-            self.window = window
-            window.makeKeyAndVisible()
-            return
-        }
+        let window = UIWindow(windowScene: windowScene)
+        window.rootViewController = MainTabBarController()
+        self.window = window
+        window.makeKeyAndVisible()
         
-        let appleIDProvider = ASAuthorizationAppleIDProvider()
-        if let userIdentifier = UserDefaults.standard.string(forKey: "userIdentifier") {
-            appleIDProvider.getCredentialState(forUserID: userIdentifier) { (credentialState, error) in
-                switch credentialState {
-                case .authorized:
-                    self.autoAppleLogin(completion: { res in
-                        if (res) {
-                            DispatchQueue.main.async {
-                                let window = UIWindow(windowScene: windowScene)
-                                window.rootViewController = MainTabBarController()
-                                self.window = window
-                                window.makeKeyAndVisible()
-                            }
-                        }
-                        else {
-                            DispatchQueue.main.async {
-                                let window = UIWindow(windowScene: windowScene)
-                                window.rootViewController = LoginViewController()
-                                self.window = window
-                                window.makeKeyAndVisible()
-                            }
-                        }
-                    })
-                    
-                default:
-                    DispatchQueue.main.async {
-                        let window = UIWindow(windowScene: windowScene)
-                        window.rootViewController = LoginViewController()
-                        self.window = window
-                        window.makeKeyAndVisible()
-                    }
-                }
-            }
-        }
-        else {
-            let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = LoginViewController()
-            self.window = window
-            window.makeKeyAndVisible()
-        }
-        
-        NotificationCenter.default.addObserver(forName: ASAuthorizationAppleIDProvider.credentialRevokedNotification, object: nil, queue: nil) { (Notification) in
-            DispatchQueue.main.async {
-                
-                let window = UIWindow(windowScene: windowScene)
-                window.rootViewController = LoginViewController()
-                self.window = window
-                window.makeKeyAndVisible()
-            }
-        }
+//        guard let _ = UserDefaults.standard.string(forKey: "Tutorial") else {
+//            let window = UIWindow(windowScene: windowScene)
+//            window.rootViewController = TutorialViewController()
+//            self.window = window
+//            window.makeKeyAndVisible()
+//            return
+//        }
+//
+//        let appleIDProvider = ASAuthorizationAppleIDProvider()
+//        if let userIdentifier = UserDefaults.standard.string(forKey: "userIdentifier") {
+//            appleIDProvider.getCredentialState(forUserID: userIdentifier) { (credentialState, error) in
+//                switch credentialState {
+//                case .authorized:
+//                    self.autoAppleLogin(completion: { res in
+//                        if (res) {
+//                            DispatchQueue.main.async {
+//                                let window = UIWindow(windowScene: windowScene)
+//                                window.rootViewController = MainTabBarController()
+//                                self.window = window
+//                                window.makeKeyAndVisible()
+//                            }
+//                        }
+//                        else {
+//                            DispatchQueue.main.async {
+//                                let window = UIWindow(windowScene: windowScene)
+//                                window.rootViewController = LoginViewController()
+//                                self.window = window
+//                                window.makeKeyAndVisible()
+//                            }
+//                        }
+//                    })
+//
+//                default:
+//                    DispatchQueue.main.async {
+//                        let window = UIWindow(windowScene: windowScene)
+//                        window.rootViewController = LoginViewController()
+//                        self.window = window
+//                        window.makeKeyAndVisible()
+//                    }
+//                }
+//            }
+//        }
+//        else {
+//            let window = UIWindow(windowScene: windowScene)
+//            window.rootViewController = LoginViewController()
+//            self.window = window
+//            window.makeKeyAndVisible()
+//        }
+//
+//        NotificationCenter.default.addObserver(forName: ASAuthorizationAppleIDProvider.credentialRevokedNotification, object: nil, queue: nil) { (Notification) in
+//            DispatchQueue.main.async {
+//
+//                let window = UIWindow(windowScene: windowScene)
+//                window.rootViewController = LoginViewController()
+//                self.window = window
+//                window.makeKeyAndVisible()
+//            }
+//        }
     }
     
     private func autoAppleLogin(completion: @escaping (Bool) -> Void) {
