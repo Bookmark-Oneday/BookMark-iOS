@@ -11,10 +11,14 @@ import SnapKit
 // MARK: - Custom Alert 뷰 컨트롤러
 class CustomAlertViewController: UIViewController {
     let alertView = CustomAlertView()
-    var cancelCompletion: (() -> Void)?
-    
+    private var titleStr: String = ""
+    private var subTitleStr: String = ""
+    private var btnTitleStr: String = ""
+    var confirmCompletion: (() -> Void)?
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         alertView.initViews(self.view)
         alertView.btn_ok.addTarget(self, action: #selector(didTapOkButton), for: .touchUpInside)
         alertView.btn_cancel.addTarget(self, action: #selector(didTapCancelButton), for: .touchUpInside)
@@ -22,6 +26,10 @@ class CustomAlertViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        alertView.label_title.setTxtAttribute(titleStr, size: 18, weight: .w600, txtColor: .black)
+        alertView.label_subtitle.setTxtAttribute(subTitleStr, size: 15, weight: .w500, txtColor: .textGray)
+        alertView.btn_ok.setTitle(btnTitleStr, size: 16, weight: .w600, color: .white)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -29,17 +37,15 @@ class CustomAlertViewController: UIViewController {
     }
     
     // MARK: - setting
-    func setAlertLabel(title: String, subtitle: String, titleColor: UIColor = .black, subtitleColor: UIColor = .textBoldGray) {
-        alertView.label_title.text = title
-        alertView.label_title.textColor = titleColor
-        
-        alertView.label_subtitle.text = subtitle
-        alertView.label_subtitle.textColor = subtitleColor
+    func setAlertLabel(title: String, subtitle: String, okButtonTitle: String) {
+        self.titleStr = title
+        self.subTitleStr = subtitle
+        self.btnTitleStr = okButtonTitle
     }
     
     // MARK: - Actions
     @objc private func didTapOkButton() {
-        self.closeModal(self.cancelCompletion)
+        self.closeModal(self.confirmCompletion)
     }
     
     @objc private func didTapCancelButton() {
@@ -59,7 +65,6 @@ class CustomAlertViewController: UIViewController {
 // MARK: - Custom Alert 뷰
 class CustomAlertView {
     let layout_main = UIView()
-    let img_bookmark = UIImageView(image: UIImage(named: "leftImg"))
     let label_title = UILabel()
     let label_subtitle = UILabel()
     let btn_ok = UIButton()
@@ -70,8 +75,8 @@ class CustomAlertView {
 
         layout_main.snp.makeConstraints() { make in
             make.center.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(23)
-            make.height.equalTo(173)
+            make.horizontalEdges.equalToSuperview().inset(30)
+            make.height.equalTo(165)
         }
         layout_main.backgroundColor = .white
         layout_main.layer.shadowColor = UIColor.black.cgColor
@@ -80,49 +85,38 @@ class CustomAlertView {
         layout_main.layer.shadowRadius = 20
         layout_main.layer.cornerRadius = 20
         
-        layout_main.addSubviews(img_bookmark, label_title, label_subtitle, btn_ok, btn_cancel)
-        
-        img_bookmark.snp.makeConstraints() { make in
-            make.top.equalToSuperview()
-            make.leading.equalToSuperview().offset(35)
-            make.width.equalTo(27)
-            make.height.equalTo(35)
-        }
+        layout_main.addSubviews(label_title, label_subtitle, btn_ok, btn_cancel)
         
         label_title.snp.makeConstraints() { make in
-            make.top.equalToSuperview().offset(32)
+            make.top.equalToSuperview().offset(31)
             make.centerX.equalToSuperview()
         }
-        label_title.text = "기록 삭제"
-        label_title.textColor = .black
-        label_title.font = UIFont.systemFont(ofSize: 20, weight: .black)
+        label_title.setTxtAttribute("", size: 18, weight: .w600, txtColor: .black)
         
         label_subtitle.snp.makeConstraints() { make in
-            make.top.equalTo(label_title.snp.bottom).offset(9)
+            make.top.equalTo(label_title.snp.bottom).offset(11)
             make.centerX.equalToSuperview()
         }
-        label_subtitle.text = "정말로 삭제하시겠습니까?"
-        label_subtitle.textColor = .textBoldGray
-        label_subtitle.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        
-        btn_ok.snp.makeConstraints() { make in
-            make.top.equalTo(label_subtitle.snp.bottom).offset(29)
-            make.leading.equalToSuperview().offset(33)
-            make.width.equalTo(130)
-            make.height.equalTo(40)
-        }
-        btn_ok.backgroundColor = .lightOrange
-        btn_ok.layer.cornerRadius = 20
-        btn_ok.setTitle("삭제", size: 16, weight: .bold, color: .white)
+        label_subtitle.setTxtAttribute("", size: 15, weight: .w500, txtColor: .textGray)
         
         btn_cancel.snp.makeConstraints() { make in
-            make.top.equalTo(btn_ok)
-            make.trailing.equalToSuperview().offset(-33)
+            make.top.equalTo(label_subtitle.snp.bottom).offset(23)
+            make.leading.equalToSuperview().offset(33)
             make.width.equalTo(130)
-            make.height.equalTo(40)
+            make.height.equalTo(38)
         }
         btn_cancel.backgroundColor = .systemGray4
-        btn_cancel.layer.cornerRadius = 20
-        btn_cancel.setTitle("취소", size: 16, weight: .bold, color: .white)
+        btn_cancel.layer.cornerRadius = 18
+        btn_cancel.setTitle("취소", size: 16, weight: .w600, color: .white)
+        
+        btn_ok.snp.makeConstraints() { make in
+            make.top.equalTo(btn_cancel)
+            make.trailing.equalToSuperview().offset(-33)
+            make.width.equalTo(130)
+            make.height.equalTo(38)
+        }
+        btn_ok.backgroundColor = .lightOrange
+        btn_ok.layer.cornerRadius = 18
+        btn_ok.setTitle("", size: 16, weight: .w600, color: .white)
     }
 }

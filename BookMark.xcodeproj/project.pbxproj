@@ -57,6 +57,8 @@
 		E89F6E5629CC344400602075 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E5529CC344400602075 /* Book.swift */; };
 		E89F6E5829CC48D600602075 /* ConfirmBookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E5729CC48D600602075 /* ConfirmBookViewModel.swift */; };
 		E89F6E5A29CC4F1900602075 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E5929CC4F1900602075 /* UIImage+Extension.swift */; };
+		E89F6E5C29CC90B700602075 /* BookDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E5B29CC90B700602075 /* BookDetailViewModel.swift */; };
+		E89F6E5F29CD3F5D00602075 /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E5E29CD3F5D00602075 /* BottomSheetViewController.swift */; };
 		E8C0535F299896A400CA5D8E /* UserClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C0535E299896A400CA5D8E /* UserClass.swift */; };
 		E8C05366299C7EFB00CA5D8E /* Network_Sueyeon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C05362299C7EFA00CA5D8E /* Network_Sueyeon.swift */; };
 		E8C05367299C7EFB00CA5D8E /* DataClass_sueyeon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C05363299C7EFB00CA5D8E /* DataClass_sueyeon.swift */; };
@@ -135,6 +137,8 @@
 		E89F6E5529CC344400602075 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		E89F6E5729CC48D600602075 /* ConfirmBookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmBookViewModel.swift; sourceTree = "<group>"; };
 		E89F6E5929CC4F1900602075 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		E89F6E5B29CC90B700602075 /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
+		E89F6E5E29CD3F5D00602075 /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		E8C0535D2998535000CA5D8E /* BookMark.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BookMark.entitlements; sourceTree = "<group>"; };
 		E8C0535E299896A400CA5D8E /* UserClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserClass.swift; sourceTree = "<group>"; };
 		E8C05362299C7EFA00CA5D8E /* Network_Sueyeon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network_Sueyeon.swift; sourceTree = "<group>"; };
@@ -171,13 +175,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		24D01FC8299395DB0045DC68 /* BookDetail */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = BookDetail;
-			sourceTree = "<group>";
-		};
 		650C55764473948B3B1476E4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,6 +191,7 @@
 				E89F6E3829CC0A6A00602075 /* ViewModel */,
 				E89F6E3729CC0A6000602075 /* View */,
 				E89F6E3F29CC0E2C00602075 /* Extensions */,
+				E89F6E5D29CD3BEF00602075 /* Utils */,
 				E89F6E1629B5E0A100602075 /* Legacy */,
 				E89F6E1529B5E09200602075 /* Fonts */,
 				86C3C2AF296858370035CFFE /* BookMark */,
@@ -322,8 +320,8 @@
 			children = (
 				86C3C2D2296E69630035CFFE /* ConfirmBookViewController.swift */,
 				24D01FCA299395DB0045DC68 /* BookDetailViewController.swift */,
-				E8C2B4F0296A8915000E2030 /* MyLibTabMainView.swift */,
 				24D01FC9299395DB0045DC68 /* BookDetailView.swift */,
+				E8C2B4F0296A8915000E2030 /* MyLibTabMainView.swift */,
 				E89F6E3D29CC0CB100602075 /* NetworkFailMainView.swift */,
 			);
 			path = MyLib;
@@ -351,8 +349,18 @@
 			children = (
 				E89F6E5329CC139900602075 /* MainViewModel.swift */,
 				E89F6E5729CC48D600602075 /* ConfirmBookViewModel.swift */,
+				E89F6E5B29CC90B700602075 /* BookDetailViewModel.swift */,
 			);
 			path = MyLib;
+			sourceTree = "<group>";
+		};
+		E89F6E5D29CD3BEF00602075 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				24D01FCD299395F40045DC68 /* CustomAlertViewController.swift */,
+				E89F6E5E29CD3F5D00602075 /* BottomSheetViewController.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		E8C0536C299C7F1700CA5D8E /* Tutorial */ = {
@@ -376,7 +384,6 @@
 		E8C2B4F3296A8A66000E2030 /* MyLib */ = {
 			isa = PBXGroup;
 			children = (
-				24D01FC8299395DB0045DC68 /* BookDetail */,
 				E8D5C3E329838352003D1AD0 /* Barcode */,
 				E8D5C3E229838329003D1AD0 /* Timer */,
 				E8C0536A299C7F0C00CA5D8E /* AllPageInputPopUp.swift */,
@@ -440,7 +447,6 @@
 		E8D5C3E129838303003D1AD0 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				24D01FCD299395F40045DC68 /* CustomAlertViewController.swift */,
 				E8C2B51229743975000E2030 /* Network.swift */,
 				E8C05363299C7EFB00CA5D8E /* DataClass_sueyeon.swift */,
 				E8C05364299C7EFB00CA5D8E /* DataClassTintin.swift */,
@@ -609,6 +615,7 @@
 				24D01FCE299395F40045DC68 /* CustomAlertViewController.swift in Sources */,
 				E89F6E4D29CC0F4200602075 /* UIImageView+Extension.swift in Sources */,
 				412B7ED92988DDF000B40AF3 /* PostDetailViewController.swift in Sources */,
+				E89F6E5C29CC90B700602075 /* BookDetailViewModel.swift in Sources */,
 				E89F6E5129CC0F9700602075 /* UIColor+Extension.swift in Sources */,
 				E89F6E5629CC344400602075 /* Book.swift in Sources */,
 				E89F6E3C29CC0AE900602075 /* StopwatchViewController.swift in Sources */,
@@ -635,6 +642,7 @@
 				E82079762994797900B36FC9 /* CreateOneLineViewController.swift in Sources */,
 				E89F6E4529CC0EA700602075 /* UIButton+Extension.swift in Sources */,
 				E89F6E3E29CC0CB100602075 /* NetworkFailMainView.swift in Sources */,
+				E89F6E5F29CD3F5D00602075 /* BottomSheetViewController.swift in Sources */,
 				E8D5C3D529824126003D1AD0 /* CreateCommunityViewController.swift in Sources */,
 				412DDC8429858E3C00F6CB22 /* CommunityMemberViewController.swift in Sources */,
 				E8D5C3D329824114003D1AD0 /* SetCommunityViewController.swift in Sources */,
