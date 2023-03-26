@@ -40,8 +40,7 @@ class BookDetailView {
     var label_zero = UILabel()
     var label_hundred = UILabel()
     
-    var btn_pageinput = UIView()
-    var label_pageinput = UILabel()
+    var btn_pageinput = UIButton()
     
     var label_myTime = UILabel()
     var label_myTimeDescription = UILabel()
@@ -115,24 +114,19 @@ class BookDetailView {
         
         label_title.snp.makeConstraints() { make in
             make.top.equalTo(layout_book.snp.bottom).offset(24)
-            make.width.equalTo(300)
+            make.horizontalEdges.equalToSuperview().inset(60)
             make.centerX.equalToSuperview()
         }
-        label_title.numberOfLines = 0
-        label_title.textColor = .black
-        label_title.text = "제목 정보가 없습니다."
-        label_title.font = .systemFont(ofSize: 20, weight: UIFont.Weight(rawValue: 600))
+        label_title.setTxtAttribute("제목 정보가 없습니다.", size: 18, weight: .w600, txtColor: .black)
         label_title.textAlignment = .center
         
         label_author.snp.makeConstraints() { make in
             make.top.equalTo(label_title.snp.bottom).offset(10)
-            make.width.equalTo(300)
+            make.horizontalEdges.equalToSuperview().inset(60)
             make.centerX.equalToSuperview()
         }
+        label_author.setTxtAttribute("작가 정보가 없습니다.", size: 15, weight: .w500, txtColor: .textGray)
         label_author.textAlignment = .center
-        label_author.textColor = .textBoldGray
-        label_author.text = "작가 정보가 없습니다."
-        label_author.font = .systemFont(ofSize: 20, weight: .semibold)
         
         layout_vertical.snp.makeConstraints() { make in
             make.top.equalTo(label_author.snp.bottom).offset(64)
@@ -143,41 +137,31 @@ class BookDetailView {
         layout_vertical.layer.cornerRadius = 3
         layout_vertical.clipsToBounds = false
         layout_vertical.layer.borderColor = UIColor.black.cgColor
-        layout_vertical.backgroundColor = UIColor(Hex: 0xDFDFDF)
+        layout_vertical.backgroundColor = UIColor(Hex: 0xD9D9D9)
         
         label_firstread.snp.makeConstraints() { make in
             make.top.equalTo(label_author.snp.bottom).offset(50)
             make.trailing.equalTo(layout_vertical.snp.leading).offset(-61)
         }
-        label_firstread.text = "처음 읽은 날"
-        label_firstread.sizeToFit()
-        label_firstread.textColor = .textBoldGray
-        label_firstread.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        label_firstread.setTxtAttribute("처음 읽은 날", size: 15, weight: .w500, txtColor: .textGray)
         
         label_firstread_data.snp.makeConstraints() { make in
             make.centerX.equalTo(label_firstread)
             make.top.equalTo(label_firstread.snp.bottom).offset(10)
         }
-        label_firstread_data.text = "2022.01.09"
-        label_firstread_data.textColor = .black
-        label_firstread_data.font = .systemFont(ofSize: 19, weight: .medium)
+        label_firstread_data.setTxtAttribute("2022.01.09", size: 17, weight: .w600, txtColor: .black)
         
         label_totaltime.snp.makeConstraints() { make in
             make.leading.equalTo(layout_vertical.snp.trailing).offset(61)
             make.top.equalTo(label_firstread)
         }
-        label_totaltime.text = "총 독서 시간"
-        label_totaltime.sizeToFit()
-        label_totaltime.textColor = .textBoldGray
-        label_totaltime.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        label_totaltime.setTxtAttribute("총 독서 시간", size: 15, weight: .w500, txtColor: .textGray)
         
         label_totaltime_data.snp.makeConstraints() { make in
             make.centerX.equalTo(label_totaltime)
             make.top.equalTo(label_totaltime.snp.bottom).offset(10)
         }
-        label_totaltime_data.text = "12:28.00"
-        label_totaltime_data.textColor = .black
-        label_totaltime_data.font = .systemFont(ofSize: 19, weight: .medium)
+        label_totaltime_data.setTxtAttribute("12:28.00", size: 17, weight: .w600, txtColor: .black)
     }
     
     private func initViews_part2(view: UIView) {
@@ -186,47 +170,36 @@ class BookDetailView {
         layout_line.snp.makeConstraints() { make in
             make.top.equalTo(label_firstread.snp.bottom).offset(56)
             make.centerX.equalToSuperview()
-            make.width.equalTo(344)
+            make.horizontalEdges.equalToSuperview().inset(23)
             make.height.equalTo(1)
         }
         layout_line.layer.cornerRadius = 3
-        layout_line.clipsToBounds = false
-        layout_line.layer.borderColor = UIColor.black.cgColor
+        layout_line.clipsToBounds = true
         layout_line.backgroundColor = UIColor(Hex: 0xDFDFDF)
         
         label_untilFin.snp.makeConstraints() { make in
             make.leading.equalToSuperview().offset(23)
             make.top.equalTo(layout_line.snp.bottom).offset(32)
         }
-        label_untilFin.sizeToFit()
-        label_untilFin.text = "완독까지"
-        label_untilFin.textColor = .textLightGray
-        label_untilFin.font = .systemFont(ofSize: 14, weight: .medium)
+        label_untilFin.setTxtAttribute("완독까지", size: 14, weight: .w500, txtColor: .textLightGray)
         
         label_untilFin_data.snp.makeConstraints() { make in
             make.leading.equalTo(label_untilFin.snp.trailing).offset(4)
             make.top.equalTo(label_untilFin)
         }
-        label_untilFin_data.text = "42%"
-        label_untilFin_data.textColor = .textOrange
-        label_untilFin_data.sizeToFit()
-        label_untilFin_data.font = .systemFont(ofSize: 14, weight: .medium)
+        label_untilFin_data.setTxtAttribute("42%", size: 14, weight: .w600, txtColor: .textOrange)
         
         label_totalpage_data.snp.makeConstraints() { make in
             make.trailing.equalTo(layout_line.snp.trailing)
             make.top.equalTo(layout_line.snp.bottom).offset(28)
         }
-        label_totalpage_data.text = "/ 354"
-        label_totalpage_data.textColor = .textBoldGray
-        label_totalpage_data.font = .systemFont(ofSize: 19, weight: .semibold)
+        label_totalpage_data.setTxtAttribute("/ 354", size: 17, weight: .w600, txtColor: .textGray)
         
         label_nowpage_data.snp.makeConstraints() { make in
             make.trailing.equalTo(label_totalpage_data.snp.leading).offset(-4)
             make.top.equalTo(label_totalpage_data)
         }
-        label_nowpage_data.text = "120"
-        label_nowpage_data.textColor = .textOrange
-        label_nowpage_data.font = .systemFont(ofSize: 19, weight: .semibold)
+        label_nowpage_data.setTxtAttribute("120", size: 17, weight: .w600, txtColor: .textOrange)
         
         layout_main.addSubviews(layout_progress, label_zero, label_hundred)
         
@@ -246,17 +219,13 @@ class BookDetailView {
             make.leading.equalTo(label_untilFin)
             make.top.equalTo(layout_progress.snp.bottom).offset(5)
         }
-        label_zero.text = "0"
-        label_zero.textColor = .textBoldGray
-        label_zero.font = .systemFont(ofSize: 11, weight: .semibold)
+        label_zero.setTxtAttribute("0", size: 11, weight: .w500, txtColor: .textGray)
         
         label_hundred.snp.makeConstraints() { make in
             make.trailing.equalTo(label_totalpage_data)
             make.top.equalTo(label_zero)
         }
-        label_hundred.text = "100"
-        label_hundred.textColor = .textBoldGray
-        label_hundred.font = .systemFont(ofSize: 11, weight: .semibold)
+        label_hundred.setTxtAttribute("100", size: 11, weight: .w500, txtColor: .textGray)
         
         btn_pageinput.snp.makeConstraints() { make in
             make.top.equalTo(label_zero.snp.bottom).offset(8)
@@ -264,19 +233,10 @@ class BookDetailView {
             make.width.equalTo(140)
             make.height.equalTo(40)
         }
-        btn_pageinput.isUserInteractionEnabled = true
+        btn_pageinput.setTitle("페이지 입력", size: 16, weight: .w600, color: .white)
         btn_pageinput.backgroundColor = .lightOrange
-        btn_pageinput.clipsToBounds = true
         btn_pageinput.layer.cornerRadius = 20
-        
-        btn_pageinput.addSubview(label_pageinput)
-        label_pageinput.snp.makeConstraints() { make in
-            make.center.equalToSuperview()
-        }
-        label_pageinput.sizeToFit()
-        label_pageinput.text = "페이지 입력"
-        label_pageinput.textColor = .white
-        label_pageinput.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        btn_pageinput.clipsToBounds = true
     }
 
     private func initViews_part3(view: UIView) {
@@ -285,19 +245,13 @@ class BookDetailView {
             make.top.equalTo(btn_pageinput.snp.bottom).offset(39)
             make.leading.equalToSuperview().offset(23)
         }
-        label_myTime.text = "나의 독서기록"
-        label_myTime.textColor = .black
-        label_myTime.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        label_myTime.sizeToFit()
+        label_myTime.setTxtAttribute("나의 독서기록", size: 16, weight: .w600, txtColor: .black)
         
         label_myTimeDescription.snp.makeConstraints() { make in
             make.top.equalTo(label_myTime.snp.bottom).offset(7)
             make.leading.equalTo(label_myTime)
         }
-        label_myTimeDescription.sizeToFit()
-        label_myTimeDescription.text = "날짜별로 보는 하루 독서량"
-        label_myTimeDescription.textColor = .textLightGray
-        label_myTimeDescription.font = UIFont.systemFont(ofSize: 13, weight: .medium)
+        label_myTimeDescription.setTxtAttribute("날짜별로 보는 하루 독서량", size: 12, weight: .w500, txtColor: .textLightGray)
         
         layout_barchart.translatesAutoresizingMaskIntoConstraints = false
         layout_barchart.snp.makeConstraints() { make in
@@ -307,9 +261,8 @@ class BookDetailView {
             make.height.equalTo(300)
         }
         layout_barchart.contentLayoutGuide.snp.makeConstraints() { make in
-            make.bottom.equalToSuperview()
-            make.height.equalTo(300)
-            make.width.equalTo(500)
+            make.verticalEdges.equalToSuperview()
+            make.width.equalTo(UIScreen.main.bounds.width)
         }
         layout_barchart.addSubview(layout_add)
         layout_add.addSubview(barchart)
@@ -324,19 +277,25 @@ class BookDetailView {
         barchart.snp.makeConstraints() { make in
             make.edges.equalToSuperview()
         }
-        setChartAttribute()
-    }
-    
-    private func setChartAttribute(_ data: [Int] = [62, 34, 13, 43, 46, 43, 11, 98, 23, 50], _ dates: [String] = ["12/1", "12/2", "12/3", "12/4", "12/5", "12/6", "12/7", "12/8", "12/9", "12/10"]) {
-        for i in 0..<data.count {
-            let entry = BarChartDataEntry(x: Double(data.count - i), y: Double(data[i]))
-            chartEntry.append(entry)
-        }
+        
         barchart.noDataText = "데이터가 없습니다"
-        barchart.noDataFont = UIFont.systemFont(ofSize: 14, weight: .medium)
+        barchart.noDataTextAlignment = .center
+        barchart.noDataFont = .suit(size: 14, weight: .w500)
         barchart.noDataTextColor = .textLightGray
         barchart.doubleTapToZoomEnabled = false
+    }
+    
+    func setChartAttribute(_ data: [History]) {
+        layout_barchart.contentLayoutGuide.snp.updateConstraints { make in
+            make.width.equalTo(54 * data.count + 16)
+        }
         
+        var dateArr = [String]()
+        for i in 0..<data.count {
+            let entry = BarChartDataEntry(x: Double(i), y: Double(data[i].time))
+            chartEntry.append(entry)
+            dateArr.append(data[i].date)
+        }
         barchart.leftAxis.enabled = false
         barchart.rightAxis.enabled = false
         barchart.leftAxis.axisMinimum = 0
@@ -344,17 +303,16 @@ class BookDetailView {
         barchart.legend.enabled = false
 
         barchart.xAxis.labelPosition = .bottom
-        barchart.xAxis.valueFormatter = IndexAxisValueFormatter(values: dates)
-        barchart.xAxis.setLabelCount(dates.count, force: false)
+        barchart.xAxis.valueFormatter = IndexAxisValueFormatter(values: dateArr)
+        barchart.xAxis.setLabelCount(data.count, force: false)
         barchart.xAxis.drawGridLinesEnabled = false
         barchart.xAxis.drawAxisLineEnabled = false
 
-        
         let dataSet = BarChartDataSet(entries: chartEntry, label: "")
         dataSet.colors = [.lightLightOrange]
         dataSet.highlightEnabled = false
         dataSet.drawValuesEnabled = true
-        dataSet.valueFont = UIFont.systemFont(ofSize: 11, weight: .semibold)
+        dataSet.valueFont = .suit(size: 11, weight: .w600)
         dataSet.valueColors = [.textOrange]
         
         let data = BarChartData(dataSet: dataSet)

@@ -15,7 +15,7 @@ import RxCocoa
 class MyLibTabMainView: UIViewController {
     let layout_main = MyLibTabView()
     let layout_fail = NetworkFailMainView()
-    let viewModel = MyLibTabMainViewModel()
+    var viewModel = MyLibTabMainViewModel()
     var disposeBag = DisposeBag()
 
     override func viewDidLoad() {

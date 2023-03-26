@@ -7,107 +7,140 @@
 
 import UIKit
 import SnapKit
+import RxCocoa
+import RxSwift
 
 // MARK: - 책 세부 내용 화면 뷰 컨트롤러
 class BookDetailViewController: UIViewController {
     var layout_bookdetail = BookDetailView()
-    var bookData: BookDetail?
-    
-    var bookID: Int = 0
-    var userID: Int = 0
-    
-    var isFavorite: Bool = false
-    let pageInputPopUp = CustomPopUp()
+    let btn_more = UIBarButtonItem(image: UIImage(named: "threeLayerBtn"))
+    let btn_heart = UIBarButtonItem(image: UIImage(named: "heart_black_unfill"))
+    let btn_stopWatch = UIBarButtonItem(image: UIImage(named: "stopwatch"))
+    var disposeBag = DisposeBag()
+    var bookDetailViewModel = BookDetailViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         
-        layout_bookdetail.initViews(view: self.view)
-        setNavCustom()
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(pageInput(_:)))
-        layout_bookdetail.btn_pageinput.addGestureRecognizer(tapGestureRecognizer)
-        pageInputPopUp.submitButton.addTarget(self, action: #selector(submitPopUp), for: .touchUpInside)
-    }
-    
-    private func setProgress(readingPage: Int, totalPage: Int = 354, animated: Bool) {
-        let progress = Int(Double(readingPage) / Double(totalPage) * 100)
-        self.layout_bookdetail.label_untilFin_data.text = "\(progress)%"
-        
-        let percent = Float(Double(progress) / Double(100))
-        self.layout_bookdetail.layout_progress.setProgress(percent, animated: animated)
-    }
-    
-    // 페이지 입력
-    @objc func pageInput(_ sender: UITapGestureRecognizer) {
-        pageInputPopUp.allPageTextField.text = String(describing: self.bookData?.totalPage ?? 0)
-        pageInputPopUp.showPopUp(with: "책갈피",
-                              message: "몇 페이지까지 읽으셨나요?",
-                              on: self)
-    }
-    
-    // 페이지 닫기
-    @objc func submitPopUp() {
-        // 페이지 수 전달
-        UIView.animate(withDuration: 0.25,
-                       animations: {
-            self.pageInputPopUp.popUpView.frame = CGRect(x: 40,
-                                                         y: self.view.frame.size.height,
-                                                         width: self.view.frame.size.width-80,
-                                                         height: 200)
-        }, completion: { done in
-            if done {
-                UIView.animate(withDuration: 0.25, animations: {
-                    self.pageInputPopUp.backgroundView.alpha = 0
-                }, completion: { done in
-                    self.pageInputPopUp.popUpView.removeFromSuperview()
-                    self.pageInputPopUp.backgroundView.removeFromSuperview()
-                    
-                    guard let page = self.pageInputPopUp.currentPageTextField.text else {return}
-                    if (page.isEmpty) {return}
-                    
-                    self.layout_bookdetail.label_nowpage_data.text = page
-                    
-                    self.setProgress(readingPage: Int(self.layout_bookdetail.label_nowpage_data.text ?? "0") ?? 10, animated: true)
-                })
-            }
-        })
-    }
-}
-
-// MARK: - 책 세부 내용 네비게이션 버튼 처리
-extension BookDetailViewController {
-    func setNavCustom() {
         self.setNavigationCustom(title: "")
-        self.setNavigationImageButton(imageName: ["trash", "heart_black_unfill", "stopwatch"], action: [#selector(tapTrash), #selector(tapHeart), #selector(tapStopwatch)])
+        self.navigationItem.rightBarButtonItems = [btn_more, btn_stopWatch, btn_heart]
+        
+        self.layout_bookdetail.initViews(view: self.view)
+        self.setupBindings()
     }
     
-    @objc func tapHeart(_ selector: UIBarButtonItem) {
-        isFavorite.toggle()
-        if (isFavorite) {
-            selector.image = UIImage(named: "heart_black_fill")
-        }
-        else {
-            selector.image = UIImage(named: "heart_black_unfill")
-        }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        disposeBag = DisposeBag()
     }
     
-    @objc func tapStopwatch(_ selector: UIBarButtonItem) {
-        //self.navigationController?.pushViewController(ReadingTime(), animated: true)
+    private func setupBindings() {
+        bookDetailViewModel.bookTitle
+            .observe(on: MainScheduler.instance)
+            .bind(to: self.layout_bookdetail.label_title.rx.text)
+            .disposed(by: disposeBag)
+        
+        bookDetailViewModel.bookAuthorAndTranslator
+            .observe(on: MainScheduler.instance)
+            .bind(to: self.layout_bookdetail.label_author.rx.text)
+            .disposed(by: disposeBag)
+        
+        bookDetailViewModel.bookImage
+            .observe(on: MainScheduler.instance)
+            .bind(to: self.layout_bookdetail.img_book.rx.image)
+            .disposed(by: disposeBag)
+        
+        bookDetailViewModel.firstReadDate
+            .observe(on: MainScheduler.instance)
+            .bind(to: self.layout_bookdetail.label_firstread_data.rx.text)
+            .disposed(by: disposeBag)
+        
+        bookDetailViewModel.totalReadingTime
+            .observe(on: MainScheduler.instance)
+            .bind(to: self.layout_bookdetail.label_totaltime_data.rx.text)
+            .disposed(by: disposeBag)
+        
+        bookDetailViewModel.totalPage
+            .observe(on: MainScheduler.instance)
+            .map { "/ \($0)" }
+            .bind(to: self.layout_bookdetail.label_totalpage_data.rx.text)
+            .disposed(by: disposeBag)
+        
+        bookDetailViewModel.currentPage
+            .observe(on: MainScheduler.instance)
+            .map { String($0) }
+            .bind(to: self.layout_bookdetail.label_nowpage_data.rx.text)
+            .disposed(by: disposeBag)
+        
+        bookDetailViewModel.readingPercent
+            .observe(on: MainScheduler.instance)
+            .map { $0 / 100.0 }
+            .bind(to:  self.layout_bookdetail.layout_progress.rx.progress)
+            .disposed(by: disposeBag)
+        
+        bookDetailViewModel.readingPercent
+            .observe(on: MainScheduler.instance)
+            .map { "\(Int($0))%" }
+            .bind(to: self.layout_bookdetail.label_untilFin_data.rx.text)
+            .disposed(by: disposeBag)
+        
+        bookDetailViewModel.readingHistory?
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { data in
+                self.layout_bookdetail.setChartAttribute(data)
+            })
+            .disposed(by: disposeBag)
+        
+        bookDetailViewModel.bookIsFavorite
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { favorite in
+                self.btn_heart.image = (favorite ? UIImage(named: "heart_black_fill") : UIImage(named: "heart_black_unfill"))
+            })
+            .disposed(by: disposeBag)
+        
+        btn_stopWatch.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.navigationController?.pushViewController(StopwatchViewController(), animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        btn_heart.rx.tap
+            .subscribe(onNext: {
+                self.bookDetailViewModel.bookIsFavorite.accept(!self.bookDetailViewModel.bookIsFavorite.value)
+            })
+            .disposed(by: disposeBag)
+        
+        btn_more.rx.tap
+            .subscribe(onNext: { [weak self] in
+                let bottomSheet = BottomSheetViewController()
+                bottomSheet.deleteCompletion = {
+                    self?.didTapDeleteBookButton()
+                }
+                bottomSheet.modalPresentationStyle = .overFullScreen
+                self?.present(bottomSheet, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        layout_bookdetail.btn_pageinput.rx.tap
+            .subscribe(onNext: {
+                
+            })
+            .disposed(by: disposeBag)
     }
     
-    @objc func tapTrash(_ selector: UIBarButtonItem) {
+    private func didTapDeleteBookButton() {
         let deletion = CustomAlertViewController()
         deletion.modalPresentationStyle = .overFullScreen
-        deletion.cancelCompletion = { [weak self] in
-            self?.deleteBookFromLib()
+        deletion.confirmCompletion = { [weak self] in
+            self?.deleteBook()
         }
-        deletion.setAlertLabel(title: "책 삭제", subtitle: "읽던 책을 정말로 삭제하시겠습니까?")
+        deletion.setAlertLabel(title: "책 삭제", subtitle: "서재 목록에서 책을 삭제하겠습니까?", okButtonTitle: "삭제")
         self.present(deletion, animated: true)
     }
     
-    // MARK: - todo: 삭제 로직
-    private func deleteBookFromLib() {
-        print("delete tab")
+    private func deleteBook() {
+        
     }
 }
+
