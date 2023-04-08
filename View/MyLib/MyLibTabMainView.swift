@@ -71,7 +71,7 @@ class MyLibTabMainView: UIViewController {
             .bind(to: self.layout_main.label_streaks.rx.text)
             .disposed(by: disposeBag)
         
-        viewModel.readCount
+        viewModel.readCount?
             .observe(on: MainScheduler.instance)
             .bind(to: self.layout_main.label_bookCount.rx.text, self.layout_main.label_bookcount.rx.text)
             .disposed(by: disposeBag)
@@ -80,15 +80,15 @@ class MyLibTabMainView: UIViewController {
             .observe(on: MainScheduler.instance)
             .bind(to: self.layout_main.layout_books.rx.items(cellIdentifier: BookCollectionCell.identifier, cellType: BookCollectionCell.self)) { idx, item, cell in
                 
-                if (item.bookID == 0) {
+                if (item.book_id == 0) {
                     cell.layout_img.image = UIImage(named: "addBook")
                 }
                 else {
-                    cell.layout_img.setImageUrl(url: item.bookImgUrl)
+                    cell.layout_img.setImageUrl(url: item.titleImage)
                 }
 
-                cell.label_title.text = item.bookTitle
-                cell.label_author.text = item.bookAuthor
+                cell.label_title.text = item.title
+                cell.label_author.text = item.authors[0]
                 cell.tag = idx
             }
             .disposed(by: disposeBag)
@@ -209,13 +209,13 @@ class MyLibTabView {
             make.top.equalTo(label_name.snp.bottom).offset(5)
             make.centerX.equalToSuperview()
         }
-        label_streaks.setTxtAttribute("연속 4일째 읽고 있어요!", size: 10, weight: .w500, txtColor: .textOrange)
+        label_streaks.setTxtAttribute("연속 0일째 읽고 있어요!", size: 10, weight: .w500, txtColor: .textOrange)
         
         label_follwerCount.snp.makeConstraints() { make in
             make.top.equalTo(label_name.snp.bottom).offset(35)
             make.centerX.equalToSuperview()
         }
-        label_follwerCount.setTxtAttribute("57", size: 18, weight: .w600, txtColor: .black)
+        label_follwerCount.setTxtAttribute("0", size: 18, weight: .w600, txtColor: .black)
         
         label_follwer.snp.makeConstraints() { make in
             make.top.equalTo(label_follwerCount.snp.bottom).offset(5)
@@ -227,7 +227,7 @@ class MyLibTabView {
             make.trailing.equalTo(label_follwerCount.snp.leading).offset(-72)
             make.top.equalTo(label_follwerCount)
         }
-        label_bookCount.setTxtAttribute("49", size: 18, weight: .w600, txtColor: .black)
+        label_bookCount.setTxtAttribute("0", size: 18, weight: .w600, txtColor: .black)
         
         label_books.snp.makeConstraints() { make in
             make.top.equalTo(label_follwer)
@@ -239,7 +239,7 @@ class MyLibTabView {
             make.leading.equalTo(label_follwerCount.snp.trailing).offset(72)
             make.top.equalTo(label_follwerCount)
         }
-        label_followingCount.setTxtAttribute("32", size: 18, weight: .w600, txtColor: .black)
+        label_followingCount.setTxtAttribute("0", size: 18, weight: .w600, txtColor: .black)
         
         label_follwing.snp.makeConstraints() { make in
             make.top.equalTo(label_follwer)
@@ -257,7 +257,7 @@ class MyLibTabView {
             make.leading.equalTo(label_mylib.snp.trailing).offset(5)
             make.centerY.equalTo(label_mylib)
         }
-        label_bookcount.setTxtAttribute("49", size: 14, weight: .w500, txtColor: .textLightGray)
+        label_bookcount.setTxtAttribute("0", size: 14, weight: .w500, txtColor: .textLightGray)
         
         layout_books.snp.makeConstraints() { make in
             make.leading.equalToSuperview().offset(15)

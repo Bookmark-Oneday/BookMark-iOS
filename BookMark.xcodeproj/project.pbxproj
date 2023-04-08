@@ -8,13 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		245FED6E2983971100EE02B6 /* JoinCommunityRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245FED6D2983971100EE02B6 /* JoinCommunityRequest.swift */; };
-		24A21A392976EA2400AE8BF9 /* DataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A21A382976EA2400AE8BF9 /* DataClass.swift */; };
-		24D01FC7299395BE0045DC68 /* AddBookBarcodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D01FC6299395BE0045DC68 /* AddBookBarcodeViewController.swift */; };
+		24A21A392976EA2400AE8BF9 /* DataClassLegacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A21A382976EA2400AE8BF9 /* DataClassLegacy.swift */; };
 		24D01FCB299395DB0045DC68 /* BookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D01FC9299395DB0045DC68 /* BookDetailView.swift */; };
 		24D01FCC299395DB0045DC68 /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D01FCA299395DB0045DC68 /* BookDetailViewController.swift */; };
 		24D01FCE299395F40045DC68 /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D01FCD299395F40045DC68 /* CustomAlertViewController.swift */; };
 		24D01FD02993966E0045DC68 /* SetTimeGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D01FCF2993966E0045DC68 /* SetTimeGoalViewController.swift */; };
-		24E794242971653C00E69633 /* ReadingTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E794232971653C00E69633 /* ReadingTime.swift */; };
 		24E7942C2972BDD300E69633 /* CustomPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E7942B2972BDD300E69633 /* CustomPopUp.swift */; };
 		2DFD5D6E9DDEA6E09EEF3D46 /* Pods_BookMark.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5721549DEE181646370BC256 /* Pods_BookMark.framework */; };
 		412B7ED92988DDF000B40AF3 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412B7ED82988DDF000B40AF3 /* PostDetailViewController.swift */; };
@@ -24,7 +22,6 @@
 		86C3C2B3296858370035CFFE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C3C2B2296858370035CFFE /* SceneDelegate.swift */; };
 		86C3C2BA296858380035CFFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86C3C2B9296858380035CFFE /* Assets.xcassets */; };
 		86C3C2BD296858380035CFFE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86C3C2BB296858380035CFFE /* LaunchScreen.storyboard */; };
-		86C3C2D1296E694B0035CFFE /* BarcodeReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C3C2CF296E694B0035CFFE /* BarcodeReaderView.swift */; };
 		86C3C2D3296E69630035CFFE /* ConfirmBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C3C2D2296E69630035CFFE /* ConfirmBookViewController.swift */; };
 		E82079442990B6E800B36FC9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82079432990B6E800B36FC9 /* LoginViewController.swift */; };
 		E82079462990B72A00B36FC9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82079452990B72A00B36FC9 /* LoginView.swift */; };
@@ -42,7 +39,6 @@
 		E89F6E2729B5E10600602075 /* SUIT-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E89F6E1929B5E0E400602075 /* SUIT-SemiBold.otf */; };
 		E89F6E2829B5E10900602075 /* SUIT-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = E89F6E1B29B5E0E400602075 /* SUIT-Thin.otf */; };
 		E89F6E2A29B5E54C00602075 /* SearchCommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E2929B5E54C00602075 /* SearchCommunityViewController.swift */; };
-		E89F6E3C29CC0AE900602075 /* StopwatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E3B29CC0AE900602075 /* StopwatchViewController.swift */; };
 		E89F6E3E29CC0CB100602075 /* NetworkFailMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E3D29CC0CB100602075 /* NetworkFailMainView.swift */; };
 		E89F6E4129CC0E6100602075 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E4029CC0E6100602075 /* UIFont+Extension.swift */; };
 		E89F6E4329CC0E9000602075 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E4229CC0E9000602075 /* UILabel+Extension.swift */; };
@@ -53,8 +49,8 @@
 		E89F6E4D29CC0F4200602075 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E4C29CC0F4200602075 /* UIImageView+Extension.swift */; };
 		E89F6E4F29CC0F7700602075 /* UIScrollView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E4E29CC0F7700602075 /* UIScrollView+Extension.swift */; };
 		E89F6E5129CC0F9700602075 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E5029CC0F9700602075 /* UIColor+Extension.swift */; };
-		E89F6E5429CC139900602075 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E5329CC139900602075 /* MainViewModel.swift */; };
-		E89F6E5629CC344400602075 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E5529CC344400602075 /* Book.swift */; };
+		E89F6E5429CC139900602075 /* MyLibTabMainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E5329CC139900602075 /* MyLibTabMainViewModel.swift */; };
+		E89F6E5629CC344400602075 /* DataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E5529CC344400602075 /* DataClass.swift */; };
 		E89F6E5829CC48D600602075 /* ConfirmBookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E5729CC48D600602075 /* ConfirmBookViewModel.swift */; };
 		E89F6E5A29CC4F1900602075 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E5929CC4F1900602075 /* UIImage+Extension.swift */; };
 		E89F6E5C29CC90B700602075 /* BookDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E5B29CC90B700602075 /* BookDetailViewModel.swift */; };
@@ -80,17 +76,23 @@
 		E8D5C3D529824126003D1AD0 /* CreateCommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D5C3D429824126003D1AD0 /* CreateCommunityViewController.swift */; };
 		E8D5C3D729824130003D1AD0 /* CommunitySettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D5C3D629824130003D1AD0 /* CommunitySettingView.swift */; };
 		E8D5C3DC29827056003D1AD0 /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D5C3DB29827056003D1AD0 /* CreatePostViewController.swift */; };
+		E8FADC1829DE7C4600AC579F /* BarcodeRecognizeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FADC1729DE7C4600AC579F /* BarcodeRecognizeViewModel.swift */; };
+		E8FADC1A29DE7C4C00AC579F /* StopwatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FADC1929DE7C4C00AC579F /* StopwatchViewModel.swift */; };
+		E8FADC1E29DE7C5A00AC579F /* BarcodeRecognizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FADC1B29DE7C5A00AC579F /* BarcodeRecognizeView.swift */; };
+		E8FADC1F29DE7C5A00AC579F /* BarcodeRecognizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FADC1C29DE7C5A00AC579F /* BarcodeRecognizeViewController.swift */; };
+		E8FADC2029DE7C5A00AC579F /* StopwatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FADC1D29DE7C5A00AC579F /* StopwatchViewController.swift */; };
+		E8FADC2329DE7CB300AC579F /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FADC2129DE7CB300AC579F /* Stopwatch.swift */; };
+		E8FADC2429DE7CB300AC579F /* BarcodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FADC2229DE7CB300AC579F /* BarcodeScanner.swift */; };
+		E8FADC2829E121F700AC579F /* MyLibModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FADC2729E121F700AC579F /* MyLibModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		245FED6D2983971100EE02B6 /* JoinCommunityRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinCommunityRequest.swift; sourceTree = "<group>"; };
-		24A21A382976EA2400AE8BF9 /* DataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataClass.swift; sourceTree = "<group>"; };
-		24D01FC6299395BE0045DC68 /* AddBookBarcodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBookBarcodeViewController.swift; sourceTree = "<group>"; };
+		24A21A382976EA2400AE8BF9 /* DataClassLegacy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataClassLegacy.swift; sourceTree = "<group>"; };
 		24D01FC9299395DB0045DC68 /* BookDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailView.swift; sourceTree = "<group>"; };
 		24D01FCA299395DB0045DC68 /* BookDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
 		24D01FCD299395F40045DC68 /* CustomAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
 		24D01FCF2993966E0045DC68 /* SetTimeGoalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetTimeGoalViewController.swift; sourceTree = "<group>"; };
-		24E794232971653C00E69633 /* ReadingTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingTime.swift; sourceTree = "<group>"; };
 		24E7942B2972BDD300E69633 /* CustomPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopUp.swift; sourceTree = "<group>"; };
 		412B7ED82988DDF000B40AF3 /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		412DDC8329858E3C00F6CB22 /* CommunityMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityMemberViewController.swift; sourceTree = "<group>"; };
@@ -103,7 +105,6 @@
 		86C3C2B9296858380035CFFE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		86C3C2BC296858380035CFFE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86C3C2BE296858380035CFFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		86C3C2CF296E694B0035CFFE /* BarcodeReaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeReaderView.swift; sourceTree = "<group>"; };
 		86C3C2D2296E69630035CFFE /* ConfirmBookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmBookViewController.swift; sourceTree = "<group>"; };
 		CD50D9E346145F9EDEF00686 /* Pods-BookMark.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookMark.release.xcconfig"; path = "Target Support Files/Pods-BookMark/Pods-BookMark.release.xcconfig"; sourceTree = "<group>"; };
 		E82079432990B6E800B36FC9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -122,7 +123,6 @@
 		E89F6E1E29B5E0E500602075 /* SUIT-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Medium.otf"; sourceTree = "<group>"; };
 		E89F6E1F29B5E0E500602075 /* SUIT-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-ExtraLight.otf"; sourceTree = "<group>"; };
 		E89F6E2929B5E54C00602075 /* SearchCommunityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCommunityViewController.swift; sourceTree = "<group>"; };
-		E89F6E3B29CC0AE900602075 /* StopwatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StopwatchViewController.swift; path = BookMark/StopwatchViewController.swift; sourceTree = SOURCE_ROOT; };
 		E89F6E3D29CC0CB100602075 /* NetworkFailMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFailMainView.swift; sourceTree = "<group>"; };
 		E89F6E4029CC0E6100602075 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		E89F6E4229CC0E9000602075 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
@@ -133,8 +133,8 @@
 		E89F6E4C29CC0F4200602075 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		E89F6E4E29CC0F7700602075 /* UIScrollView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extension.swift"; sourceTree = "<group>"; };
 		E89F6E5029CC0F9700602075 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
-		E89F6E5329CC139900602075 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
-		E89F6E5529CC344400602075 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		E89F6E5329CC139900602075 /* MyLibTabMainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibTabMainViewModel.swift; sourceTree = "<group>"; };
+		E89F6E5529CC344400602075 /* DataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataClass.swift; sourceTree = "<group>"; };
 		E89F6E5729CC48D600602075 /* ConfirmBookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmBookViewModel.swift; sourceTree = "<group>"; };
 		E89F6E5929CC4F1900602075 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		E89F6E5B29CC90B700602075 /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
@@ -161,6 +161,14 @@
 		E8D5C3D429824126003D1AD0 /* CreateCommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCommunityViewController.swift; sourceTree = "<group>"; };
 		E8D5C3D629824130003D1AD0 /* CommunitySettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunitySettingView.swift; sourceTree = "<group>"; };
 		E8D5C3DB29827056003D1AD0 /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
+		E8FADC1729DE7C4600AC579F /* BarcodeRecognizeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeRecognizeViewModel.swift; sourceTree = "<group>"; };
+		E8FADC1929DE7C4C00AC579F /* StopwatchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopwatchViewModel.swift; sourceTree = "<group>"; };
+		E8FADC1B29DE7C5A00AC579F /* BarcodeRecognizeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeRecognizeView.swift; sourceTree = "<group>"; };
+		E8FADC1C29DE7C5A00AC579F /* BarcodeRecognizeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeRecognizeViewController.swift; sourceTree = "<group>"; };
+		E8FADC1D29DE7C5A00AC579F /* StopwatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopwatchViewController.swift; sourceTree = "<group>"; };
+		E8FADC2129DE7CB300AC579F /* Stopwatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
+		E8FADC2229DE7CB300AC579F /* BarcodeScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScanner.swift; sourceTree = "<group>"; };
+		E8FADC2729E121F700AC579F /* MyLibModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,7 +221,6 @@
 			isa = PBXGroup;
 			children = (
 				E8C0535D2998535000CA5D8E /* BookMark.entitlements */,
-				E89F6E3B29CC0AE900602075 /* StopwatchViewController.swift */,
 				E8C2B4F8296A8D6D000E2030 /* MainTabBarController.swift */,
 				86C3C2B0296858370035CFFE /* AppDelegate.swift */,
 				86C3C2B2296858370035CFFE /* SceneDelegate.swift */,
@@ -310,7 +317,9 @@
 		E89F6E3929CC0A7100602075 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E89F6E5529CC344400602075 /* Book.swift */,
+				E8C2B51229743975000E2030 /* Network.swift */,
+				E89F6E5529CC344400602075 /* DataClass.swift */,
+				E8FADC2729E121F700AC579F /* MyLibModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -318,6 +327,9 @@
 		E89F6E3A29CC0AAF00602075 /* MyLib */ = {
 			isa = PBXGroup;
 			children = (
+				E8FADC1B29DE7C5A00AC579F /* BarcodeRecognizeView.swift */,
+				E8FADC1C29DE7C5A00AC579F /* BarcodeRecognizeViewController.swift */,
+				E8FADC1D29DE7C5A00AC579F /* StopwatchViewController.swift */,
 				86C3C2D2296E69630035CFFE /* ConfirmBookViewController.swift */,
 				24D01FCA299395DB0045DC68 /* BookDetailViewController.swift */,
 				24D01FC9299395DB0045DC68 /* BookDetailView.swift */,
@@ -347,7 +359,9 @@
 		E89F6E5229CC137700602075 /* MyLib */ = {
 			isa = PBXGroup;
 			children = (
-				E89F6E5329CC139900602075 /* MainViewModel.swift */,
+				E89F6E5329CC139900602075 /* MyLibTabMainViewModel.swift */,
+				E8FADC1729DE7C4600AC579F /* BarcodeRecognizeViewModel.swift */,
+				E8FADC1929DE7C4C00AC579F /* StopwatchViewModel.swift */,
 				E89F6E5729CC48D600602075 /* ConfirmBookViewModel.swift */,
 				E89F6E5B29CC90B700602075 /* BookDetailViewModel.swift */,
 			);
@@ -357,6 +371,8 @@
 		E89F6E5D29CD3BEF00602075 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				E8FADC2229DE7CB300AC579F /* BarcodeScanner.swift */,
+				E8FADC2129DE7CB300AC579F /* Stopwatch.swift */,
 				24D01FCD299395F40045DC68 /* CustomAlertViewController.swift */,
 				E89F6E5E29CD3F5D00602075 /* BottomSheetViewController.swift */,
 			);
@@ -384,8 +400,6 @@
 		E8C2B4F3296A8A66000E2030 /* MyLib */ = {
 			isa = PBXGroup;
 			children = (
-				E8D5C3E329838352003D1AD0 /* Barcode */,
-				E8D5C3E229838329003D1AD0 /* Timer */,
 				E8C0536A299C7F0C00CA5D8E /* AllPageInputPopUp.swift */,
 				24E7942B2972BDD300E69633 /* CustomPopUp.swift */,
 			);
@@ -447,32 +461,14 @@
 		E8D5C3E129838303003D1AD0 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				E8C2B51229743975000E2030 /* Network.swift */,
 				E8C05363299C7EFB00CA5D8E /* DataClass_sueyeon.swift */,
 				E8C05364299C7EFB00CA5D8E /* DataClassTintin.swift */,
 				E8C05362299C7EFA00CA5D8E /* Network_Sueyeon.swift */,
 				E8C05365299C7EFB00CA5D8E /* NetworkTintin.swift */,
-				24A21A382976EA2400AE8BF9 /* DataClass.swift */,
+				24A21A382976EA2400AE8BF9 /* DataClassLegacy.swift */,
 				E8C0535E299896A400CA5D8E /* UserClass.swift */,
 			);
 			path = Utility;
-			sourceTree = "<group>";
-		};
-		E8D5C3E229838329003D1AD0 /* Timer */ = {
-			isa = PBXGroup;
-			children = (
-				24E794232971653C00E69633 /* ReadingTime.swift */,
-			);
-			path = Timer;
-			sourceTree = "<group>";
-		};
-		E8D5C3E329838352003D1AD0 /* Barcode */ = {
-			isa = PBXGroup;
-			children = (
-				24D01FC6299395BE0045DC68 /* AddBookBarcodeViewController.swift */,
-				86C3C2CF296E694B0035CFFE /* BarcodeReaderView.swift */,
-			);
-			path = Barcode;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -601,30 +597,31 @@
 			files = (
 				24D01FD02993966E0045DC68 /* SetTimeGoalViewController.swift in Sources */,
 				E8C05375299C874200CA5D8E /* TestViewController.swift in Sources */,
-				24A21A392976EA2400AE8BF9 /* DataClass.swift in Sources */,
+				24A21A392976EA2400AE8BF9 /* DataClassLegacy.swift in Sources */,
+				E8FADC2429DE7CB300AC579F /* BarcodeScanner.swift in Sources */,
 				E89F6E4329CC0E9000602075 /* UILabel+Extension.swift in Sources */,
+				E8FADC1829DE7C4600AC579F /* BarcodeRecognizeViewModel.swift in Sources */,
 				24D01FCC299395DB0045DC68 /* BookDetailViewController.swift in Sources */,
 				E89F6E5829CC48D600602075 /* ConfirmBookViewModel.swift in Sources */,
 				E89F6E2A29B5E54C00602075 /* SearchCommunityViewController.swift in Sources */,
 				E8C2B4FB296A8F40000E2030 /* CommunityTab.swift in Sources */,
 				245FED6E2983971100EE02B6 /* JoinCommunityRequest.swift in Sources */,
-				86C3C2D1296E694B0035CFFE /* BarcodeReaderView.swift in Sources */,
 				E832390829879ABC00DC83C2 /* CommunityInsideViewController.swift in Sources */,
-				E89F6E5429CC139900602075 /* MainViewModel.swift in Sources */,
+				E89F6E5429CC139900602075 /* MyLibTabMainViewModel.swift in Sources */,
 				E8D5C3DC29827056003D1AD0 /* CreatePostViewController.swift in Sources */,
 				24D01FCE299395F40045DC68 /* CustomAlertViewController.swift in Sources */,
 				E89F6E4D29CC0F4200602075 /* UIImageView+Extension.swift in Sources */,
+				E8FADC1E29DE7C5A00AC579F /* BarcodeRecognizeView.swift in Sources */,
 				412B7ED92988DDF000B40AF3 /* PostDetailViewController.swift in Sources */,
 				E89F6E5C29CC90B700602075 /* BookDetailViewModel.swift in Sources */,
 				E89F6E5129CC0F9700602075 /* UIColor+Extension.swift in Sources */,
-				E89F6E5629CC344400602075 /* Book.swift in Sources */,
-				E89F6E3C29CC0AE900602075 /* StopwatchViewController.swift in Sources */,
+				E89F6E5629CC344400602075 /* DataClass.swift in Sources */,
 				E8C2B51329743975000E2030 /* Network.swift in Sources */,
 				E8C05367299C7EFB00CA5D8E /* DataClass_sueyeon.swift in Sources */,
 				E8C2B4FF296A8F8C000E2030 /* MyPageTab.swift in Sources */,
 				E8C0536B299C7F0C00CA5D8E /* AllPageInputPopUp.swift in Sources */,
 				412DDC8629858E5F00F6CB22 /* WaitMemberViewController.swift in Sources */,
-				24E794242971653C00E69633 /* ReadingTime.swift in Sources */,
+				E8FADC2329DE7CB300AC579F /* Stopwatch.swift in Sources */,
 				E82079442990B6E800B36FC9 /* LoginViewController.swift in Sources */,
 				E8C05366299C7EFB00CA5D8E /* Network_Sueyeon.swift in Sources */,
 				86C3C2B1296858370035CFFE /* AppDelegate.swift in Sources */,
@@ -637,6 +634,7 @@
 				86C3C2B3296858370035CFFE /* SceneDelegate.swift in Sources */,
 				24D01FCB299395DB0045DC68 /* BookDetailView.swift in Sources */,
 				E8C0536F299C7F1700CA5D8E /* Tutorials.swift in Sources */,
+				E8FADC1F29DE7C5A00AC579F /* BarcodeRecognizeViewController.swift in Sources */,
 				E89F6E4F29CC0F7700602075 /* UIScrollView+Extension.swift in Sources */,
 				E89F6E4129CC0E6100602075 /* UIFont+Extension.swift in Sources */,
 				E82079762994797900B36FC9 /* CreateOneLineViewController.swift in Sources */,
@@ -648,12 +646,14 @@
 				E8D5C3D329824114003D1AD0 /* SetCommunityViewController.swift in Sources */,
 				E89F6E4929CC0EF200602075 /* UIViewController+Extension.swift in Sources */,
 				E8D5C3D729824130003D1AD0 /* CommunitySettingView.swift in Sources */,
+				E8FADC1A29DE7C4C00AC579F /* StopwatchViewModel.swift in Sources */,
+				E8FADC2029DE7C5A00AC579F /* StopwatchViewController.swift in Sources */,
 				E82079742994795800B36FC9 /* OneLineTabView.swift in Sources */,
-				24D01FC7299395BE0045DC68 /* AddBookBarcodeViewController.swift in Sources */,
 				E8C05369299C7EFB00CA5D8E /* NetworkTintin.swift in Sources */,
 				86C3C2D3296E69630035CFFE /* ConfirmBookViewController.swift in Sources */,
 				E89F6E5A29CC4F1900602075 /* UIImage+Extension.swift in Sources */,
 				E8C2B4FD296A8F6A000E2030 /* ScrapTab.swift in Sources */,
+				E8FADC2829E121F700AC579F /* MyLibModel.swift in Sources */,
 				E8C2B4F7296A8CC5000E2030 /* OneLineTab.swift in Sources */,
 				E82079462990B72A00B36FC9 /* LoginView.swift in Sources */,
 				E8C0535F299896A400CA5D8E /* UserClass.swift in Sources */,

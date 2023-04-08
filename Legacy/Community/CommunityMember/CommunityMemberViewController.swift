@@ -9,7 +9,7 @@ import SnapKit
 
 class CommunityMemberViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var clubID: Int = 1
-    let network = Network()
+//    let network = Network()
     let layout_member = CommunityMemberView()
     private var memberList = [[String]]() // [user name, now reading, message, user images]
     
@@ -81,18 +81,18 @@ extension CommunityMemberViewController {
 // MARK: - 네트워크 용 extension
 extension CommunityMemberViewController {
     func getCommunityMember() {
-        network.getCommunityUserInfo(clubID: self.clubID, completion: { res in
-            switch res {
-            case .success(let members):
-                guard let member = (members as? [CommunityUserList]) else {return}
-                member.forEach { item in
-                    self.memberList.append([item.user_name, String(describing: item.now_reading), item.introduce_message, item.img_url ?? ""])
-                }
-                self.layout_member.layout_members.reloadData()
-            default:
-                print("failed")
-            }
-        })
+//        network.getCommunityUserInfo(clubID: self.clubID, completion: { res in
+//            switch res {
+//            case .success(let members):
+//                guard let member = (members as? [CommunityUserList]) else {return}
+//                member.forEach { item in
+//                    self.memberList.append([item.user_name, String(describing: item.now_reading), item.introduce_message, item.img_url ?? ""])
+//                }
+//                self.layout_member.layout_members.reloadData()
+//            default:
+//                print("failed")
+//            }
+//        })
     }
 }
 

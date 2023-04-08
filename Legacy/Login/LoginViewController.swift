@@ -27,17 +27,17 @@ extension LoginViewController: ASAuthorizationControllerPresentationContextProvi
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else {
-            return
-        }
-        let userIdentifier = appleIDCredential.user
-        let fullName = (appleIDCredential.fullName?.familyName ?? "") + (appleIDCredential.fullName?.givenName ?? "")
-        
-        let userDef = UserDefaults.standard
-        userDef.set(userIdentifier, forKey: "userIdentifier")
-        userDef.synchronize()
-        UserInfo.shared.userAccessToken = userIdentifier
-        
+//        guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else {
+//            return
+//        }
+//        let userIdentifier = appleIDCredential.user
+//        let fullName = (appleIDCredential.fullName?.familyName ?? "") + (appleIDCredential.fullName?.givenName ?? "")
+//
+//        let userDef = UserDefaults.standard
+//        userDef.set(userIdentifier, forKey: "userIdentifier")
+//        userDef.synchronize()
+//        UserInfo.shared.userAccessToken = userIdentifier
+//        
 //        if  let authorizationCode = appleIDCredential.authorizationCode,
 //            let identityToken = appleIDCredential.identityToken,
 //            let authString = String(data: authorizationCode, encoding: .utf8),
@@ -48,27 +48,27 @@ extension LoginViewController: ASAuthorizationControllerPresentationContextProvi
 //            print("tokenString: \(tokenString)")
 //        }
         
-        self.postLogin(userIdentifier: userIdentifier, completion: { res in
-            if (res) {
-                if let name = userDef.string(forKey: "userNickName"), let msg = userDef.string(forKey: "userMessage"), let goal = userDef.string(forKey: "userGoal") {
-                    print("okok")
-                    UserInfo.shared.userNickName = name
-                    UserInfo.shared.userMessage = msg
-                    UserInfo.shared.userGoal = Int(goal) ?? 0
-                }
-                
-                let vc = MainTabBarController()
-                vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true)
-            }
-            
-            else {
-                let vc = UINavigationController(rootViewController: SetNameViewController())
-                vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true)
-            }
-        
-        })
+//        self.postLogin(userIdentifier: userIdentifier, completion: { res in
+//            if (res) {
+//                if let name = userDef.string(forKey: "userNickName"), let msg = userDef.string(forKey: "userMessage"), let goal = userDef.string(forKey: "userGoal") {
+//                    print("okok")
+//                    UserInfo.shared.userNickName = name
+//                    UserInfo.shared.userMessage = msg
+//                    UserInfo.shared.userGoal = Int(goal) ?? 0
+//                }
+//
+//                let vc = MainTabBarController()
+//                vc.modalPresentationStyle = .fullScreen
+//                self.present(vc, animated: true)
+//            }
+//
+//            else {
+//                let vc = UINavigationController(rootViewController: SetNameViewController())
+//                vc.modalPresentationStyle = .fullScreen
+//                self.present(vc, animated: true)
+//            }
+//
+//        })
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
@@ -118,42 +118,42 @@ extension LoginViewController: ASAuthorizationControllerPresentationContextProvi
 }
 
 // MARK: - 네트워크 용 extension
-extension LoginViewController {
-    func postLogin(userIdentifier: String, completion: @escaping (Bool) -> Void) {
-        let params: Parameters = ["access_token": userIdentifier]
-        let baseUrl = "https://port-0-bookmark-oneliner-luj2cldx5nm16.sel3.cloudtype.app"
-        let URL = baseUrl + "/login"
-        let datarequest = AF.request(URL, method: .post, parameters: params, encoding: JSONEncoding.default).validate()
-        
-        datarequest.responseData(completionHandler: { response in
-            switch response.result {
-            case .success:
-                guard let value = response.value else {return}
-                guard let _ = response.response?.statusCode else {return}
-                
-                let decoder = JSONDecoder()
-                guard let decodedData = try? decoder.decode(LoginResponse.self, from: value) else {
-                    return
-                }
-                if (decodedData.message == " 기등록된 유저 입니다.") {
-                    if let id = decodedData.userId?[0].userID {
-                        print("user ID: \(id)")
-                        UserInfo.shared.userID = id
-                        completion(true)
-                    }
-                }
-                else if (decodedData.message == " 등록되지 않은 유저입니다. ") {
-                    completion(false)
-                }
-                else {
-                    print("no message")
-                }
-
-                
-            case .failure(let e):
-                print(e)
-            }
-        
-        })
-    }
-}
+//extension LoginViewController {
+//    func postLogin(userIdentifier: String, completion: @escaping (Bool) -> Void) {
+//        let params: Parameters = ["access_token": userIdentifier]
+//        let baseUrl = "https://port-0-bookmark-oneliner-luj2cldx5nm16.sel3.cloudtype.app"
+//        let URL = baseUrl + "/login"
+//        let datarequest = AF.request(URL, method: .post, parameters: params, encoding: JSONEncoding.default).validate()
+//        
+//        datarequest.responseData(completionHandler: { response in
+//            switch response.result {
+//            case .success:
+//                guard let value = response.value else {return}
+//                guard let _ = response.response?.statusCode else {return}
+//                
+//                let decoder = JSONDecoder()
+//                guard let decodedData = try? decoder.decode(LoginResponse.self, from: value) else {
+//                    return
+//                }
+//                if (decodedData.message == " 기등록된 유저 입니다.") {
+//                    if let id = decodedData.userId?[0].userID {
+//                        print("user ID: \(id)")
+//                        UserInfo.shared.userID = id
+//                        completion(true)
+//                    }
+//                }
+//                else if (decodedData.message == " 등록되지 않은 유저입니다. ") {
+//                    completion(false)
+//                }
+//                else {
+//                    print("no message")
+//                }
+//
+//                
+//            case .failure(let e):
+//                print(e)
+//            }
+//        
+//        })
+//    }
+//}

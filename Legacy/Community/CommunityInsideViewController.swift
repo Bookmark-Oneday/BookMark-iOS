@@ -148,14 +148,14 @@ extension CommunityInsideViewController {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = PostDetailViewController()
-        if (announceID == nil) {
-            vc.postID = Int(self.postData[indexPath.row][0]) ?? 0
-        }
-        else {
-            vc.postID = Int(self.postData[indexPath.row - 1][0]) ?? 0
-        }
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let vc = PostDetailViewController()
+//        if (announceID == nil) {
+//            vc.postID = Int(self.postData[indexPath.row][0]) ?? 0
+//        }
+//        else {
+//            vc.postID = Int(self.postData[indexPath.row - 1][0]) ?? 0
+//        }
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

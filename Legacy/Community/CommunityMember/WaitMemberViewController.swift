@@ -7,7 +7,7 @@
 import UIKit
 
 class WaitMemberViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    let network = Network()
+//    let network = Network()
     let layout_waits = WaitMembersView()
     var clubID: Int = 1
     private var requestList = [[String]]() // [프로필 사진, 이름, 소개말, 아이디]
@@ -64,45 +64,45 @@ extension WaitMemberViewController {
 // MARK: - 네트워크 용 extension
 extension WaitMemberViewController {
     func getRequestList() {
-        network.getCommunityJoinRequestList(clubID: self.clubID, completion: { res in
-            switch res {
-            case .success(let members):
-                guard let member = (members as? CommunityJoinRequest)?.membersRequesting else {return}
-                member.forEach { item in
-                    self.requestList.append([item.img_url, item.user_name, item.introduce_message, "\(item.user_id)"])
-                }
-                self.layout_waits.layout_waits.reloadData()
-            default:
-                self.view.makeToast("가입 요청자가 없습니다", duration: 1, position: .bottom)
-                print("get failed")
-            }
-        })
+//        network.getCommunityJoinRequestList(clubID: self.clubID, completion: { res in
+//            switch res {
+//            case .success(let members):
+//                guard let member = (members as? CommunityJoinRequest)?.membersRequesting else {return}
+//                member.forEach { item in
+//                    self.requestList.append([item.img_url, item.user_name, item.introduce_message, "\(item.user_id)"])
+//                }
+//                self.layout_waits.layout_waits.reloadData()
+//            default:
+//                self.view.makeToast("가입 요청자가 없습니다", duration: 1, position: .bottom)
+//                print("get failed")
+//            }
+//        })
     }
     
     func accpetJoinRequest(userID: String, completion: @escaping () -> Void) {
-        let userid = Int(userID) ?? 0
-        network.postCommunityJoinRequestStatus(userID: userid, clubID: self.clubID, completion: { res in
-            switch res {
-            case .success:
-                self.view.makeToast("가입이 되었습니다", duration: 1, position: .bottom)
-                completion()
-            default:
-                self.view.makeToast("가입 요청을 받을 수 없습니다\n 잠시 후 다시 시도해주세요", duration: 1, position: .bottom)
-            }
-        })
+//        let userid = Int(userID) ?? 0
+//        network.postCommunityJoinRequestStatus(userID: userid, clubID: self.clubID, completion: { res in
+//            switch res {
+//            case .success:
+//                self.view.makeToast("가입이 되었습니다", duration: 1, position: .bottom)
+//                completion()
+//            default:
+//                self.view.makeToast("가입 요청을 받을 수 없습니다\n 잠시 후 다시 시도해주세요", duration: 1, position: .bottom)
+//            }
+//        })
     }
     
     func declineJoinRequest(userID: String, completion: @escaping () -> Void) {
-        let userid = Int(userID) ?? 0
-        network.postCommunityJoinRequestDecline(userID: userid, clubID: self.clubID, completion: { res in
-            switch res {
-            case .success:
-                self.view.makeToast("가입 거부 되었습니다", duration: 1, position: .bottom)
-                completion()
-            default:
-                self.view.makeToast("가입 거부를 할 수 없습니다\n 잠시 후 다시 시도해주세요", duration: 1, position: .bottom)
-            }
-        })
+//        let userid = Int(userID) ?? 0
+//        network.postCommunityJoinRequestDecline(userID: userid, clubID: self.clubID, completion: { res in
+//            switch res {
+//            case .success:
+//                self.view.makeToast("가입 거부 되었습니다", duration: 1, position: .bottom)
+//                completion()
+//            default:
+//                self.view.makeToast("가입 거부를 할 수 없습니다\n 잠시 후 다시 시도해주세요", duration: 1, position: .bottom)
+//            }
+//        })
     }
 }
 

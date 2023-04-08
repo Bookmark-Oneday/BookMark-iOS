@@ -152,7 +152,7 @@ class StopwatchViewA {
         label_time.snp.makeConstraints{ make in
             make.centerX.centerY.equalToSuperview()
             make.height.equalTo(120)
-        }
+        } 
         
         label_time.text = "--:--"
         label_time.textColor = UIColor(red: 0.262, green: 0.262, blue: 0.262, alpha: 1)
@@ -162,6 +162,7 @@ class StopwatchViewA {
             make.centerX.equalToSuperview()
             make.top.equalTo(label_time.snp.bottom).offset(5)
         }
+        label_total.font = .suit(size: 16, weight: .w500)
         
         label_total.text = "Total"
         label_total.textColor = .textOrange
