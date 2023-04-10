@@ -27,6 +27,8 @@ class MyLibTabMainView: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
+        
+        setUpCollectionBinding()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -66,21 +68,27 @@ class MyLibTabMainView: UIViewController {
         
         viewModel.streak
             .observe(on: MainScheduler.instance)
+            .map { Int($0) ?? 0 }
             .filter { $0 > 0 }
             .map { "연속 \($0)일째 읽고 있어요!" }
-            .bind(to: self.layout_main.label_streaks.rx.text)
+            .subscribe(onNext: { res in
+                self.layout_main.label_streaks.isHidden = false
+                self.layout_main.label_streaks.text = res
+            })
             .disposed(by: disposeBag)
         
-        viewModel.readCount?
+        viewModel.readCount
             .observe(on: MainScheduler.instance)
             .bind(to: self.layout_main.label_bookCount.rx.text, self.layout_main.label_bookcount.rx.text)
             .disposed(by: disposeBag)
-        
+    }
+    
+    private func setUpCollectionBinding() {
         viewModel.books
             .observe(on: MainScheduler.instance)
             .bind(to: self.layout_main.layout_books.rx.items(cellIdentifier: BookCollectionCell.identifier, cellType: BookCollectionCell.self)) { idx, item, cell in
                 
-                if (item.book_id == 0) {
+                if (item.book_id == "") {
                     cell.layout_img.image = UIImage(named: "addBook")
                 }
                 else {
@@ -210,6 +218,7 @@ class MyLibTabView {
             make.centerX.equalToSuperview()
         }
         label_streaks.setTxtAttribute("연속 0일째 읽고 있어요!", size: 10, weight: .w500, txtColor: .textOrange)
+        label_streaks.isHidden = true
         
         label_follwerCount.snp.makeConstraints() { make in
             make.top.equalTo(label_name.snp.bottom).offset(35)

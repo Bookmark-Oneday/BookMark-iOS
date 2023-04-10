@@ -23,7 +23,7 @@ class MyLibModel: ApiRequest {
     var parameters: [String: String]
     
     init(sortType: SortType = .latest) {
-        self.parameters = ["sortType": "latest", "perPage": "0", "continuousToken": "0"]
+        self.parameters = ["sortType": sortType.rawValue, "perPage": "3", "continuousToken": "0"]
         self.headerParam = ["user_id": "74d18bfc-14c5-46d2-a1a8-1eb627918859"]
     }
 }

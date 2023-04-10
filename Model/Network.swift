@@ -71,17 +71,15 @@ class Network {
                 switch response.result {
                 case .success(let data) :
                     do {
-                        print(response.response?.statusCode)
                         let model: T = try JSONDecoder().decode(T.self, from: data)
-                        print(model)
                         observer.onNext(model)
                     } catch let error {
-                        print("\nfailed\n")
+                        print("failed")
                         observer.onError(error)
                     }
                 case .failure(let error):
+                    print("failed")
                     observer.onError(error)
-
                 }
                 observer.onCompleted()
             }
