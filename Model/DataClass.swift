@@ -7,9 +7,10 @@
 
 import Foundation
 
+// MARK: B.1
 struct MyLib: Decodable {
     var data: [Books]?
-    var meta: Metas
+    var meta: LibMeta
 }
 
 struct Books: Decodable {
@@ -23,7 +24,7 @@ struct Books: Decodable {
     var favorite: Bool
 }
 
-struct Metas: Decodable {
+struct LibMeta: Decodable {
     var sortType: String
     var continuousToken: String
     var currentPage: Int
@@ -32,37 +33,27 @@ struct Metas: Decodable {
     var now: Int
 }
 
-
-// MARK: - Welcome
-struct Welcome: Codable {
-    let data: [Datum]
-    let meta: Meta?
+// MARK: - B.2
+struct BookDetail: Decodable {
+    let data: BookDetailData
+    let meta: BookDetailMeta
 }
 
-// MARK: - Datum
-struct Datum: Codable {
-    let bookID, title: String
+struct History: Decodable {
+    let id, date: String
+    let time: Int
+}
+
+struct BookDetailData: Decodable {
+    let book_id, title: String
     let authors, translators: [String]
     let publisher: String
     let titleImage: String
-    let reading, favorite: Bool
-
-    enum CodingKeys: String, CodingKey {
-        case bookID = "book_id"
-        case title, authors, translators, publisher, titleImage, reading, favorite
-    }
+    let current_page, total_page: Int
+    let history: [History]?
 }
 
-// MARK: - Meta
-struct Meta: Codable {
-    let sortType, continuousToken: String?
-    let currentPage, totalCount: Int?
-    let requestID: String
+struct BookDetailMeta: Decodable {
+    let requestId: String
     let now: Int
-
-    enum CodingKeys: String, CodingKey {
-        case sortType, continuousToken, currentPage, totalCount
-        case requestID = "requestId"
-        case now
-    }
 }

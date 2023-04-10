@@ -18,7 +18,7 @@ public enum RequestType: String {
 protocol ApiRequest{
     var method : RequestType { get }
     var path : String { get }
-    var parameters : [String : String] { get}
+    var parameters : [String : String]? { get}
     var headerParam: [String: String]? {get}
 }
 
@@ -27,7 +27,7 @@ extension ApiRequest {
         guard var components = URLComponents(url: baseURL.appendingPathComponent(path), resolvingAgainstBaseURL: false) else {
             fatalError("url errror")
         }
-        components.queryItems = parameters.map{
+        components.queryItems = parameters?.map {
             URLQueryItem(name: String($0), value: String($1))
         }
         guard let url = components.url else {
@@ -90,17 +90,3 @@ class Network {
         }
     }
 }
-
-
-//extension HTTPManager: URLSessionDelegate {
-//    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void) {
-//        if challenge.previousFailureCount > 0 {
-//            completionHandler(.cancelAuthenticationChallenge, nil)
-//        } else if let serverTrust = challenge.protectionSpace.serverTrust {
-//            completionHandler(.useCredential, URLCredential(trust: serverTrust))
-//        } else {
-//            print("unknown state. error: \(challenge.error)")
-//            completionHandler(.performDefaultHandling, nil)
-//        }
-//    }
-//}

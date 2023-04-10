@@ -17,7 +17,16 @@ class BookDetailViewController: UIViewController {
     let btn_heart = UIBarButtonItem(image: UIImage(named: "heart_black_unfill"))
     let btn_stopWatch = UIBarButtonItem(image: UIImage(named: "stopwatch"))
     var disposeBag = DisposeBag()
-    var bookDetailViewModel = BookDetailViewModel()
+    var bookDetailViewModel: BookDetailViewModel
+    
+    init(bookId: String) {
+        self.bookDetailViewModel = BookDetailViewModel(bookId: bookId)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +57,14 @@ class BookDetailViewController: UIViewController {
         
         bookDetailViewModel.bookImage
             .observe(on: MainScheduler.instance)
-            .bind(to: self.layout_bookdetail.img_book.rx.image)
+            .subscribe(onNext: { [weak self] url in
+                UIImage.loadFromUrl(url)
+                    .filter { $0 != nil }
+                    .subscribe { data in
+                        self?.layout_bookdetail.img_book.image = data
+                    }
+                    .dispose()
+            })
             .disposed(by: disposeBag)
         
         bookDetailViewModel.firstReadDate
@@ -85,10 +101,11 @@ class BookDetailViewController: UIViewController {
             .bind(to: self.layout_bookdetail.label_untilFin_data.rx.text)
             .disposed(by: disposeBag)
         
-        bookDetailViewModel.readingHistory?
+        bookDetailViewModel.readingHistory
             .observe(on: MainScheduler.instance)
+            .filter { $0 != nil }
             .subscribe(onNext: { data in
-                self.layout_bookdetail.setChartAttribute(data)
+                self.layout_bookdetail.setChartAttribute(data!)
             })
             .disposed(by: disposeBag)
         

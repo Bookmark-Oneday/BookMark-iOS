@@ -29,6 +29,7 @@
 		E82079762994797900B36FC9 /* CreateOneLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82079752994797900B36FC9 /* CreateOneLineViewController.swift */; };
 		E820797829947DBC00B36FC9 /* backImg.png in Resources */ = {isa = PBXBuildFile; fileRef = E820797729947DBC00B36FC9 /* backImg.png */; };
 		E832390829879ABC00DC83C2 /* CommunityInsideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E832390729879ABC00DC83C2 /* CommunityInsideViewController.swift */; };
+		E882E97E29E4626B00B5FAE5 /* BookDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E882E97D29E4626B00B5FAE5 /* BookDetailModel.swift */; };
 		E89F6E2029B5E0F200602075 /* SUIT-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E89F6E1829B5E0E400602075 /* SUIT-Bold.otf */; };
 		E89F6E2129B5E0F500602075 /* SUIT-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E89F6E1A29B5E0E400602075 /* SUIT-ExtraBold.otf */; };
 		E89F6E2229B5E0F700602075 /* SUIT-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = E89F6E1F29B5E0E500602075 /* SUIT-ExtraLight.otf */; };
@@ -113,6 +114,7 @@
 		E82079752994797900B36FC9 /* CreateOneLineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOneLineViewController.swift; sourceTree = "<group>"; };
 		E820797729947DBC00B36FC9 /* backImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backImg.png; sourceTree = "<group>"; };
 		E832390729879ABC00DC83C2 /* CommunityInsideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityInsideViewController.swift; sourceTree = "<group>"; };
+		E882E97D29E4626B00B5FAE5 /* BookDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailModel.swift; sourceTree = "<group>"; };
 		E89F6E1729B5E0E400602075 /* SUIT-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Regular.otf"; sourceTree = "<group>"; };
 		E89F6E1829B5E0E400602075 /* SUIT-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Bold.otf"; sourceTree = "<group>"; };
 		E89F6E1929B5E0E400602075 /* SUIT-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-SemiBold.otf"; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 				E8C2B51229743975000E2030 /* Network.swift */,
 				E89F6E5529CC344400602075 /* DataClass.swift */,
 				E8FADC2729E121F700AC579F /* MyLibModel.swift */,
+				E882E97D29E4626B00B5FAE5 /* BookDetailModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -637,6 +640,7 @@
 				E8FADC1F29DE7C5A00AC579F /* BarcodeRecognizeViewController.swift in Sources */,
 				E89F6E4F29CC0F7700602075 /* UIScrollView+Extension.swift in Sources */,
 				E89F6E4129CC0E6100602075 /* UIFont+Extension.swift in Sources */,
+				E882E97E29E4626B00B5FAE5 /* BookDetailModel.swift in Sources */,
 				E82079762994797900B36FC9 /* CreateOneLineViewController.swift in Sources */,
 				E89F6E4529CC0EA700602075 /* UIButton+Extension.swift in Sources */,
 				E89F6E3E29CC0CB100602075 /* NetworkFailMainView.swift in Sources */,

@@ -97,6 +97,7 @@ class MyLibTabMainView: UIViewController {
 
                 cell.label_title.text = item.title
                 cell.label_author.text = item.authors[0]
+                cell.bookID = item.book_id
                 cell.tag = idx
             }
             .disposed(by: disposeBag)
@@ -106,11 +107,13 @@ class MyLibTabMainView: UIViewController {
             .bind(onNext: { [weak self] indexpath in
                 let cell = self?.layout_main.layout_books.cellForItem(at: indexpath) as? BookCollectionCell
                 
-                switch cell?.tag {
-                case 0:
+                switch cell?.bookID {
+                case "":
                     self?.navigationController?.pushViewControllerTabHidden(ConfirmBookViewController(), animated: true)
                 default:
-                    self?.navigationController?.pushViewControllerTabHidden(BookDetailViewController(), animated: true)
+                    guard let id = cell?.bookID else {return}
+                    let vc = BookDetailViewController(bookId: id)
+                    self?.navigationController?.pushViewControllerTabHidden(vc, animated: true)
                 }
             })
             .disposed(by: disposeBag)
@@ -280,6 +283,7 @@ class MyLibTabView {
 // MARK: - scroll view cell class
 class BookCollectionCell: UICollectionViewCell {
     static let identifier = "BookCollectionCell"
+    var bookID: String = ""
     let layout_img = UIImageView()
     let label_title = UILabel()
     let label_author = UILabel()

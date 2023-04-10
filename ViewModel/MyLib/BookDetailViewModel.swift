@@ -8,55 +8,65 @@
 import RxSwift
 import RxCocoa
 
-struct History {
-    var date: String
-    var time: Int
-}
+class BookDetailViewModel {
+    let disposeBag = DisposeBag()
+    var bookImage = PublishSubject<String>()
+    var bookTitle = PublishSubject<String>()
+    var bookAuthorAndTranslator = PublishSubject<String>()
+    var bookAuthor = PublishSubject<String>()
+    var bookTranslator = PublishSubject<String>()
+    var bookIsFavorite = BehaviorRelay<Bool>(value: false)
+    
+    var currentPage = PublishSubject<Int>()
+    var totalPage = PublishSubject<Int>()
+    
+    var firstReadDate = Observable.just("2023.01.09")
+    var totalReadingTime = Observable.just("12:28.00")
+    
+    var readingPercent = PublishSubject<Float>()
+    var readingHistory = PublishSubject<[History]?>()
+    
+    init(bookId: String) {
+        let getApi: Observable<BookDetail> = Network().sendRequest(apiRequest: BookDetailModel(bookId: bookId))
 
-struct BookDetailViewModel {
-    var bookImage: Observable<UIImage?>
-    var bookTitle: Observable<String>
-    var bookAuthorAndTranslator: Observable<String>
-    var bookAuthor: Observable<String>
-    var bookTranslator: Observable<String>
-    var bookIsFavorite: BehaviorRelay<Bool>
-    
-    var currentPage: Observable<Int>
-    var totalPage: Observable<Int>
-    
-    var firstReadDate: Observable<String>
-    var totalReadingTime: Observable<String>
-    
-    var readingPercent: Observable<Float>
-    var readingHistory: Observable<[History]>?
-    
-    init() {
-        self.bookImage = UIImage.loadFromUrl("https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788976041548.jpg")
-        self.bookTitle = Observable.just("공포의 계곡")
-        self.bookAuthor = Observable.just("아서 코난 도일")
-        self.bookTranslator = Observable.just("김나민")
-        self.bookAuthorAndTranslator = Observable.zip(bookAuthor, bookTranslator)
+        getApi
+            .map { $0.data }
+            .subscribe(onNext: { [weak self] data in
+                self?.bookAuthor.onNext(data.authors[0])
+                self?.bookImage.onNext(data.titleImage)
+                self?.bookTitle.onNext(data.title)
+                self?.bookTranslator.onNext(data.translators[0])
+                self?.currentPage.onNext(data.current_page)
+                self?.totalPage.onNext(data.total_page)
+                self?.readingHistory.onNext(data.history)
+            })
+            .disposed(by: disposeBag)
+
+        Observable.zip(bookAuthor, bookTranslator)
             .map { "\($0) ◦ \($1) 번역" }
+            .bind(onNext: { str in
+                self.bookAuthorAndTranslator.onNext(str)
+            })
+            .disposed(by: disposeBag)
         
-        self.currentPage = Observable.just(120)
-        self.totalPage = Observable.just(354)
-        self.readingPercent = Observable.zip(currentPage, totalPage)
+        Observable.zip(currentPage, totalPage)
             .map { Float(Double($0) / Double($1) * 100) }
-        
-        self.firstReadDate = Observable.just("2023.01.09")
-        self.totalReadingTime = Observable.just("12:28.00")
-        
-        self.readingHistory = Observable.of([History(date: "12/23", time: 62),
-                                             History(date: "12/24", time: 15),
-                                             History(date: "12/25", time: 32),
-                                             History(date: "12/26", time: 44),
-                                             History(date: "12/27", time: 44),
-                                             History(date: "12/28", time: 29),
-                                             History(date: "12/29", time: 45),
-                                             History(date: "12/30", time: 23),
-                                             History(date: "12/31", time: 10),
-                                             History(date: "1/1", time: 83)])
-        
-        self.bookIsFavorite = BehaviorRelay<Bool>(value: false)
+            .bind(onNext: { res in
+                self.readingPercent.onNext(res)
+            })
+            .disposed(by: disposeBag)
+//
+//        self.readingHistory = Observable.of([History(date: "12/23", time: 62),
+//                                             History(date: "12/24", time: 15),
+//                                             History(date: "12/25", time: 32),
+//                                             History(date: "12/26", time: 44),
+//                                             History(date: "12/27", time: 44),
+//                                             History(date: "12/28", time: 29),
+//                                             History(date: "12/29", time: 45),
+//                                             History(date: "12/30", time: 23),
+//                                             History(date: "12/31", time: 10),
+//                                             History(date: "1/1", time: 83)])
+//
     }
+    
 }
