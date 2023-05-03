@@ -10,6 +10,7 @@ import RxCocoa
 
 class BookDetailViewModel {
     let disposeBag = DisposeBag()
+    var bookId: String = ""
     var bookImage = PublishSubject<String>()
     var bookTitle = PublishSubject<String>()
     var bookAuthorAndTranslator = PublishSubject<String>()
@@ -27,6 +28,7 @@ class BookDetailViewModel {
     var readingHistory = PublishSubject<[History]?>()
     
     init(bookId: String) {
+        self.bookId = bookId
         let getApi: Observable<BookDetail> = Network().sendRequest(apiRequest: BookDetailModel(bookId: bookId))
 
         getApi
@@ -67,6 +69,14 @@ class BookDetailViewModel {
 //                                             History(date: "12/31", time: 10),
 //                                             History(date: "1/1", time: 83)])
 //
+    }
+    
+    func deleteBook() {
+        let request = DeleteBookModel(bookId: self.bookId)
+        Network().sendRequest(apiRequest: request)
+            .subscribe(onNext: { rescode in
+                
+            })
     }
     
 }

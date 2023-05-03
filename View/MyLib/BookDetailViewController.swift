@@ -145,14 +145,11 @@ class BookDetailViewController: UIViewController {
         let deletion = CustomAlertViewController()
         deletion.modalPresentationStyle = .overFullScreen
         deletion.confirmCompletion = { [weak self] in
-            self?.deleteBook()
+            self?.bookDetailViewModel.deleteBook()
+            self?.navigationController?.popToRootViewController(animated: true)
         }
         deletion.setAlertLabel(title: "책 삭제", subtitle: "서재 목록에서 책을 삭제하겠습니까?", okButtonTitle: "삭제")
         self.present(deletion, animated: true)
-    }
-    
-    private func deleteBook() {
-        
     }
 }
 

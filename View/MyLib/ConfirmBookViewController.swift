@@ -15,7 +15,7 @@ import RxSwift
 class ConfirmBookViewController: UIViewController {
     let registerButton = UIBarButtonItem(title: "등록")
     let layout_main = ConfirmBookView()
-    let confirmBookViewModel = ConfirmBookViewModel()
+    let confirmBookViewModel = ConfirmBookViewModel(isbn: "9788976041548")
     var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -38,7 +38,14 @@ class ConfirmBookViewController: UIViewController {
         self.registerButton.rx
             .tap
             .subscribe(onNext: { [weak self] in
-                self?.navigationController?.popToRootViewController(animated: true)
+                let register = CustomAlertViewController()
+                register.modalPresentationStyle = .overFullScreen
+                register.confirmCompletion = { [weak self] in
+                    self?.confirmBookViewModel.registerBook(totalPage: 264)
+                    self?.navigationController?.popToRootViewController(animated: true)
+                }
+                register.setAlertLabel(title: "중복 등록", subtitle: "이전에 등록한 책입니다. 중복등록 하시겠습니까?", okButtonTitle: "등록")
+                self?.present(register, animated: true)
             })
             .disposed(by: disposeBag)
         
