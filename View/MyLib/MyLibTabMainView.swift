@@ -20,14 +20,18 @@ class MyLibTabMainView: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupBindings()
+        
+        let panGesture = UIPanGestureRecognizer()
+        panGesture.addTarget(self, action: #selector(didTapPanGesture))
+        layout_main.layout_submain.addGestureRecognizer(panGesture)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
-        
+    
         setUpCollectionBinding()
     }
     
@@ -118,13 +122,38 @@ class MyLibTabMainView: UIViewController {
             })
             .disposed(by: disposeBag)
     }
+    
+    @objc func didTapPanGesture(_ sender: UIPanGestureRecognizer) {
+        guard let senderView = sender.view else {
+            return
+        }
+        
+        let transition = sender.translation(in: self.view)
+        let changedY = senderView.center.y + transition.y
+        
+        if (changedY <= self.view.center.y) {
+            self.layout_main.layout_title.isHidden = false
+            self.layout_main.label_title.textColor = .black
+        }
+        else {
+            self.layout_main.layout_title.isHidden = true
+            self.layout_main.label_title.textColor = .white
+        }
+        
+        if (changedY >= 280 && changedY <= 143 + self.layout_main.layout_submain.frame.height / 2) {
+            senderView.center = CGPoint(x: senderView.center.x, y: senderView.center.y + transition.y)
+            sender.setTranslation(.zero, in: self.view)
+        }
+    }
 }
 
 // MARK: - layout class
 class MyLibTabView {
     var layout_main = UIView()
-  
+    
+    let layout_title = UIView()
     let label_title = UILabel()
+    let line = UIView()
     let img_background = UIImageView()
     
     let layout_submain = UIView()
@@ -162,16 +191,33 @@ class MyLibTabView {
         layout_main.snp.makeConstraints() { make in
             make.edges.equalToSuperview()
         }
-        layout_main.addSubviews(label_title, img_background, layout_submain)
+        layout_main.addSubviews(layout_title, label_title, img_background, layout_submain)
         
         label_title.snp.makeConstraints() { make in
             make.top.equalTo(superView.safeAreaLayoutGuide)
             make.leading.equalToSuperview().offset(23)
-            make.width.equalToSuperview()
             make.height.equalTo(44)
+            make.width.equalToSuperview()
         }
         label_title.setTxtAttribute("책갈피 : 나의 서재", size: 18, weight: .w500, txtColor: .white)
         label_title.layer.zPosition = 999
+        
+        layout_title.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.horizontalEdges.equalToSuperview()
+            make.bottom.equalTo(label_title)
+        }
+        layout_title.backgroundColor = .white
+        layout_title.layer.zPosition = 999
+        layout_title.isHidden = true
+        
+        layout_title.addSubviews(line)
+        line.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.height.equalTo(1)
+        }
+        line.backgroundColor = UIColor(Hex: 0xD5D5D5)
         
         img_background.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
@@ -180,7 +226,7 @@ class MyLibTabView {
         img_background.backgroundColor = .lightOrange
         
         layout_submain.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(143)
+            make.top.equalTo(label_title.snp.bottom).offset(52)
             make.leading.trailing.bottom.equalToSuperview()
         }
         layout_submain.layer.shadowColor = UIColor.black.cgColor
@@ -275,7 +321,7 @@ class MyLibTabView {
             make.leading.equalToSuperview().offset(15)
             make.trailing.equalToSuperview().offset(-15)
             make.top.equalTo(label_mylib.snp.bottom).offset(18)
-            make.bottom.equalTo(superView.safeAreaLayoutGuide)
+            make.height.equalTo(superView.frame.height - 104)
         }
     }
 }
