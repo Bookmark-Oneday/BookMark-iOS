@@ -58,12 +58,7 @@ class BookDetailViewController: UIViewController {
         bookDetailViewModel.bookImage
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] url in
-                UIImage.loadFromUrl(url)
-                    .filter { $0 != nil }
-                    .subscribe { data in
-                        self?.layout_bookdetail.img_book.image = data
-                    }
-                    .dispose()
+                self?.layout_bookdetail.img_book.setImageUrl(url: url)
             })
             .disposed(by: disposeBag)
         
