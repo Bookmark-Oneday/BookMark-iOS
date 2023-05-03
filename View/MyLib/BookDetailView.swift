@@ -294,7 +294,12 @@ class BookDetailView {
         for i in 0..<data.count {
             let entry = BarChartDataEntry(x: Double(i), y: Double(data[i].time))
             chartEntry.append(entry)
-            dateArr.append(data[i].date)
+            
+            let str = data[i].date
+            let startIdx = str.index(str.startIndex, offsetBy: 5)
+            let endIdx = str.index(str.startIndex, offsetBy: 10)
+            let sliced = String(str[startIdx..<endIdx]).replacingOccurrences(of: "-", with: "/")
+            dateArr.append(sliced)
         }
         barchart.leftAxis.enabled = false
         barchart.rightAxis.enabled = false
