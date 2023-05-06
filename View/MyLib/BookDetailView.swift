@@ -323,9 +323,9 @@ class BookDetailView {
         let data = BarChartData(dataSet: dataSet)
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .none
-        numberFormatter.generatesDecimalNumbers = false
+        numberFormatter.minimumFractionDigits = 0
         let formatter = DefaultValueFormatter(formatter: numberFormatter)
-        data.setValueFormatter(formatter)
         barchart.data = data
+        data.setValueFormatter(formatter)
     }
 }
