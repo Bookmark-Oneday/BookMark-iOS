@@ -62,7 +62,6 @@ class Network {
         return Observable<Int>.create { observer in
             guard let requestURL = URL(string: "https://api.bmonlner.me") else {
                 return Disposables.create()
-                
             }
             let request = apiRequest.request(with: requestURL)
             
@@ -105,6 +104,39 @@ class Network {
                         observer.onNext(model)
                     } catch let error {
                         print("failed")
+                        observer.onError(error)
+                    }
+                case .failure(let error):
+                    print("failed")
+                    observer.onError(error)
+                }
+                observer.onCompleted()
+            }
+
+            return Disposables.create() {
+                dataRequest.cancel()
+            }
+        }
+    }
+    
+    func sendKakaoRequest<T: Decodable>(apiRequest: ApiRequest) -> Observable<T> {
+        return Observable<T>.create { observer in
+            guard let requestURL = URL(string: "https://dapi.kakao.com") else {
+                return Disposables.create()
+                
+            }
+            
+            let request = apiRequest.request(with: requestURL)
+            
+            let dataRequest = AF.request(request).responseData {
+                response in
+                switch response.result {
+                case .success(let data) :
+                    do {
+                        let model: T = try JSONDecoder().decode(T.self, from: data)
+                        observer.onNext(model)
+                    } catch let error {
+                        print("decode failed")
                         observer.onError(error)
                     }
                 case .failure(let error):

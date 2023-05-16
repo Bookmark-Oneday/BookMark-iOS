@@ -57,18 +57,6 @@ class BookDetailViewModel {
                 self.readingPercent.onNext(res)
             })
             .disposed(by: disposeBag)
-//
-//        self.readingHistory = Observable.of([History(date: "12/23", time: 62),
-//                                             History(date: "12/24", time: 15),
-//                                             History(date: "12/25", time: 32),
-//                                             History(date: "12/26", time: 44),
-//                                             History(date: "12/27", time: 44),
-//                                             History(date: "12/28", time: 29),
-//                                             History(date: "12/29", time: 45),
-//                                             History(date: "12/30", time: 23),
-//                                             History(date: "12/31", time: 10),
-//                                             History(date: "1/1", time: 83)])
-//
     }
     
     func deleteBook() {

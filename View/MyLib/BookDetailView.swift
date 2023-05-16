@@ -296,10 +296,7 @@ class BookDetailView {
             chartEntry.append(entry)
             
             let str = data[i].date
-            let startIdx = str.index(str.startIndex, offsetBy: 5)
-            let endIdx = str.index(str.startIndex, offsetBy: 10)
-            let sliced = String(str[startIdx..<endIdx]).replacingOccurrences(of: "-", with: "/")
-            dateArr.append(sliced)
+            dateArr.append(str.dateFormat(startOffset: 5, endOffset: 10, replacer: "/"))
         }
         barchart.leftAxis.enabled = false
         barchart.rightAxis.enabled = false

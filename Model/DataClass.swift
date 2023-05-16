@@ -57,3 +57,29 @@ struct BookDetailMeta: Decodable {
     let requestId: String
     let now: Int
 }
+
+// MARK: 책 검색
+struct BookSearch: Decodable {
+    let documents: [BookDocument]?
+    let meta: BookMeta
+}
+
+// MARK: - Document
+struct BookDocument: Decodable {
+    let authors: [String]
+    let contents, datetime, isbn: String
+    let price: Int
+    let publisher: String
+    let sale_price: Int
+    let status: String
+    let thumbnail: String
+    let title: String
+    let translators: [String]
+    let url: String
+}
+
+// MARK: - Meta
+struct BookMeta: Decodable {
+    let is_end: Bool
+    let pageable_count, total_count: Int
+}

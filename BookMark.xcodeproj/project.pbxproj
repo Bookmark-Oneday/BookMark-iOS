@@ -25,6 +25,8 @@
 		86C3C2D3296E69630035CFFE /* ConfirmBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C3C2D2296E69630035CFFE /* ConfirmBookViewController.swift */; };
 		E80E5D8B2A02336B0087B1CB /* DeleteBookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80E5D8A2A02336A0087B1CB /* DeleteBookModel.swift */; };
 		E80E5D8D2A023ACB0087B1CB /* RegisterBookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80E5D8C2A023ACB0087B1CB /* RegisterBookModel.swift */; };
+		E80E5D8F2A134B6E0087B1CB /* SearchBookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80E5D8E2A134B6E0087B1CB /* SearchBookModel.swift */; };
+		E80E5D912A13558F0087B1CB /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80E5D902A13558F0087B1CB /* String+Extension.swift */; };
 		E82079442990B6E800B36FC9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82079432990B6E800B36FC9 /* LoginViewController.swift */; };
 		E82079462990B72A00B36FC9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82079452990B72A00B36FC9 /* LoginView.swift */; };
 		E82079742994795800B36FC9 /* OneLineTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82079732994795800B36FC9 /* OneLineTabView.swift */; };
@@ -112,6 +114,8 @@
 		CD50D9E346145F9EDEF00686 /* Pods-BookMark.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookMark.release.xcconfig"; path = "Target Support Files/Pods-BookMark/Pods-BookMark.release.xcconfig"; sourceTree = "<group>"; };
 		E80E5D8A2A02336A0087B1CB /* DeleteBookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteBookModel.swift; sourceTree = "<group>"; };
 		E80E5D8C2A023ACB0087B1CB /* RegisterBookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterBookModel.swift; sourceTree = "<group>"; };
+		E80E5D8E2A134B6E0087B1CB /* SearchBookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBookModel.swift; sourceTree = "<group>"; };
+		E80E5D902A13558F0087B1CB /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		E82079432990B6E800B36FC9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E82079452990B72A00B36FC9 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		E82079732994795800B36FC9 /* OneLineTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineTabView.swift; sourceTree = "<group>"; };
@@ -329,6 +333,7 @@
 				E882E97D29E4626B00B5FAE5 /* BookDetailModel.swift */,
 				E80E5D8A2A02336A0087B1CB /* DeleteBookModel.swift */,
 				E80E5D8C2A023ACB0087B1CB /* RegisterBookModel.swift */,
+				E80E5D8E2A134B6E0087B1CB /* SearchBookModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -361,6 +366,7 @@
 				E89F6E4E29CC0F7700602075 /* UIScrollView+Extension.swift */,
 				E89F6E5029CC0F9700602075 /* UIColor+Extension.swift */,
 				E89F6E5929CC4F1900602075 /* UIImage+Extension.swift */,
+				E80E5D902A13558F0087B1CB /* String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -618,6 +624,7 @@
 				245FED6E2983971100EE02B6 /* JoinCommunityRequest.swift in Sources */,
 				E832390829879ABC00DC83C2 /* CommunityInsideViewController.swift in Sources */,
 				E89F6E5429CC139900602075 /* MyLibTabMainViewModel.swift in Sources */,
+				E80E5D8F2A134B6E0087B1CB /* SearchBookModel.swift in Sources */,
 				E8D5C3DC29827056003D1AD0 /* CreatePostViewController.swift in Sources */,
 				24D01FCE299395F40045DC68 /* CustomAlertViewController.swift in Sources */,
 				E89F6E4D29CC0F4200602075 /* UIImageView+Extension.swift in Sources */,
@@ -661,6 +668,7 @@
 				E8FADC2029DE7C5A00AC579F /* StopwatchViewController.swift in Sources */,
 				E82079742994795800B36FC9 /* OneLineTabView.swift in Sources */,
 				E8C05369299C7EFB00CA5D8E /* NetworkTintin.swift in Sources */,
+				E80E5D912A13558F0087B1CB /* String+Extension.swift in Sources */,
 				86C3C2D3296E69630035CFFE /* ConfirmBookViewController.swift in Sources */,
 				E89F6E5A29CC4F1900602075 /* UIImage+Extension.swift in Sources */,
 				E8C2B4FD296A8F6A000E2030 /* ScrapTab.swift in Sources */,

@@ -17,32 +17,3 @@ enum NetworkResult<T> {
     case decodeFail
 }
 
-// MARK: - 책 검색 data struct
-struct BookSearch: Codable {
-    let userID: UserID
-    let myData: [MyData]
-
-    enum CodingKeys: String, CodingKey {
-        case userID = "userId"
-        case myData
-    }
-}
-
-// MARK: BookSearch.MyData
-struct MyData: Codable {
-    let title: String
-    let link: String
-    let image: String
-    let author, discount, publisher, pubdate: String
-    let isbn, description: String
-}
-
-// MARK: BookSearch.UserID
-struct UserID: Codable {
-    let userID: Int
-
-    enum CodingKeys: String, CodingKey {
-        case userID = "user_id"
-    }
-}
-

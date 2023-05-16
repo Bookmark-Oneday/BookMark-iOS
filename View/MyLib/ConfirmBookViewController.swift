@@ -38,14 +38,8 @@ class ConfirmBookViewController: UIViewController {
         self.registerButton.rx
             .tap
             .subscribe(onNext: { [weak self] in
-                let register = CustomAlertViewController()
-                register.modalPresentationStyle = .overFullScreen
-                register.confirmCompletion = { [weak self] in
-                    self?.confirmBookViewModel.registerBook(totalPage: 264)
-                    self?.navigationController?.popToRootViewController(animated: true)
-                }
-                register.setAlertLabel(title: "중복 등록", subtitle: "이전에 등록한 책입니다. 중복등록 하시겠습니까?", okButtonTitle: "등록")
-                self?.present(register, animated: true)
+                self?.confirmBookViewModel.registerBook(totalPage: 264)
+                self?.navigationController?.popToRootViewController(animated: true)
             })
             .disposed(by: disposeBag)
         
@@ -61,14 +55,23 @@ class ConfirmBookViewController: UIViewController {
         
         self.confirmBookViewModel.bookImage
             .observe(on: MainScheduler.instance)
-            .filter { $0 != nil }
-            .bind(to: self.layout_main.imageView.rx.image)
+            .bind(onNext: { [weak self] url in
+                self?.layout_main.imageView.setImageUrl(url: url)
+            })
             .disposed(by: disposeBag)
         
-        self.confirmBookViewModel.bookPubAndDate
+        self.confirmBookViewModel.bookPublisher
             .observe(on: MainScheduler.instance)
+            .map { "출판사  " + $0 }
             .bind(to: self.layout_main.publisherLabel.rx.text)
             .disposed(by: disposeBag)
+        
+        self.confirmBookViewModel.bookDate
+            .observe(on: MainScheduler.instance)
+            .map { "발행일  " + $0}
+            .bind(to: self.layout_main.pubdateLabel.rx.text)
+            .disposed(by: disposeBag)
+        
         
         self.confirmBookViewModel.bookSummary
             .observe(on: MainScheduler.instance)
@@ -85,6 +88,7 @@ class ConfirmBookView {
     let titleLabel = UILabel()
     let authorLabel = UILabel()
     let publisherLabel = UILabel()
+    let pubdateLabel = UILabel()
     let label_summary = UILabel()
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -104,18 +108,18 @@ class ConfirmBookView {
         superView.backgroundColor = .white
         
         scrollView.addSubview(contentView)
-        contentView.addSubviews(layout_book, titleLabel, authorLabel, publisherLabel, descriptionTextView, showallButton, showShortButton, divideView, upperDivideView, label_summary)
+        contentView.addSubviews(layout_book, titleLabel, authorLabel, publisherLabel, pubdateLabel, descriptionTextView, showallButton, showShortButton, divideView, upperDivideView, label_summary)
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.snp.makeConstraints() { make in
             make.edges.equalTo(superView.safeAreaLayoutGuide)
         }
         scrollView.contentLayoutGuide.snp.makeConstraints() { make in
-            make.edges.equalTo(superView.safeAreaLayoutGuide)
+            make.edges.equalToSuperview()
         }
         
         contentView.snp.makeConstraints() { make in
-            make.edges.equalTo(scrollView.contentLayoutGuide)
+            make.edges.equalToSuperview()
         }
         
         upperDivideView.snp.makeConstraints { make in
@@ -156,7 +160,6 @@ class ConfirmBookView {
         
         titleLabel.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(60)
-            make.centerX.equalToSuperview()
             make.top.equalTo(imageView.snp.bottom).offset(24)
         }
         titleLabel.setTxtAttribute("제목 정보가 없습니다.", size: 18, weight: .w600, txtColor: .black)
@@ -165,7 +168,6 @@ class ConfirmBookView {
         
         authorLabel.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(60)
-            make.centerX.equalToSuperview()
             make.top.equalTo(titleLabel.snp.bottom).offset(13)
         }
         authorLabel.setTxtAttribute("작가 정보가 없습니다.", size: 15, weight: .w600, txtColor: .textGray)
@@ -173,12 +175,20 @@ class ConfirmBookView {
         authorLabel.textAlignment = .center
         
         publisherLabel.snp.makeConstraints { make in
-            make.horizontalEdges.equalToSuperview().inset(20)
-            make.centerX.equalToSuperview()
+            make.leading.equalToSuperview().inset(20)
+            make.trailing.equalTo(superView.snp.centerX).inset(5)
             make.top.equalTo(authorLabel.snp.bottom).offset(8)
         }
         publisherLabel.setTxtAttribute("출판사 정보가 없습니다.", size: 14, weight: .w500, txtColor: .textGray)
-        publisherLabel.textAlignment = .center
+        publisherLabel.textAlignment = .right
+        
+        pubdateLabel.snp.makeConstraints { make in
+            make.leading.equalTo(superView.snp.centerX).offset(5)
+            make.trailing.equalToSuperview().inset(20)
+            make.top.equalTo(authorLabel.snp.bottom).offset(8)
+        }
+        pubdateLabel.setTxtAttribute("날짜 정보가 없습니다.", size: 14, weight: .w500, txtColor: .textGray)
+        pubdateLabel.textAlignment = .left
         
         divideView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview()
