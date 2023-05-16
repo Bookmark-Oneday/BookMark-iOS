@@ -135,8 +135,13 @@ class BookDetailViewController: UIViewController {
             .disposed(by: disposeBag)
         
         layout_bookdetail.btn_pageinput.rx.tap
-            .subscribe(onNext: {
-                
+            .subscribe(onNext: { [weak self] in
+                let pageInput = PageUpdateViewController()
+                pageInput.modalPresentationStyle = .overFullScreen
+                pageInput.confirmCompletion = { [weak self] current, total in
+                    self?.bookDetailViewModel.updatePage(currentPage: current, totalPage: total)
+                }
+                self?.present(pageInput, animated: true)
             })
             .disposed(by: disposeBag)
     }

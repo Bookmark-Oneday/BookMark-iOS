@@ -67,4 +67,16 @@ class BookDetailViewModel {
             })
     }
     
+    func updatePage(currentPage: String, totalPage: String) {
+        self.currentPage.onNext(Int(currentPage) ?? 0)
+        self.totalPage.onNext(Int(totalPage) ?? 0)
+        
+        let request = UpdatePageModel(bookId: self.bookId, currentPage: currentPage, total_page: totalPage)
+        Network().sendRequest(apiRequest: request)
+            .subscribe(onNext: { rescode in
+                print(rescode)
+            })
+            .disposed(by: disposeBag)
+    }
+    
 }

@@ -1,16 +1,16 @@
 //
-//  TotalPageInputViewController.swift
+//  PageUpdateViewController.swift
 //  BookMark
 //
-//  Created by BoMin on 2023/02/15.
+//  Created by JOSUEYEON on 2023/05/16.
 //
 
 import UIKit
 import SnapKit
 
-class TotalPageInputViewController: UIViewController {
-    let alertView = PageInputView()
-    var confirmCompletion: ((String) -> Void)?
+class PageUpdateViewController: UIViewController {
+    let alertView = PageUpdateView()
+    var confirmCompletion: ((String, String) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,23 +37,25 @@ class TotalPageInputViewController: UIViewController {
         self.closeModal()
     }
     
-    private func closeModal(_ completed: ((String) -> Void)? = nil) {
+    private func closeModal(_ completed: ((String, String) -> Void)? = nil) {
         UIView.animate(withDuration: 0.3) {
             self.view.backgroundColor = .clear
         } completion: { _ in
             self.dismiss(animated: true)
-            completed?(self.alertView.tf_page.text ?? "0")
+            completed?(self.alertView.tf_page.text ?? "0", self.alertView.tf_total.text ?? "0")
         }
     }
 }
 
 // MARK: - Custom Alert 뷰
-class PageInputView {
+class PageUpdateView {
     let layout_main = UIView()
     let left_img = UIImageView()
     let label_title = UILabel()
     let label_subtitle = UILabel()
     let tf_page = UITextField()
+    let label_slash = UIImageView()
+    let tf_total = UITextField()
     let btn_ok = UIButton()
     let btn_cancel = UIButton()
     
@@ -72,7 +74,7 @@ class PageInputView {
         layout_main.layer.shadowRadius = 20
         layout_main.layer.cornerRadius = 20
         
-        layout_main.addSubviews(left_img, label_title, label_subtitle, tf_page, btn_ok, btn_cancel)
+        layout_main.addSubviews(left_img, label_title, label_subtitle, tf_page, label_slash, tf_total, btn_ok, btn_cancel)
         
         left_img.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(29)
@@ -92,10 +94,10 @@ class PageInputView {
             make.top.equalTo(label_title.snp.bottom).offset(11)
             make.centerX.equalToSuperview()
         }
-        label_subtitle.setTxtAttribute("총 페이지를 입력해주세요.", size: 16, weight: .w500, txtColor: .textGray)
+        label_subtitle.setTxtAttribute("몇 페이지까지 읽으셨나요?", size: 16, weight: .w500, txtColor: .textGray)
         
         tf_page.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
+            make.leading.equalToSuperview().offset(29)
             make.top.equalTo(label_subtitle.snp.bottom).offset(22)
             make.width.equalTo(120)
             make.height.equalTo(35)
@@ -104,7 +106,28 @@ class PageInputView {
         tf_page.layer.borderColor = UIColor(Hex: 0xDFDFDF).cgColor
         tf_page.layer.borderWidth = 1
         tf_page.layer.cornerRadius = 7
+        tf_page.textColor = .textOrange
         tf_page.font = .suit(size: 17, weight: .w600)
+        
+        label_slash.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(label_subtitle.snp.bottom).offset(26)
+            make.width.equalTo(27)
+            make.height.equalTo(13)
+        }
+        label_slash.image = UIImage(named: "slash")
+        
+        tf_total.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(29)
+            make.top.equalTo(label_subtitle.snp.bottom).offset(22)
+            make.width.equalTo(120)
+            make.height.equalTo(35)
+        }
+        tf_total.font = .suit(size: 17, weight: .w600)
+        tf_total.textAlignment = .center
+        tf_total.layer.borderColor = UIColor(Hex: 0xDFDFDF).cgColor
+        tf_total.layer.borderWidth = 1
+        tf_total.layer.cornerRadius = 7
         
         btn_cancel.snp.makeConstraints() { make in
             make.top.equalToSuperview().offset(15)
