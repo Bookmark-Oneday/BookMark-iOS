@@ -31,7 +31,6 @@
 		E80E5D952A13765C0087B1CB /* PageUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80E5D942A13765C0087B1CB /* PageUpdateViewController.swift */; };
 		E80E5D972A138A940087B1CB /* SignUpUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80E5D962A138A940087B1CB /* SignUpUserInfo.swift */; };
 		E82079442990B6E800B36FC9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82079432990B6E800B36FC9 /* LoginViewController.swift */; };
-		E82079462990B72A00B36FC9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82079452990B72A00B36FC9 /* LoginView.swift */; };
 		E82079742994795800B36FC9 /* OneLineTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82079732994795800B36FC9 /* OneLineTabView.swift */; };
 		E82079762994797900B36FC9 /* CreateOneLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82079752994797900B36FC9 /* CreateOneLineViewController.swift */; };
 		E820797829947DBC00B36FC9 /* backImg.png in Resources */ = {isa = PBXBuildFile; fileRef = E820797729947DBC00B36FC9 /* backImg.png */; };
@@ -63,6 +62,8 @@
 		E89F6E5A29CC4F1900602075 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E5929CC4F1900602075 /* UIImage+Extension.swift */; };
 		E89F6E5C29CC90B700602075 /* BookDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E5B29CC90B700602075 /* BookDetailViewModel.swift */; };
 		E89F6E5F29CD3F5D00602075 /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E5E29CD3F5D00602075 /* BottomSheetViewController.swift */; };
+		E8ACD78D2A139E2B00A6F9DD /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8ACD78C2A139E2B00A6F9DD /* LoginViewModel.swift */; };
+		E8ACD78F2A139F5400A6F9DD /* SocialLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8ACD78E2A139F5400A6F9DD /* SocialLoginButton.swift */; };
 		E8C0535F299896A400CA5D8E /* UserClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C0535E299896A400CA5D8E /* UserClass.swift */; };
 		E8C05366299C7EFB00CA5D8E /* Network_Sueyeon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C05362299C7EFA00CA5D8E /* Network_Sueyeon.swift */; };
 		E8C05367299C7EFB00CA5D8E /* DataClass_sueyeon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C05363299C7EFB00CA5D8E /* DataClass_sueyeon.swift */; };
@@ -122,7 +123,6 @@
 		E80E5D942A13765C0087B1CB /* PageUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageUpdateViewController.swift; sourceTree = "<group>"; };
 		E80E5D962A138A940087B1CB /* SignUpUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUserInfo.swift; sourceTree = "<group>"; };
 		E82079432990B6E800B36FC9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		E82079452990B72A00B36FC9 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		E82079732994795800B36FC9 /* OneLineTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineTabView.swift; sourceTree = "<group>"; };
 		E82079752994797900B36FC9 /* CreateOneLineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOneLineViewController.swift; sourceTree = "<group>"; };
 		E820797729947DBC00B36FC9 /* backImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backImg.png; sourceTree = "<group>"; };
@@ -154,6 +154,8 @@
 		E89F6E5929CC4F1900602075 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		E89F6E5B29CC90B700602075 /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
 		E89F6E5E29CD3F5D00602075 /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
+		E8ACD78C2A139E2B00A6F9DD /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		E8ACD78E2A139F5400A6F9DD /* SocialLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginButton.swift; sourceTree = "<group>"; };
 		E8C0535D2998535000CA5D8E /* BookMark.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BookMark.entitlements; sourceTree = "<group>"; };
 		E8C0535E299896A400CA5D8E /* UserClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserClass.swift; sourceTree = "<group>"; };
 		E8C05362299C7EFA00CA5D8E /* Network_Sueyeon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network_Sueyeon.swift; sourceTree = "<group>"; };
@@ -257,7 +259,6 @@
 			isa = PBXGroup;
 			children = (
 				E82079432990B6E800B36FC9 /* LoginViewController.swift */,
-				E82079452990B72A00B36FC9 /* LoginView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -299,7 +300,6 @@
 		E89F6E1629B5E0A100602075 /* Legacy */ = {
 			isa = PBXGroup;
 			children = (
-				E82079422990B6D500B36FC9 /* Login */,
 				E8D5C3E129838303003D1AD0 /* Utility */,
 				E8D5C3E0298382C1003D1AD0 /* MyPage */,
 				E8D5C3DF298382B3003D1AD0 /* Scrap */,
@@ -313,6 +313,7 @@
 		E89F6E3729CC0A6000602075 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E82079422990B6D500B36FC9 /* Login */,
 				E8C05371299C856A00CA5D8E /* SignUp */,
 				E8C0536C299C7F1700CA5D8E /* Tutorial */,
 				E89F6E3A29CC0AAF00602075 /* MyLib */,
@@ -323,6 +324,7 @@
 		E89F6E3829CC0A6A00602075 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				E8ACD78B2A139E1E00A6F9DD /* Login */,
 				E89F6E5229CC137700602075 /* MyLib */,
 			);
 			path = ViewModel;
@@ -398,8 +400,17 @@
 				24D01FCD299395F40045DC68 /* CustomAlertViewController.swift */,
 				E89F6E5E29CD3F5D00602075 /* BottomSheetViewController.swift */,
 				E80E5D942A13765C0087B1CB /* PageUpdateViewController.swift */,
+				E8ACD78E2A139F5400A6F9DD /* SocialLoginButton.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		E8ACD78B2A139E1E00A6F9DD /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				E8ACD78C2A139E2B00A6F9DD /* LoginViewModel.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		E8C0536C299C7F1700CA5D8E /* Tutorial */ = {
@@ -650,6 +661,7 @@
 				E80E5D972A138A940087B1CB /* SignUpUserInfo.swift in Sources */,
 				E8C05366299C7EFB00CA5D8E /* Network_Sueyeon.swift in Sources */,
 				86C3C2B1296858370035CFFE /* AppDelegate.swift in Sources */,
+				E8ACD78F2A139F5400A6F9DD /* SocialLoginButton.swift in Sources */,
 				E89F6E4729CC0ED900602075 /* UIView+Extension.swift in Sources */,
 				E8C2B4F9296A8D6D000E2030 /* MainTabBarController.swift in Sources */,
 				E89F6E4B29CC0F2300602075 /* UINavigationController+Extension.swift in Sources */,
@@ -660,6 +672,7 @@
 				24D01FCB299395DB0045DC68 /* BookDetailView.swift in Sources */,
 				E8C0536F299C7F1700CA5D8E /* Tutorials.swift in Sources */,
 				E8FADC1F29DE7C5A00AC579F /* BarcodeRecognizeViewController.swift in Sources */,
+				E8ACD78D2A139E2B00A6F9DD /* LoginViewModel.swift in Sources */,
 				E89F6E4F29CC0F7700602075 /* UIScrollView+Extension.swift in Sources */,
 				E89F6E4129CC0E6100602075 /* UIFont+Extension.swift in Sources */,
 				E882E97E29E4626B00B5FAE5 /* BookDetailModel.swift in Sources */,
@@ -682,7 +695,6 @@
 				E8C2B4FD296A8F6A000E2030 /* ScrapTab.swift in Sources */,
 				E8FADC2829E121F700AC579F /* MyLibModel.swift in Sources */,
 				E8C2B4F7296A8CC5000E2030 /* OneLineTab.swift in Sources */,
-				E82079462990B72A00B36FC9 /* LoginView.swift in Sources */,
 				E8C0535F299896A400CA5D8E /* UserClass.swift in Sources */,
 				E8C05370299C7F1700CA5D8E /* TutorialViewController.swift in Sources */,
 				E8C2B4F1296A8915000E2030 /* MyLibTabMainView.swift in Sources */,

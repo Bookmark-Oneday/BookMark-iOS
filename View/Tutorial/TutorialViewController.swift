@@ -86,7 +86,7 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let index = dataViewControllers.firstIndex(of: viewController) else { return nil }
-        var previousIndex = index - 1
+        let previousIndex = index - 1
         if previousIndex < 0 {
             return nil
         }
@@ -95,7 +95,7 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let index = dataViewControllers.firstIndex(of: viewController) else { return nil }
-        var nextIndex = index + 1
+        let nextIndex = index + 1
         if nextIndex == dataViewControllers.count {
             return nil
         }

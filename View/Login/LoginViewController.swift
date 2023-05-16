@@ -8,17 +8,61 @@
 import UIKit
 import AuthenticationServices
 import Alamofire
+import SnapKit
+import Pastel
 
 // MARK: - 로그인 뷰 컨트롤러
 class LoginViewController: UIViewController {
-    
     let loginView = LoginView()
     override func viewDidLoad() {
         super.viewDidLoad()
         loginView.initViews(self.view)
-        loginView.btn_appleLogin.addTarget(self, action: #selector(didTapLoginBtn), for: .touchUpInside)
     }
 }
+
+// MARK: - 로그인 뷰
+class LoginView {
+    let img_mainlogo = UIImageView()
+    let btn_appleLogin = SocialLoginButton(social: "Apple", logo: UIImage(named: "AppleLogo"))
+    let btn_googleLogin = SocialLoginButton(social: "Google", logo: UIImage(named: "GoogleLogo"))
+    
+    func initViews(_ superView: UIView) {
+        let pastelView = PastelView(frame: superView.bounds)
+
+        pastelView.startPastelPoint = .top
+        pastelView.endPastelPoint = .bottom
+
+        pastelView.animationDuration = 3.0
+
+       pastelView.setColors([UIColor(Hex: 0xF99030), UIColor(Hex: 0xFFCA0C), UIColor(Hex: 0xF99030), UIColor(Hex: 0xFFCA0C), UIColor(Hex: 0xF99030), UIColor(Hex: 0xFFCA0C)])
+
+        pastelView.startAnimation()
+        superView.insertSubview(pastelView, at: 0)
+        
+        superView.addSubviews(img_mainlogo, btn_appleLogin, btn_googleLogin)
+        
+        img_mainlogo.snp.makeConstraints() { make in
+            make.top.equalToSuperview().offset(250)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(154)
+            make.height.equalTo(211)
+        }
+        img_mainlogo.image = UIImage(named: "loginImg")
+        
+        btn_appleLogin.snp.makeConstraints() { make in
+            make.bottom.equalToSuperview().offset(-123)
+            make.horizontalEdges.equalToSuperview().inset(29)
+            make.height.equalTo(60)
+        }
+        
+        btn_googleLogin.snp.makeConstraints() { make in
+            make.top.equalTo(btn_appleLogin.snp.bottom).offset(9)
+            make.horizontalEdges.equalToSuperview().inset(29)
+            make.height.equalTo(60)
+        }
+    }
+}
+
 
 // MARK: - 로그인 로직 처리
 extension LoginViewController: ASAuthorizationControllerPresentationContextProviding, ASAuthorizationControllerDelegate {
