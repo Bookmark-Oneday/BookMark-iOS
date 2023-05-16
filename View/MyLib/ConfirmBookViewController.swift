@@ -38,8 +38,13 @@ class ConfirmBookViewController: UIViewController {
         self.registerButton.rx
             .tap
             .subscribe(onNext: { [weak self] in
-                self?.confirmBookViewModel.registerBook(totalPage: 264)
-                self?.navigationController?.popToRootViewController(animated: true)
+                let pageInput = TotalPageInputViewController()
+                pageInput.modalPresentationStyle = .overFullScreen
+                pageInput.confirmCompletion = { [weak self] total in
+                    self?.confirmBookViewModel.registerBook(totalPage: total)
+                    self?.navigationController?.popToRootViewController(animated: true)
+                }
+                self?.present(pageInput, animated: true)
             })
             .disposed(by: disposeBag)
         

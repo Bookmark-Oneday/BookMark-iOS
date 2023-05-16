@@ -27,6 +27,7 @@
 		E80E5D8D2A023ACB0087B1CB /* RegisterBookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80E5D8C2A023ACB0087B1CB /* RegisterBookModel.swift */; };
 		E80E5D8F2A134B6E0087B1CB /* SearchBookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80E5D8E2A134B6E0087B1CB /* SearchBookModel.swift */; };
 		E80E5D912A13558F0087B1CB /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80E5D902A13558F0087B1CB /* String+Extension.swift */; };
+		E80E5D932A1364180087B1CB /* UpdatePageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80E5D922A1364180087B1CB /* UpdatePageModel.swift */; };
 		E82079442990B6E800B36FC9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82079432990B6E800B36FC9 /* LoginViewController.swift */; };
 		E82079462990B72A00B36FC9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82079452990B72A00B36FC9 /* LoginView.swift */; };
 		E82079742994795800B36FC9 /* OneLineTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82079732994795800B36FC9 /* OneLineTabView.swift */; };
@@ -65,7 +66,7 @@
 		E8C05367299C7EFB00CA5D8E /* DataClass_sueyeon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C05363299C7EFB00CA5D8E /* DataClass_sueyeon.swift */; };
 		E8C05368299C7EFB00CA5D8E /* DataClassTintin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C05364299C7EFB00CA5D8E /* DataClassTintin.swift */; };
 		E8C05369299C7EFB00CA5D8E /* NetworkTintin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C05365299C7EFB00CA5D8E /* NetworkTintin.swift */; };
-		E8C0536B299C7F0C00CA5D8E /* AllPageInputPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C0536A299C7F0C00CA5D8E /* AllPageInputPopUp.swift */; };
+		E8C0536B299C7F0C00CA5D8E /* TotalPageInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C0536A299C7F0C00CA5D8E /* TotalPageInputViewController.swift */; };
 		E8C0536F299C7F1700CA5D8E /* Tutorials.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C0536D299C7F1700CA5D8E /* Tutorials.swift */; };
 		E8C05370299C7F1700CA5D8E /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C0536E299C7F1700CA5D8E /* TutorialViewController.swift */; };
 		E8C05373299C857D00CA5D8E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C05372299C857D00CA5D8E /* SignUpViewController.swift */; };
@@ -116,6 +117,7 @@
 		E80E5D8C2A023ACB0087B1CB /* RegisterBookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterBookModel.swift; sourceTree = "<group>"; };
 		E80E5D8E2A134B6E0087B1CB /* SearchBookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBookModel.swift; sourceTree = "<group>"; };
 		E80E5D902A13558F0087B1CB /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		E80E5D922A1364180087B1CB /* UpdatePageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePageModel.swift; sourceTree = "<group>"; };
 		E82079432990B6E800B36FC9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E82079452990B72A00B36FC9 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		E82079732994795800B36FC9 /* OneLineTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineTabView.swift; sourceTree = "<group>"; };
@@ -155,7 +157,7 @@
 		E8C05363299C7EFB00CA5D8E /* DataClass_sueyeon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataClass_sueyeon.swift; sourceTree = "<group>"; };
 		E8C05364299C7EFB00CA5D8E /* DataClassTintin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataClassTintin.swift; sourceTree = "<group>"; };
 		E8C05365299C7EFB00CA5D8E /* NetworkTintin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTintin.swift; sourceTree = "<group>"; };
-		E8C0536A299C7F0C00CA5D8E /* AllPageInputPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllPageInputPopUp.swift; sourceTree = "<group>"; };
+		E8C0536A299C7F0C00CA5D8E /* TotalPageInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TotalPageInputViewController.swift; sourceTree = "<group>"; };
 		E8C0536D299C7F1700CA5D8E /* Tutorials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tutorials.swift; sourceTree = "<group>"; };
 		E8C0536E299C7F1700CA5D8E /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		E8C05372299C857D00CA5D8E /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -334,6 +336,7 @@
 				E80E5D8A2A02336A0087B1CB /* DeleteBookModel.swift */,
 				E80E5D8C2A023ACB0087B1CB /* RegisterBookModel.swift */,
 				E80E5D8E2A134B6E0087B1CB /* SearchBookModel.swift */,
+				E80E5D922A1364180087B1CB /* UpdatePageModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 		E89F6E5D29CD3BEF00602075 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				E8C0536A299C7F0C00CA5D8E /* TotalPageInputViewController.swift */,
 				E8FADC2229DE7CB300AC579F /* BarcodeScanner.swift */,
 				E8FADC2129DE7CB300AC579F /* Stopwatch.swift */,
 				24D01FCD299395F40045DC68 /* CustomAlertViewController.swift */,
@@ -415,7 +419,6 @@
 		E8C2B4F3296A8A66000E2030 /* MyLib */ = {
 			isa = PBXGroup;
 			children = (
-				E8C0536A299C7F0C00CA5D8E /* AllPageInputPopUp.swift */,
 				24E7942B2972BDD300E69633 /* CustomPopUp.swift */,
 			);
 			path = MyLib;
@@ -611,6 +614,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				24D01FD02993966E0045DC68 /* SetTimeGoalViewController.swift in Sources */,
+				E80E5D932A1364180087B1CB /* UpdatePageModel.swift in Sources */,
 				E8C05375299C874200CA5D8E /* TestViewController.swift in Sources */,
 				E80E5D8D2A023ACB0087B1CB /* RegisterBookModel.swift in Sources */,
 				24A21A392976EA2400AE8BF9 /* DataClassLegacy.swift in Sources */,
@@ -636,7 +640,7 @@
 				E8C2B51329743975000E2030 /* Network.swift in Sources */,
 				E8C05367299C7EFB00CA5D8E /* DataClass_sueyeon.swift in Sources */,
 				E8C2B4FF296A8F8C000E2030 /* MyPageTab.swift in Sources */,
-				E8C0536B299C7F0C00CA5D8E /* AllPageInputPopUp.swift in Sources */,
+				E8C0536B299C7F0C00CA5D8E /* TotalPageInputViewController.swift in Sources */,
 				412DDC8629858E5F00F6CB22 /* WaitMemberViewController.swift in Sources */,
 				E8FADC2329DE7CB300AC579F /* Stopwatch.swift in Sources */,
 				E82079442990B6E800B36FC9 /* LoginViewController.swift in Sources */,

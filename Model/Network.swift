@@ -39,6 +39,7 @@ extension ApiRequest {
             request.httpMethod = method.rawValue
             request.allHTTPHeaderFields = headerParam
             request.addValue("application/json", forHTTPHeaderField: "Accept")
+            request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
             return request
         }()
         

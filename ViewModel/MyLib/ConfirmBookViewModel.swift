@@ -30,7 +30,8 @@ class ConfirmBookViewModel {
             .filter { $0.meta.total_count > 0 }
             .map { $0.documents!.first! }
             .subscribe(onNext: { [weak self] in
-                self?.bookIsbn = $0.isbn
+                let arr = $0.isbn.components(separatedBy: " ")
+                self?.bookIsbn = arr[0]
                 self?.bookImage.onNext($0.thumbnail)
                 self?.bookTitle.onNext($0.title)
                 self?.bookAuthor.onNext($0.authors.reduce("") { result, x in result+x+" " })
@@ -47,12 +48,12 @@ class ConfirmBookViewModel {
             .disposed(by: disposeBag)
     }
     
-    func registerBook(totalPage: Int) {
-        let request = RegisterBookModel(title: self.bookTitleText, content: "", authors: self.bookAuthorText, publisher: self.bookPublisherText, translators: self.bookTranslatorText, thumbnail_url: self.bookImageText, isbn: self.bookIsbn, total_page: totalPage)
+    func registerBook(totalPage: String) {
+        let request = RegisterBookModel(title: self.bookTitleText, authors: self.bookAuthorText, publisher: self.bookPublisherText, translators: self.bookTranslatorText, thumbnail_url: self.bookImageText, isbn: self.bookIsbn, total_page: totalPage)
         
         Network().sendRequest(apiRequest: request)
             .subscribe(onNext: { rescode in
-                
+                print("rescode: \(rescode)")
             })
             .disposed(by: disposeBag)
     }
