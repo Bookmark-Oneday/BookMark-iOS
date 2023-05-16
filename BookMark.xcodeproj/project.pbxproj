@@ -29,6 +29,7 @@
 		E80E5D912A13558F0087B1CB /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80E5D902A13558F0087B1CB /* String+Extension.swift */; };
 		E80E5D932A1364180087B1CB /* UpdatePageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80E5D922A1364180087B1CB /* UpdatePageModel.swift */; };
 		E80E5D952A13765C0087B1CB /* PageUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80E5D942A13765C0087B1CB /* PageUpdateViewController.swift */; };
+		E80E5D972A138A940087B1CB /* SignUpUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80E5D962A138A940087B1CB /* SignUpUserInfo.swift */; };
 		E82079442990B6E800B36FC9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82079432990B6E800B36FC9 /* LoginViewController.swift */; };
 		E82079462990B72A00B36FC9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82079452990B72A00B36FC9 /* LoginView.swift */; };
 		E82079742994795800B36FC9 /* OneLineTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82079732994795800B36FC9 /* OneLineTabView.swift */; };
@@ -71,7 +72,6 @@
 		E8C0536F299C7F1700CA5D8E /* Tutorials.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C0536D299C7F1700CA5D8E /* Tutorials.swift */; };
 		E8C05370299C7F1700CA5D8E /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C0536E299C7F1700CA5D8E /* TutorialViewController.swift */; };
 		E8C05373299C857D00CA5D8E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C05372299C857D00CA5D8E /* SignUpViewController.swift */; };
-		E8C05375299C874200CA5D8E /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C05374299C874200CA5D8E /* TestViewController.swift */; };
 		E8C2B4F1296A8915000E2030 /* MyLibTabMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C2B4F0296A8915000E2030 /* MyLibTabMainView.swift */; };
 		E8C2B4F7296A8CC5000E2030 /* OneLineTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C2B4F6296A8CC5000E2030 /* OneLineTab.swift */; };
 		E8C2B4F9296A8D6D000E2030 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C2B4F8296A8D6D000E2030 /* MainTabBarController.swift */; };
@@ -120,6 +120,7 @@
 		E80E5D902A13558F0087B1CB /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		E80E5D922A1364180087B1CB /* UpdatePageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePageModel.swift; sourceTree = "<group>"; };
 		E80E5D942A13765C0087B1CB /* PageUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageUpdateViewController.swift; sourceTree = "<group>"; };
+		E80E5D962A138A940087B1CB /* SignUpUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUserInfo.swift; sourceTree = "<group>"; };
 		E82079432990B6E800B36FC9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E82079452990B72A00B36FC9 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		E82079732994795800B36FC9 /* OneLineTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineTabView.swift; sourceTree = "<group>"; };
@@ -163,7 +164,6 @@
 		E8C0536D299C7F1700CA5D8E /* Tutorials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tutorials.swift; sourceTree = "<group>"; };
 		E8C0536E299C7F1700CA5D8E /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		E8C05372299C857D00CA5D8E /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		E8C05374299C874200CA5D8E /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		E8C2B4F0296A8915000E2030 /* MyLibTabMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibTabMainView.swift; sourceTree = "<group>"; };
 		E8C2B4F6296A8CC5000E2030 /* OneLineTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineTab.swift; sourceTree = "<group>"; };
 		E8C2B4F8296A8D6D000E2030 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -299,7 +299,6 @@
 		E89F6E1629B5E0A100602075 /* Legacy */ = {
 			isa = PBXGroup;
 			children = (
-				E8C05371299C856A00CA5D8E /* SignUp */,
 				E82079422990B6D500B36FC9 /* Login */,
 				E8D5C3E129838303003D1AD0 /* Utility */,
 				E8D5C3E0298382C1003D1AD0 /* MyPage */,
@@ -314,6 +313,7 @@
 		E89F6E3729CC0A6000602075 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E8C05371299C856A00CA5D8E /* SignUp */,
 				E8C0536C299C7F1700CA5D8E /* Tutorial */,
 				E89F6E3A29CC0AAF00602075 /* MyLib */,
 			);
@@ -331,6 +331,7 @@
 		E89F6E3929CC0A7100602075 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E80E5D962A138A940087B1CB /* SignUpUserInfo.swift */,
 				E8C2B51229743975000E2030 /* Network.swift */,
 				E89F6E5529CC344400602075 /* DataClass.swift */,
 				E8FADC2729E121F700AC579F /* MyLibModel.swift */,
@@ -414,7 +415,6 @@
 			isa = PBXGroup;
 			children = (
 				E8C05372299C857D00CA5D8E /* SignUpViewController.swift */,
-				E8C05374299C874200CA5D8E /* TestViewController.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -619,7 +619,6 @@
 				24D01FD02993966E0045DC68 /* SetTimeGoalViewController.swift in Sources */,
 				E80E5D952A13765C0087B1CB /* PageUpdateViewController.swift in Sources */,
 				E80E5D932A1364180087B1CB /* UpdatePageModel.swift in Sources */,
-				E8C05375299C874200CA5D8E /* TestViewController.swift in Sources */,
 				E80E5D8D2A023ACB0087B1CB /* RegisterBookModel.swift in Sources */,
 				24A21A392976EA2400AE8BF9 /* DataClassLegacy.swift in Sources */,
 				E8FADC2429DE7CB300AC579F /* BarcodeScanner.swift in Sources */,
@@ -648,6 +647,7 @@
 				412DDC8629858E5F00F6CB22 /* WaitMemberViewController.swift in Sources */,
 				E8FADC2329DE7CB300AC579F /* Stopwatch.swift in Sources */,
 				E82079442990B6E800B36FC9 /* LoginViewController.swift in Sources */,
+				E80E5D972A138A940087B1CB /* SignUpUserInfo.swift in Sources */,
 				E8C05366299C7EFB00CA5D8E /* Network_Sueyeon.swift in Sources */,
 				86C3C2B1296858370035CFFE /* AppDelegate.swift in Sources */,
 				E89F6E4729CC0ED900602075 /* UIView+Extension.swift in Sources */,

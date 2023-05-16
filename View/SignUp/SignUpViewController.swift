@@ -6,14 +6,18 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 import Alamofire
 
 // MARK: - 회원 가입 베이스 뷰 컨트롤러
 class BaseSignUpViewController: UIViewController {
+    let signUpUserInfo = SignUpUserInfo()
     let layout_main = UIView()
     let label_title = UILabel()
     let progress = UIProgressView()
     let button = UIButton()
+    var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +40,7 @@ class BaseSignUpViewController: UIViewController {
         layout_main.addSubviews(progress, label_title, button)
         progress.snp.makeConstraints() { make in
             make.leading.trailing.top.equalToSuperview()
-            make.height.equalTo(10)
+            make.height.equalTo(4)
         }
         progress.progressTintColor = .lightOrange
         progress.trackTintColor = .lightGray
@@ -47,13 +51,15 @@ class BaseSignUpViewController: UIViewController {
         }
         
         button.snp.makeConstraints() { make in
-            make.leading.trailing.equalToSuperview().inset(29)
+            make.horizontalEdges.equalToSuperview().inset(29)
             make.height.equalTo(50)
-            make.bottom.equalToSuperview().offset(-58)
+            make.bottom.equalToSuperview().offset(-24)
         }
-        button.backgroundColor = .lightOrange
+        button.backgroundColor = UIColor(Hex: 0xBDBDBD)
         button.layer.cornerRadius = 26
-        button.setTitle("다음", size: 17, weight: .bold, color: .white)
+        button.setTitle("다음", size: 17, weight: .w600, color: .white)
+        button.layer.zPosition = 999
+        button.isEnabled = false
     }
     
     func setTextAttribute(_ text: String, boldStr: String) {
@@ -65,7 +71,7 @@ class BaseSignUpViewController: UIViewController {
         str.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, text.count))
         str.addAttribute(.foregroundColor, value: UIColor.textOrange, range: (text as NSString).range(of: boldStr))
         
-        label_title.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        label_title.font = .suit(size: 24, weight: .w600)
         label_title.attributedText = str
     }
 }
@@ -89,8 +95,7 @@ class SetNameViewController: BaseSignUpViewController {
             make.leading.trailing.equalToSuperview().inset(30)
         }
         tf_name.placeholder = "닉네임 입력"
-        tf_name.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        tf_name.addTarget(self, action: #selector(didTextChanged), for: .editingChanged)
+        tf_name.font = .suit(size: 18, weight: .w600)
         
         line.snp.makeConstraints() { make in
             make.top.equalTo(tf_name.snp.bottom).offset(11)
@@ -105,7 +110,7 @@ class SetNameViewController: BaseSignUpViewController {
         }
         nameCountData.text = "0"
         nameCountData.textColor = UIColor(Hex: 0xBDBDBD)
-        nameCountData.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        nameCountData.font = .suit(size: 15, weight: .w500)
         
         name_count.snp.makeConstraints() { make in
             make.centerY.equalTo(nameCountData)
@@ -113,25 +118,49 @@ class SetNameViewController: BaseSignUpViewController {
         }
         name_count.text = "/10"
         name_count.textColor = UIColor(Hex: 0xBDBDBD)
-        name_count.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        
-        button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
-    }
-    
-    @objc func didTextChanged(_ sender: UITextField) {
-        self.nameCountData.text = String(describing: sender.text?.count ?? 0)
-    }
-    
-    @objc func didTapButton(_ sender: UIButton) {
-        if tf_name.hasText, let name = tf_name.text {
-            if (name == "") {}
-            else {UserInfo.shared.userNickName = name}
-        }
-        self.navigationController?.pushViewController(SetProfileViewController(), animated: true)
+        name_count.font = .suit(size: 15, weight: .w500)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         progress.setProgress(0.25, animated: animated)
+        
+        tf_name.rx.controlEvent(.editingChanged)
+            .asObservable()
+            .subscribe(onNext: { [weak self] in
+                self?.nameCountData.text = String(describing: self?.tf_name.text?.count ?? 0)
+            })
+            .disposed(by: disposeBag)
+        
+        tf_name.rx.text
+            .map { $0?.count ?? 0 }
+            .subscribe(onNext: { [weak self] cnt in
+                if (cnt > 0) {
+                    UIView.animate(withDuration: 0.3, delay: 0, animations: {
+                        self?.button.backgroundColor = .lightOrange
+                    })
+                    self?.button.isEnabled = true
+                }
+                else {
+                    UIView.animate(withDuration: 0.3, delay: 0, animations: {
+                        self?.button.backgroundColor = UIColor(Hex: 0xBDBDBD)
+                    })
+                    self?.button.isEnabled = false
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        button.rx.controlEvent(.touchUpInside)
+            .asObservable()
+            .subscribe(onNext: { [weak self] in
+                self?.signUpUserInfo.userNickName = self?.tf_name.text
+                self?.navigationController?.pushViewController(SetProfileViewController(), animated: true)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        disposeBag = DisposeBag()
     }
 }
 
@@ -141,6 +170,7 @@ class SetProfileViewController: BaseSignUpViewController {
     let img_profile = UIImageView()
     let label_name = UILabel()
     let tf_message = UITextField()
+    let btn_later = UIButton()
     let line = UIView()
     let message_count = UILabel()
     let messageCountData = UILabel()
@@ -151,7 +181,7 @@ class SetProfileViewController: BaseSignUpViewController {
         setImgPicker()
         setTextAttribute("자신의 프로필을\n설정해주세요", boldStr: "프로필")
         
-        self.layout_main.addSubviews(tf_message, line, message_count, messageCountData, layout_circle, img_profile, label_name)
+        self.layout_main.addSubviews(tf_message, line, message_count, messageCountData, layout_circle, img_profile, label_name, btn_later)
     
         self.progress.progress = 0.25
         layout_circle.snp.makeConstraints() { make in
@@ -180,16 +210,15 @@ class SetProfileViewController: BaseSignUpViewController {
             make.top.equalTo(layout_circle.snp.bottom).offset(15)
             make.centerX.equalToSuperview()
         }
-        label_name.text = UserInfo.shared.userNickName
-        label_name.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label_name.text = self.signUpUserInfo.userNickName
+        label_name.font = .suit(size: 20, weight: .w600)
         
         tf_message.snp.makeConstraints() { make in
             make.top.equalTo(label_name.snp.bottom).offset(40)
             make.leading.trailing.equalToSuperview().inset(30)
         }
         tf_message.placeholder = "소개말 입력"
-        tf_message.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        tf_message.addTarget(self, action: #selector(didTextChanged), for: .editingChanged)
+        tf_message.font = .suit(size: 18, weight: .w600)
         
         line.snp.makeConstraints() { make in
             make.top.equalTo(tf_message.snp.bottom).offset(11)
@@ -204,7 +233,7 @@ class SetProfileViewController: BaseSignUpViewController {
         }
         messageCountData.text = "0"
         messageCountData.textColor = UIColor(Hex: 0xBDBDBD)
-        messageCountData.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        messageCountData.font = .suit(size: 15, weight: .w500)
         
         message_count.snp.makeConstraints() { make in
             make.centerY.equalTo(messageCountData)
@@ -212,33 +241,63 @@ class SetProfileViewController: BaseSignUpViewController {
         }
         message_count.text = "/60"
         message_count.textColor = UIColor(Hex: 0xBDBDBD)
-        message_count.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        
-        button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
-    }
+        message_count.font = .suit(size: 15, weight: .w500)
     
-    @objc func didTextChanged(_ sender: UITextField) {
-        self.messageCountData.text = String(describing: sender.text?.count ?? 0)
-    }
-    
-    @objc func didTapButton(_ sender: UIButton) {
-        if let msg = tf_message.text {
-            if (!msg.isEmpty) {
-                UserInfo.shared.userMessage = msg
-            }
+        button.snp.remakeConstraints { make in
+            make.horizontalEdges.equalToSuperview().inset(29)
+            make.height.equalTo(50)
+            make.bottom.equalToSuperview().offset(-48)
         }
-
-        self.navigationController?.pushViewController(SetGoalViewController(), animated: true)
+        
+        btn_later.snp.makeConstraints { make in
+            make.top.equalTo(button.snp.bottom).offset(13)
+            make.centerX.equalToSuperview()
+        }
+        
+        btn_later.setTitle("나중에 설정하기", size: 15, weight: .w500, color: .textLightGray)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         progress.setProgress(0.5, animated: animated)
+        
+        tf_message.rx.controlEvent(.editingChanged)
+            .asObservable()
+            .subscribe(onNext: { [weak self] in
+                self?.messageCountData.text = String(describing: self?.tf_message.text?.count ?? 0)
+            })
+            .disposed(by: disposeBag)
+        
+        tf_message.rx.text
+            .map { $0?.count ?? 0 }
+            .subscribe(onNext: { [weak self] cnt in
+                if (cnt > 0) {
+                    UIView.animate(withDuration: 0.3, delay: 0, animations: {
+                        self?.button.backgroundColor = .lightOrange
+                    })
+                    self?.button.isEnabled = true
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        button.rx.controlEvent(.touchUpInside)
+            .asObservable()
+            .subscribe(onNext: { [weak self] in
+                self?.signUpUserInfo.userMessage = self?.tf_message.text
+                self?.navigationController?.pushViewController(SetGoalViewController(), animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        btn_later.rx.controlEvent(.touchUpInside)
+            .asObservable()
+            .subscribe(onNext: { [weak self] in
+                self?.navigationController?.pushViewController(SetGoalViewController(), animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 }
 
 // MARK: 이미지 피커 컨트롤러 extension
 extension SetProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
     private func setImgPicker() {
         imgPicker.sourceType = .photoLibrary
         imgPicker.allowsEditing = true
@@ -246,6 +305,11 @@ extension SetProfileViewController: UIImagePickerControllerDelegate, UINavigatio
     }
     
     @objc func imagePicker(_ sender: UITapGestureRecognizer) {
+        UIView.animate(withDuration: 0.3, delay: 0, animations: {
+            self.button.backgroundColor = .lightOrange
+        })
+        
+        self.button.isEnabled = true
         present(self.imgPicker, animated: true)
     }
     
@@ -260,7 +324,7 @@ extension SetProfileViewController: UIImagePickerControllerDelegate, UINavigatio
         }
         
         self.img_profile.image = newImage
-        UserInfo.shared.userImg = newImage
+        self.signUpUserInfo.userImg = newImage
         
         picker.dismiss(animated: true, completion: {
           print("dismissed")
@@ -280,50 +344,53 @@ class SetGoalViewController: BaseSignUpViewController {
         super.viewDidLoad()
         
         setTextAttribute("목표 독서 시간을\n설정하고 실천해보세요", boldStr: "목표 독서 시간")
+        button.isEnabled = true
+        button.backgroundColor = .lightOrange
         
         progress.progress = 0.5
         self.layout_main.addSubviews(img_hourglass, label_top, label_bottom, label_time, slider)
         img_hourglass.snp.makeConstraints() { make in
             make.top.equalTo(label_title.snp.bottom).offset(83)
             make.centerX.equalToSuperview()
-            make.size.equalTo(144)
+            make.width.equalTo(220)
+            make.height.equalTo(187)
         }
-        img_hourglass.image = UIImage(named: "hourglassImg")
-        
-        label_top.snp.makeConstraints() { make in
-            make.top.equalTo(img_hourglass.snp.bottom).offset(30)
-            make.centerX.equalToSuperview()
-        }
-        label_top.text = "2022년 성인 기준"
-        label_top.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        
-        label_bottom.snp.makeConstraints() { make in
-            make.top.equalTo(label_top.snp.bottom).offset(7)
-            make.centerX.equalToSuperview()
-        }
-        setBoldAttribute("평균보다 60분 많아요")
+        img_hourglass.image = UIImage(named: "setTimeGoal")
         
         slider.snp.makeConstraints() { make in
-            make.bottom.equalTo(button.snp.top).offset(-44)
-            make.leading.trailing.equalToSuperview().inset(29)
-            make.height.equalTo(7)
+            make.top.equalTo(img_hourglass.snp.bottom).offset(65)
+            make.horizontalEdges.equalToSuperview().inset(29)
+            make.height.equalTo(5)
         }
         slider.backgroundColor = .lightGray
         slider.thumbTintColor = .lightOrange
         slider.tintColor = .lightOrange
         slider.minimumValue = 10
-        slider.maximumValue = 360
-        slider.value = 90
+        slider.maximumValue = 240
+        slider.value = 120
         slider.addTarget(self, action: #selector(didSliderValueChanged), for: .valueChanged)
         
         label_time.snp.makeConstraints() { make in
-            make.bottom.equalTo(slider.snp.top).offset(-58)
+            make.top.equalTo(slider.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
         }
-        label_time.font = UIFont.systemFont(ofSize: 27, weight: .bold)
-        label_time.text = "1시간 30분"
-
-        button.setTitle("가입 완료", size: 17, weight: .bold, color: .white)
+        label_time.font = .suit(size: 26, weight: .w500)
+        label_time.text = "2시간"
+        
+        label_top.snp.makeConstraints() { make in
+            make.top.equalTo(label_time.snp.bottom).offset(24)
+            make.centerX.equalToSuperview()
+        }
+        label_top.text = "2022년 성인 기준"
+        label_top.font = .suit(size: 17, weight: .w600)
+        
+        label_bottom.snp.makeConstraints() { make in
+            make.top.equalTo(label_top.snp.bottom).offset(7)
+            make.centerX.equalToSuperview()
+        }
+        setBoldAttribute("평균보다 90분 많아요")
+        
+        button.setTitle("가입 완료", size: 17, weight: .w600, color: .white)
         button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
     }
     
@@ -350,13 +417,13 @@ class SetGoalViewController: BaseSignUpViewController {
         
         let boldStr = text[first...last]
         let str = NSMutableAttributedString(string: text)
-        str.addAttributes([.font: UIFont.systemFont(ofSize: 18, weight: .bold)], range: NSRange(location: 0, length: text.count))
+        str.addAttributes([.font: UIFont.suit(size: 17, weight: .w600)], range: NSRange(location: 0, length: text.count))
         str.addAttribute(.foregroundColor, value: UIColor.textOrange, range: (text as NSString).range(of: String(boldStr)))
         self.label_bottom.attributedText = str
     }
     
     @objc func didTapButton(_ sender: UIButton) {
-        UserInfo.shared.userGoal = Int(self.slider.value)
+        self.signUpUserInfo.userGoal = Int(self.slider.value)
         self.navigationController?.pushViewController(FinishSignUpViewController(), animated: true)
     }
     
@@ -390,78 +457,9 @@ class FinishSignUpViewController: BaseSignUpViewController {
         label_title.text = "축하합니다!\n책갈피 회원이 되었어요🎉"
         label_title.textAlignment = .center
         label_title.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        
-        button.setTitle("시작하기", size: 17, weight: .bold, color: .white)
-        button.addTarget(self, action: #selector(didTapStartButton), for: .touchUpInside)
-    }
-    
-    @objc func didTapStartButton(_ sender: UIButton) {
-        self.newUserSignUp(completion: { [weak self] in
-            UserDefaults.standard.setValue(UserInfo.shared.userMessage, forKey: "userMessage")
-            UserDefaults.standard.setValue(UserInfo.shared.userNickName, forKey: "userNickName")
-            UserDefaults.standard.setValue(UserInfo.shared.userGoal, forKey: "userGoal")
-            UserDefaults.standard.synchronize()
-            
-            let vc = LoginViewController()
-            vc.modalPresentationStyle = .fullScreen
-            self?.present(vc, animated: true)
-        })
     }
     
     override func viewDidAppear(_ animated: Bool) {
         progress.setProgress(1, animated: animated)
-    }
-}
-
-// MARK: 네트워크 용 extension
-extension FinishSignUpViewController {
-    func newUserSignUp(completion: @escaping () -> Void) {
-        let baseUrl = "https://port-0-bookmark-oneliner-luj2cldx5nm16.sel3.cloudtype.app"
-        let URL = baseUrl + "/login/register"
-        guard let token = UserInfo.shared.userAccessToken else {
-            print("no access token")
-            return
-        }
-        
-        let params: Parameters = ["user_name": UserInfo.shared.userNickName, "introduce_message": UserInfo.shared.userMessage, "goal": UserInfo.shared.userGoal, "access_token": token]
-        
-        if let img = UserInfo.shared.userImg {
-            guard let imgData = img.jpegData(compressionQuality: 0.7) else {
-                print("jpeg data failed")
-                return
-            }
-            postWithUserImg(params, URL: URL, userImgData: imgData, completion: {
-                completion()
-            })
-        }
-        
-        else {
-            guard let imgData = UIImage(named: "noProfileImg")?.jpegData(compressionQuality: 0.7) else {
-                print("jpeg data failed")
-                return
-            }
-            postWithUserImg(params, URL: URL, userImgData: imgData, completion: {
-                completion()
-            })
-        }
-    }
-    
-    private func postWithUserImg(_ params: Parameters, URL: String, userImgData: Data, completion: @escaping () -> Void) {
-        AF.upload(multipartFormData: { multipartFormData in
-            multipartFormData.append(userImgData, withName: "img_url", fileName: "\(UserInfo.shared.userNickName)_profileImage.png" , mimeType: "image/png")
-            
-            for (key, value) in params
-            {
-                multipartFormData.append("\(value)".data(using: .utf8, allowLossyConversion: false)!, withName: "\(key)")
-            }
-            
-        }, to: URL, method: .post).responseData(completionHandler: { (response) in
-            if let err = response.error {
-                print("create community failed: \(err)")
-                return
-            }
-            print(response.result)
-            completion()
-        })
     }
 }
