@@ -300,7 +300,6 @@
 			isa = PBXGroup;
 			children = (
 				E8C05371299C856A00CA5D8E /* SignUp */,
-				E8C0536C299C7F1700CA5D8E /* Tutorial */,
 				E82079422990B6D500B36FC9 /* Login */,
 				E8D5C3E129838303003D1AD0 /* Utility */,
 				E8D5C3E0298382C1003D1AD0 /* MyPage */,
@@ -315,6 +314,7 @@
 		E89F6E3729CC0A6000602075 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E8C0536C299C7F1700CA5D8E /* Tutorial */,
 				E89F6E3A29CC0AAF00602075 /* MyLib */,
 			);
 			path = View;

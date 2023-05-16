@@ -18,10 +18,10 @@ class TutorialBaseViewController: UIViewController{
         
         self.view.addSubviews(label_title, label_description, img_tutorial)
         label_title.snp.makeConstraints() { make in
-            make.top.equalToSuperview().offset(159)
+            make.top.equalToSuperview().offset(153)
             make.centerX.equalToSuperview()
         }
-        label_title.font = UIFont.systemFont(ofSize: 26, weight: .bold)
+        label_title.font = .suit(size: 26, weight: .w400)
         
         label_description.snp.makeConstraints() { make in
             make.top.equalTo(label_title.snp.bottom).offset(18)
@@ -36,7 +36,7 @@ class TutorialBaseViewController: UIViewController{
         paragraphStyle.alignment = .center
         paragraphStyle.lineSpacing = 6
         attrString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
-        attrString.addAttributes([.font: UIFont.systemFont(ofSize: 16, weight: .semibold), .foregroundColor: UIColor.textBoldGray], range: NSMakeRange(0, attrString.length))
+        attrString.addAttributes([.font: UIFont.suit(size: 16, weight: .w500), .foregroundColor: UIColor.textBoldGray], range: NSMakeRange(0, attrString.length))
         self.label_description.attributedText = attrString
     }
 }

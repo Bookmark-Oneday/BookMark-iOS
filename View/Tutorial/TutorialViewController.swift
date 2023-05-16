@@ -52,7 +52,7 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
         button.layer.zPosition = 999
         button.layer.cornerRadius = 26
         button.backgroundColor = .lightOrange
-        button.setTitle("시작하기", size: 17, weight: .bold, color: .white)
+        button.setTitle("시작하기", size: 17, weight: .w600, color: .white)
         button.addTarget(self, action: #selector(didTapStartButton), for: .touchUpInside)
         
         pageControl.snp.makeConstraints() { make in
@@ -64,7 +64,6 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
         pageControl.numberOfPages = 4
         pageControl.pageIndicatorTintColor = .lightGray
         pageControl.currentPageIndicatorTintColor = .lightOrange
-        
     }
     
     @objc func didTapStartButton(_ sender: UIButton) {
@@ -82,7 +81,6 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
             else if let _ = pageViewController.viewControllers?[0] as? SecondPageViewController { pageControl.currentPage = 1 }
             else if let _ = pageViewController.viewControllers?[0] as? ThirdPageViewController { pageControl.currentPage = 2 }
             else if let _ = pageViewController.viewControllers?[0] as? FourthPageViewController { pageControl.currentPage = 3 }
-            
         }
     }
     
@@ -90,7 +88,7 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
         guard let index = dataViewControllers.firstIndex(of: viewController) else { return nil }
         var previousIndex = index - 1
         if previousIndex < 0 {
-            previousIndex = 3
+            return nil
         }
         return dataViewControllers[previousIndex]
     }
@@ -99,7 +97,7 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
         guard let index = dataViewControllers.firstIndex(of: viewController) else { return nil }
         var nextIndex = index + 1
         if nextIndex == dataViewControllers.count {
-            nextIndex = 0
+            return nil
         }
         return dataViewControllers[nextIndex]
     }
