@@ -15,8 +15,17 @@ import RxSwift
 class ConfirmBookViewController: UIViewController {
     let registerButton = UIBarButtonItem(title: "등록")
     let layout_main = ConfirmBookView()
-    let confirmBookViewModel = ConfirmBookViewModel(isbn: "9788976041548")
+    var confirmBookViewModel: ConfirmBookViewModel
     var disposeBag = DisposeBag()
+    
+    init(isbn: String) {
+        self.confirmBookViewModel = ConfirmBookViewModel(isbn: isbn)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

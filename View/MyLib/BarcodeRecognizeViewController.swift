@@ -41,6 +41,8 @@ class BarcodeRecognizeViewController: UIViewController {
                 .observe(on: MainScheduler.instance)
                 .subscribe(onNext: { [weak self] barcode in
                     print("Barcode detected: \(barcode)")
+                    let vc = ConfirmBookViewController(isbn: barcode)
+                    self?.navigationController?.pushViewController(vc, animated: true)
 //                    self?.barcodeView.showDetectedAnimation()
                 })
                 .disposed(by: disposeBag)
