@@ -34,13 +34,13 @@ class CreateOneLineViewController: UIViewController {
     }
     
     @objc func didTapPostButton(_ sender: UIBarButtonItem) {
-        self.createOneLineview.img_backgound.removeFromSuperview()
-        self.userTextData = self.createOneLineview.txt_mainV.text
-        if let rootVC = navigationController?.viewControllers.first as? OneLineTab {
-            rootVC.txtUserData = self.userTextData
-            rootVC.imgUserData = self.userImageData
-        }
-        self.navigationController?.popToRootViewController(animated: true)
+//        self.createOneLineview.img_backgound.removeFromSuperview()
+//        self.userTextData = self.createOneLineview.txt_mainV.text
+//        if let rootVC = navigationController?.viewControllers.first as? OneLineTabViewController {
+//            rootVC.txtUserData = self.userTextData
+//            rootVC.imgUserData = self.userImageData
+//        }
+//        self.navigationController?.popToRootViewController(animated: true)
     }
     
     @objc func didTapSetImgButton(_ sender: UIButton) {

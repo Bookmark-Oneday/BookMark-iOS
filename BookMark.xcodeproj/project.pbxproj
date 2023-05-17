@@ -31,9 +31,7 @@
 		E80E5D952A13765C0087B1CB /* PageUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80E5D942A13765C0087B1CB /* PageUpdateViewController.swift */; };
 		E80E5D972A138A940087B1CB /* SignUpUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80E5D962A138A940087B1CB /* SignUpUserInfo.swift */; };
 		E82079442990B6E800B36FC9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82079432990B6E800B36FC9 /* LoginViewController.swift */; };
-		E82079742994795800B36FC9 /* OneLineTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82079732994795800B36FC9 /* OneLineTabView.swift */; };
 		E82079762994797900B36FC9 /* CreateOneLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82079752994797900B36FC9 /* CreateOneLineViewController.swift */; };
-		E820797829947DBC00B36FC9 /* backImg.png in Resources */ = {isa = PBXBuildFile; fileRef = E820797729947DBC00B36FC9 /* backImg.png */; };
 		E832390829879ABC00DC83C2 /* CommunityInsideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E832390729879ABC00DC83C2 /* CommunityInsideViewController.swift */; };
 		E882E97E29E4626B00B5FAE5 /* BookDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E882E97D29E4626B00B5FAE5 /* BookDetailModel.swift */; };
 		E89F6E2029B5E0F200602075 /* SUIT-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E89F6E1829B5E0E400602075 /* SUIT-Bold.otf */; };
@@ -64,6 +62,7 @@
 		E89F6E5F29CD3F5D00602075 /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89F6E5E29CD3F5D00602075 /* BottomSheetViewController.swift */; };
 		E8ACD78D2A139E2B00A6F9DD /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8ACD78C2A139E2B00A6F9DD /* LoginViewModel.swift */; };
 		E8ACD78F2A139F5400A6F9DD /* SocialLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8ACD78E2A139F5400A6F9DD /* SocialLoginButton.swift */; };
+		E8ACD7912A14A3EA00A6F9DD /* backImg.png in Resources */ = {isa = PBXBuildFile; fileRef = E8ACD7902A14A3E900A6F9DD /* backImg.png */; };
 		E8C0535F299896A400CA5D8E /* UserClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C0535E299896A400CA5D8E /* UserClass.swift */; };
 		E8C05366299C7EFB00CA5D8E /* Network_Sueyeon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C05362299C7EFA00CA5D8E /* Network_Sueyeon.swift */; };
 		E8C05367299C7EFB00CA5D8E /* DataClass_sueyeon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C05363299C7EFB00CA5D8E /* DataClass_sueyeon.swift */; };
@@ -73,8 +72,8 @@
 		E8C0536F299C7F1700CA5D8E /* Tutorials.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C0536D299C7F1700CA5D8E /* Tutorials.swift */; };
 		E8C05370299C7F1700CA5D8E /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C0536E299C7F1700CA5D8E /* TutorialViewController.swift */; };
 		E8C05373299C857D00CA5D8E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C05372299C857D00CA5D8E /* SignUpViewController.swift */; };
-		E8C2B4F1296A8915000E2030 /* MyLibTabMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C2B4F0296A8915000E2030 /* MyLibTabMainView.swift */; };
-		E8C2B4F7296A8CC5000E2030 /* OneLineTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C2B4F6296A8CC5000E2030 /* OneLineTab.swift */; };
+		E8C2B4F1296A8915000E2030 /* MyLibTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C2B4F0296A8915000E2030 /* MyLibTabViewController.swift */; };
+		E8C2B4F7296A8CC5000E2030 /* OneLineTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C2B4F6296A8CC5000E2030 /* OneLineTabViewController.swift */; };
 		E8C2B4F9296A8D6D000E2030 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C2B4F8296A8D6D000E2030 /* MainTabBarController.swift */; };
 		E8C2B4FB296A8F40000E2030 /* CommunityTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C2B4FA296A8F40000E2030 /* CommunityTab.swift */; };
 		E8C2B4FD296A8F6A000E2030 /* ScrapTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C2B4FC296A8F6A000E2030 /* ScrapTab.swift */; };
@@ -123,9 +122,7 @@
 		E80E5D942A13765C0087B1CB /* PageUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageUpdateViewController.swift; sourceTree = "<group>"; };
 		E80E5D962A138A940087B1CB /* SignUpUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUserInfo.swift; sourceTree = "<group>"; };
 		E82079432990B6E800B36FC9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		E82079732994795800B36FC9 /* OneLineTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineTabView.swift; sourceTree = "<group>"; };
 		E82079752994797900B36FC9 /* CreateOneLineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOneLineViewController.swift; sourceTree = "<group>"; };
-		E820797729947DBC00B36FC9 /* backImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backImg.png; sourceTree = "<group>"; };
 		E832390729879ABC00DC83C2 /* CommunityInsideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityInsideViewController.swift; sourceTree = "<group>"; };
 		E882E97D29E4626B00B5FAE5 /* BookDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailModel.swift; sourceTree = "<group>"; };
 		E89F6E1729B5E0E400602075 /* SUIT-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Regular.otf"; sourceTree = "<group>"; };
@@ -156,6 +153,7 @@
 		E89F6E5E29CD3F5D00602075 /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		E8ACD78C2A139E2B00A6F9DD /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		E8ACD78E2A139F5400A6F9DD /* SocialLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginButton.swift; sourceTree = "<group>"; };
+		E8ACD7902A14A3E900A6F9DD /* backImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backImg.png; sourceTree = "<group>"; };
 		E8C0535D2998535000CA5D8E /* BookMark.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BookMark.entitlements; sourceTree = "<group>"; };
 		E8C0535E299896A400CA5D8E /* UserClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserClass.swift; sourceTree = "<group>"; };
 		E8C05362299C7EFA00CA5D8E /* Network_Sueyeon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network_Sueyeon.swift; sourceTree = "<group>"; };
@@ -166,8 +164,8 @@
 		E8C0536D299C7F1700CA5D8E /* Tutorials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tutorials.swift; sourceTree = "<group>"; };
 		E8C0536E299C7F1700CA5D8E /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		E8C05372299C857D00CA5D8E /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		E8C2B4F0296A8915000E2030 /* MyLibTabMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibTabMainView.swift; sourceTree = "<group>"; };
-		E8C2B4F6296A8CC5000E2030 /* OneLineTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineTab.swift; sourceTree = "<group>"; };
+		E8C2B4F0296A8915000E2030 /* MyLibTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibTabViewController.swift; sourceTree = "<group>"; };
+		E8C2B4F6296A8CC5000E2030 /* OneLineTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineTabViewController.swift; sourceTree = "<group>"; };
 		E8C2B4F8296A8D6D000E2030 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		E8C2B4FA296A8F40000E2030 /* CommunityTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityTab.swift; sourceTree = "<group>"; };
 		E8C2B4FC296A8F6A000E2030 /* ScrapTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapTab.swift; sourceTree = "<group>"; };
@@ -303,7 +301,6 @@
 				E8D5C3E129838303003D1AD0 /* Utility */,
 				E8D5C3E0298382C1003D1AD0 /* MyPage */,
 				E8D5C3DF298382B3003D1AD0 /* Scrap */,
-				E8D5C3DE29838299003D1AD0 /* OneLine */,
 				E8D5C3DD29838269003D1AD0 /* Community */,
 				E8C2B4F3296A8A66000E2030 /* MyLib */,
 			);
@@ -313,6 +310,7 @@
 		E89F6E3729CC0A6000602075 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E8D5C3DE29838299003D1AD0 /* OneLine */,
 				E82079422990B6D500B36FC9 /* Login */,
 				E8C05371299C856A00CA5D8E /* SignUp */,
 				E8C0536C299C7F1700CA5D8E /* Tutorial */,
@@ -355,7 +353,7 @@
 				86C3C2D2296E69630035CFFE /* ConfirmBookViewController.swift */,
 				24D01FCA299395DB0045DC68 /* BookDetailViewController.swift */,
 				24D01FC9299395DB0045DC68 /* BookDetailView.swift */,
-				E8C2B4F0296A8915000E2030 /* MyLibTabMainView.swift */,
+				E8C2B4F0296A8915000E2030 /* MyLibTabViewController.swift */,
 				E89F6E3D29CC0CB100602075 /* NetworkFailMainView.swift */,
 			);
 			path = MyLib;
@@ -465,9 +463,8 @@
 		E8D5C3DE29838299003D1AD0 /* OneLine */ = {
 			isa = PBXGroup;
 			children = (
-				E820797729947DBC00B36FC9 /* backImg.png */,
-				E8C2B4F6296A8CC5000E2030 /* OneLineTab.swift */,
-				E82079732994795800B36FC9 /* OneLineTabView.swift */,
+				E8ACD7902A14A3E900A6F9DD /* backImg.png */,
+				E8C2B4F6296A8CC5000E2030 /* OneLineTabViewController.swift */,
 				E82079752994797900B36FC9 /* CreateOneLineViewController.swift */,
 			);
 			path = OneLine;
@@ -563,7 +560,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E820797829947DBC00B36FC9 /* backImg.png in Resources */,
 				86C3C2BD296858380035CFFE /* LaunchScreen.storyboard in Resources */,
 				E89F6E2129B5E0F500602075 /* SUIT-ExtraBold.otf in Resources */,
 				E89F6E2629B5E10300602075 /* SUIT-Regular.otf in Resources */,
@@ -572,6 +568,7 @@
 				86C3C2BA296858380035CFFE /* Assets.xcassets in Resources */,
 				E89F6E2429B5E0FE00602075 /* SUIT-Heavy.otf in Resources */,
 				E89F6E2229B5E0F700602075 /* SUIT-ExtraLight.otf in Resources */,
+				E8ACD7912A14A3EA00A6F9DD /* backImg.png in Resources */,
 				E89F6E2029B5E0F200602075 /* SUIT-Bold.otf in Resources */,
 				E89F6E2729B5E10600602075 /* SUIT-SemiBold.otf in Resources */,
 				E89F6E2329B5E0FA00602075 /* SUIT-Light.otf in Resources */,
@@ -687,17 +684,16 @@
 				E8D5C3D729824130003D1AD0 /* CommunitySettingView.swift in Sources */,
 				E8FADC1A29DE7C4C00AC579F /* StopwatchViewModel.swift in Sources */,
 				E8FADC2029DE7C5A00AC579F /* StopwatchViewController.swift in Sources */,
-				E82079742994795800B36FC9 /* OneLineTabView.swift in Sources */,
 				E8C05369299C7EFB00CA5D8E /* NetworkTintin.swift in Sources */,
 				E80E5D912A13558F0087B1CB /* String+Extension.swift in Sources */,
 				86C3C2D3296E69630035CFFE /* ConfirmBookViewController.swift in Sources */,
 				E89F6E5A29CC4F1900602075 /* UIImage+Extension.swift in Sources */,
 				E8C2B4FD296A8F6A000E2030 /* ScrapTab.swift in Sources */,
 				E8FADC2829E121F700AC579F /* MyLibModel.swift in Sources */,
-				E8C2B4F7296A8CC5000E2030 /* OneLineTab.swift in Sources */,
+				E8C2B4F7296A8CC5000E2030 /* OneLineTabViewController.swift in Sources */,
 				E8C0535F299896A400CA5D8E /* UserClass.swift in Sources */,
 				E8C05370299C7F1700CA5D8E /* TutorialViewController.swift in Sources */,
-				E8C2B4F1296A8915000E2030 /* MyLibTabMainView.swift in Sources */,
+				E8C2B4F1296A8915000E2030 /* MyLibTabViewController.swift in Sources */,
 				E80E5D8B2A02336B0087B1CB /* DeleteBookModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
