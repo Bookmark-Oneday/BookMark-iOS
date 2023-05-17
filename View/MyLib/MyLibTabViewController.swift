@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 // MARK: - 나의 서재 탭
-class MyLibTabMainView: UIViewController {
+class MyLibTabViewController: UIViewController {
     let layout_main = MyLibTabView()
     let layout_fail = NetworkFailMainView()
     var viewModel = MyLibTabMainViewModel()
@@ -113,7 +113,7 @@ class MyLibTabMainView: UIViewController {
                 
                 switch cell?.bookID {
                 case "":
-                    self?.navigationController?.pushViewControllerTabHidden(ConfirmBookViewController(), animated: true)
+                    self?.navigationController?.pushViewControllerTabHidden(BarcodeRecognizeViewController(), animated: true)
                 default:
                     guard let id = cell?.bookID else {return}
                     let vc = BookDetailViewController(bookId: id)
