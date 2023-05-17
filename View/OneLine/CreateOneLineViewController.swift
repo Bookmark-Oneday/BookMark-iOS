@@ -29,7 +29,7 @@ class CreateOneLineViewController: UIViewController {
     }
     
     private func setNavCustom() {
-        self.setNavigationCustom(title: "한 줄 작성")
+        self.setNavigationCustom(title: "한줄 작성")
         self.setNavigationLabelButton(title: "게시", action: #selector(didTapPostButton))
     }
     
@@ -144,6 +144,7 @@ class CreateOneLineView {
     let img_backgound = UIImageView()
     let label_placeholder = UILabel()
     let txt_mainV = UITextView()
+    let label_onelineInfo = UILabel()
     let btn_setImg = UIButton()
     let label_setImg = UILabel()
     let layout_settings = UIView()
@@ -155,9 +156,10 @@ class CreateOneLineView {
     func initViews(_ superView: UIView) {
         superView.addSubview(layout_main)
         layout_main.snp.makeConstraints() { make in
-            make.edges.equalTo(superView.safeAreaLayoutGuide)
+            make.edges.equalTo(superView)
         }
-        layout_main.addSubviews(img_backgound, txt_mainV, label_placeholder, btn_setImg, label_setImg)
+        layout_main.backgroundColor = UIColor(Hex: 0xE3E3E3)
+        layout_main.addSubviews(img_backgound, txt_mainV, label_placeholder, label_onelineInfo, btn_setImg, label_setImg)
         
         img_backgound.snp.makeConstraints() { make in
             make.edges.equalToSuperview()
@@ -167,35 +169,41 @@ class CreateOneLineView {
         img_backgound.layer.opacity = 0.8
         
         txt_mainV.snp.makeConstraints() { make in
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(390)
-            make.top.equalToSuperview().offset(118)
+            make.horizontalEdges.equalToSuperview().inset(23)
+            make.height.equalTo(20)
+            make.centerY.equalToSuperview()
         }
+        txt_mainV.backgroundColor = .clear
         txt_mainV.textContainerInset = UIEdgeInsets(top: 30, left: 20, bottom: 30, right: 20)
-        txt_mainV.backgroundColor = UIColor(Hex: 0xE3E3E3)
-        txt_mainV.font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        txt_mainV.textColor = .textGray
-        txt_mainV.layer.opacity = 0.8
+        txt_mainV.font = .suit(size: 17, weight: .w500)
+        txt_mainV.textColor = UIColor(Hex: 0x111111)
         txt_mainV.textAlignment = .center
         
         label_placeholder.snp.makeConstraints() { make in
             make.center.equalTo(txt_mainV)
         }
-        label_placeholder.setTxtAttribute("텍스트를 입력하세요", size: 18, weight: .medium, txtColor: .textBoldGray)
+        label_placeholder.setTxtAttribute("텍스트를 입력하세요", size: 17, weight: .w500, txtColor: UIColor(Hex: 0x111111))
+        
+        label_onelineInfo.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview().inset(23)
+            make.top.equalTo(txt_mainV.snp.bottom).offset(22)
+        }
+        label_onelineInfo.textAlignment = .center
+        label_onelineInfo.setTxtAttribute("책 제목, 저자", size: 13, weight: .w500, txtColor: UIColor(Hex: 0x111111))
         
         btn_setImg.snp.makeConstraints() { make in
-            make.top.equalTo(txt_mainV.snp.bottom).offset(16)
-            make.leading.equalToSuperview().offset(23)
-            make.size.equalTo(33)
+            make.bottom.equalToSuperview().inset(49)
+            make.leading.equalToSuperview().offset(26)
+            make.size.equalTo(29)
         }
         btn_setImg.tintColor = .textBoldGray
-        btn_setImg.setImage(UIImage(systemName: "photo"), for: .normal)
+        btn_setImg.setImage(UIImage(named: "photoIcon"), for: .normal)
         
         label_setImg.snp.makeConstraints() { make in
             make.top.equalTo(btn_setImg.snp.bottom).offset(3)
             make.centerX.equalTo(btn_setImg)
         }
-        label_setImg.setTxtAttribute("배경 설정", size: 12, weight: .medium, txtColor: .textBoldGray)
+        label_setImg.setTxtAttribute("배경 설정", size: 10, weight: .w500, txtColor: .textBoldGray)
     }
     
     func didStartEditing(_ superView: UIView) {
