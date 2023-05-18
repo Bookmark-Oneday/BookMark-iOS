@@ -22,7 +22,7 @@ class CreateOneLineViewController: UIViewController {
         
         setNavCustom()
         setImgPicker()
-        createOneLineview.txt_mainV.delegate = self
+        createOneLineview.tv_oneline.delegate = self
         
         createOneLineview.initViews(self.view)
         createOneLineview.btn_setImg.addTarget(self, action: #selector(didTapSetImgButton), for: .touchUpInside)
@@ -79,6 +79,19 @@ extension CreateOneLineViewController: UITextViewDelegate {
         self.createOneLineview.label_placeholder.removeFromSuperview()
     }
     
+    func textViewDidChange(_ textView: UITextView) {
+        UIView.animate(withDuration: 0, delay: 0, animations: {
+            let size = CGSize(width: textView.frame.width, height: .infinity)
+            let estimatedSize = textView.sizeThatFits(size)
+            
+//            guard estimatedSize.height >= 80 else {return}
+            
+            self.createOneLineview.layout_content.snp.updateConstraints { make in
+                make.height.equalTo(estimatedSize.height + 30)
+            }
+        })
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
       }
@@ -106,17 +119,14 @@ extension CreateOneLineViewController {
                 make.leading.trailing.equalToSuperview()
                 make.bottom.equalToSuperview().inset(keyboardRectangle.height)
                 make.height.equalTo(48)
-                
             }
             self.createOneLineview.didStartEditing(self.view)
             
             UIView.animate(
                 withDuration: 0
                 , animations: {
-                    let height = self.createOneLineview.layout_main.frame.height
-                    self.createOneLineview.txt_mainV.snp.remakeConstraints() { make in
-                        make.top.leading.trailing.equalToSuperview()
-                        make.height.equalTo(height - keyboardRectangle.height - 10)
+                    self.createOneLineview.layout_content.snp.updateConstraints { make in
+                        make.bottom.equalTo(self.createOneLineview.layout_main.snp.centerY).inset(keyboardRectangle.height + 210)
                     }
                 }
             )
@@ -127,13 +137,11 @@ extension CreateOneLineViewController {
         self.createOneLineview.btn_color.removeFromSuperview()
         self.createOneLineview.layout_vertical.removeFromSuperview()
         self.createOneLineview.btn_font.removeFromSuperview()
-        self.createOneLineview.btn_size.removeFromSuperview()
         self.createOneLineview.layout_settings.removeFromSuperview()
         
-        self.createOneLineview.txt_mainV.snp.remakeConstraints() {make in
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(390)
-            make.top.equalToSuperview().offset(118)
+        let height = self.createOneLineview.layout_content.frame.height / 2
+        self.createOneLineview.layout_content.snp.updateConstraints {make in
+            make.bottom.equalTo(self.createOneLineview.layout_main.snp.centerY).offset(height)
         }
     }
 }
@@ -142,14 +150,17 @@ extension CreateOneLineViewController {
 class CreateOneLineView {
     let layout_main = UIView()
     let img_backgound = UIImageView()
+    
+    let layout_content = UIView()
     let label_placeholder = UILabel()
-    let txt_mainV = UITextView()
+    let tv_oneline = UITextView()
     let label_onelineInfo = UILabel()
+    
     let btn_setImg = UIButton()
     let label_setImg = UILabel()
+    
     let layout_settings = UIView()
     let btn_font = UIButton()
-    let btn_size = UIButton()
     let layout_vertical = UIView()
     let btn_color = UIButton()
     
@@ -159,7 +170,7 @@ class CreateOneLineView {
             make.edges.equalTo(superView)
         }
         layout_main.backgroundColor = UIColor(Hex: 0xE3E3E3)
-        layout_main.addSubviews(img_backgound, txt_mainV, label_placeholder, label_onelineInfo, btn_setImg, label_setImg)
+        layout_main.addSubviews(img_backgound, layout_content, label_placeholder, btn_setImg, label_setImg)
         
         img_backgound.snp.makeConstraints() { make in
             make.edges.equalToSuperview()
@@ -168,25 +179,35 @@ class CreateOneLineView {
         img_backgound.contentMode = .scaleAspectFill
         img_backgound.layer.opacity = 0.8
         
-        txt_mainV.snp.makeConstraints() { make in
-            make.horizontalEdges.equalToSuperview().inset(23)
-            make.height.equalTo(20)
-            make.centerY.equalToSuperview()
+        layout_content.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(layout_main.snp.centerY).offset(40)
+            make.horizontalEdges.equalToSuperview().inset(60)
+            make.height.equalTo(80)
         }
-        txt_mainV.backgroundColor = .clear
-        txt_mainV.textContainerInset = UIEdgeInsets(top: 30, left: 20, bottom: 30, right: 20)
-        txt_mainV.font = .suit(size: 17, weight: .w500)
-        txt_mainV.textColor = UIColor(Hex: 0x111111)
-        txt_mainV.textAlignment = .center
+        layout_content.layer.borderColor = UIColor.white.cgColor
+        layout_content.layer.borderWidth = 1
+        layout_content.addSubviews(tv_oneline, label_onelineInfo)
+        
+        tv_oneline.snp.makeConstraints() { make in
+            make.top.horizontalEdges.equalToSuperview()
+            make.bottom.equalToSuperview().inset(38)
+        }
+        tv_oneline.isScrollEnabled = false
+        tv_oneline.backgroundColor = .clear
+        tv_oneline.textContainerInset = UIEdgeInsets(top: 30, left: 10, bottom: 30, right: 10)
+        tv_oneline.font = .suit(size: 17, weight: .w500)
+        tv_oneline.textColor = UIColor(Hex: 0x111111)
+        tv_oneline.textAlignment = .center
         
         label_placeholder.snp.makeConstraints() { make in
-            make.center.equalTo(txt_mainV)
+            make.center.equalTo(tv_oneline)
         }
         label_placeholder.setTxtAttribute("텍스트를 입력하세요", size: 17, weight: .w500, txtColor: UIColor(Hex: 0x111111))
         
         label_onelineInfo.snp.makeConstraints { make in
-            make.horizontalEdges.equalToSuperview().inset(23)
-            make.top.equalTo(txt_mainV.snp.bottom).offset(22)
+            make.horizontalEdges.equalToSuperview()
+            make.bottom.equalToSuperview().inset(10)
         }
         label_onelineInfo.textAlignment = .center
         label_onelineInfo.setTxtAttribute("책 제목, 저자", size: 13, weight: .w500, txtColor: UIColor(Hex: 0x111111))
@@ -208,31 +229,24 @@ class CreateOneLineView {
     
     func didStartEditing(_ superView: UIView) {
         layout_settings.backgroundColor = .white
-        layout_settings.addSubviews(btn_font, btn_size, layout_vertical, btn_color)
+        layout_settings.addSubviews(btn_font, layout_vertical, btn_color)
         btn_font.snp.makeConstraints() { make in
             make.leading.equalToSuperview().offset(23)
             make.centerY.equalToSuperview()
+            make.width.equalTo(27)
         }
-        btn_font.sizeToFit()
-        btn_font.setTitle("T", size: 15, weight: .bold, color: .textBoldGray)
-        
-        btn_size.snp.makeConstraints() { make in
-            make.leading.equalTo(btn_font.snp.trailing).offset(10)
-            make.centerY.equalToSuperview()
-        }
-        btn_size.sizeToFit()
-        btn_size.setTitle("13pt", size: 13, weight: .semibold, color: .black)
+        btn_font.setImage(UIImage(named: "fontIcon"), for: .normal)
         
         layout_vertical.snp.makeConstraints() { make in
             make.height.equalTo(14)
-            make.width.equalTo(3)
-            make.leading.equalTo(btn_size.snp.trailing).offset(10)
+            make.width.equalTo(2)
+            make.leading.equalTo(btn_font.snp.trailing).offset(15)
             make.centerY.equalToSuperview()
         }
-        layout_vertical.backgroundColor = .lightGray
+        layout_vertical.backgroundColor = .semiLightGray
         
         btn_color.snp.makeConstraints() { make in
-            make.leading.equalTo(layout_vertical.snp.trailing).offset(10)
+            make.leading.equalTo(layout_vertical.snp.trailing).offset(15)
             make.size.equalTo(20)
             make.centerY.equalToSuperview()
         }
