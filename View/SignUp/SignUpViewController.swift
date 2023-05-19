@@ -395,10 +395,22 @@ class SetGoalViewController: BaseSignUpViewController {
     }
     
     @objc func didSliderValueChanged(_ sender: UISlider) {
+        guard Int(sender.value) % 5 == 0 else {return}
+        
         let time = Int(sender.value)
         let hour = time / 60
         let min = Int(time % 60)
-        label_time.text = "\(hour)시간 \(min)분"
+        
+        if (hour != 0 && min != 0) {
+            label_time.text = "\(hour)시간 \(min)분"
+        }
+        else if (hour == 0){
+            label_time.text = "\(min)분"
+        }
+        else {
+            label_time.text = "\(hour)시간"
+        }
+        
         let timeDiff = time - 30
         if (timeDiff < 0) {
             setBoldAttribute("평균보다 \(30 - timeDiff)분 적어요")
