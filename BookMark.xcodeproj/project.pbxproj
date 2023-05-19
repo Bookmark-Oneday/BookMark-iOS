@@ -63,6 +63,7 @@
 		E8ACD78D2A139E2B00A6F9DD /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8ACD78C2A139E2B00A6F9DD /* LoginViewModel.swift */; };
 		E8ACD78F2A139F5400A6F9DD /* SocialLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8ACD78E2A139F5400A6F9DD /* SocialLoginButton.swift */; };
 		E8ACD7912A14A3EA00A6F9DD /* backImg.png in Resources */ = {isa = PBXBuildFile; fileRef = E8ACD7902A14A3E900A6F9DD /* backImg.png */; };
+		E8ACD7972A17324B00A6F9DD /* CreateOneLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8ACD7962A17324B00A6F9DD /* CreateOneLineView.swift */; };
 		E8C0535F299896A400CA5D8E /* UserClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C0535E299896A400CA5D8E /* UserClass.swift */; };
 		E8C05366299C7EFB00CA5D8E /* Network_Sueyeon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C05362299C7EFA00CA5D8E /* Network_Sueyeon.swift */; };
 		E8C05367299C7EFB00CA5D8E /* DataClass_sueyeon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C05363299C7EFB00CA5D8E /* DataClass_sueyeon.swift */; };
@@ -154,6 +155,7 @@
 		E8ACD78C2A139E2B00A6F9DD /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		E8ACD78E2A139F5400A6F9DD /* SocialLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginButton.swift; sourceTree = "<group>"; };
 		E8ACD7902A14A3E900A6F9DD /* backImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backImg.png; sourceTree = "<group>"; };
+		E8ACD7962A17324B00A6F9DD /* CreateOneLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOneLineView.swift; sourceTree = "<group>"; };
 		E8C0535D2998535000CA5D8E /* BookMark.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BookMark.entitlements; sourceTree = "<group>"; };
 		E8C0535E299896A400CA5D8E /* UserClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserClass.swift; sourceTree = "<group>"; };
 		E8C05362299C7EFA00CA5D8E /* Network_Sueyeon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network_Sueyeon.swift; sourceTree = "<group>"; };
@@ -466,6 +468,7 @@
 				E8ACD7902A14A3E900A6F9DD /* backImg.png */,
 				E8C2B4F6296A8CC5000E2030 /* OneLineTabViewController.swift */,
 				E82079752994797900B36FC9 /* CreateOneLineViewController.swift */,
+				E8ACD7962A17324B00A6F9DD /* CreateOneLineView.swift */,
 			);
 			path = OneLine;
 			sourceTree = "<group>";
@@ -651,6 +654,7 @@
 				E8C2B51329743975000E2030 /* Network.swift in Sources */,
 				E8C05367299C7EFB00CA5D8E /* DataClass_sueyeon.swift in Sources */,
 				E8C2B4FF296A8F8C000E2030 /* MyPageTab.swift in Sources */,
+				E8ACD7972A17324B00A6F9DD /* CreateOneLineView.swift in Sources */,
 				E8C0536B299C7F0C00CA5D8E /* TotalPageInputViewController.swift in Sources */,
 				412DDC8629858E5F00F6CB22 /* WaitMemberViewController.swift in Sources */,
 				E8FADC2329DE7CB300AC579F /* Stopwatch.swift in Sources */,
