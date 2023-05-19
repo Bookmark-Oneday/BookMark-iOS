@@ -5,6 +5,7 @@ PODS:
   - Charts/Core (4.1.0):
     - SwiftAlgorithms (~> 1.0)
   - Kingfisher (7.5.0)
+  - lottie-ios (4.2.0)
   - Pastel (0.6.0)
   - RxCocoa (6.5.0):
     - RxRelay (= 6.5.0)
@@ -20,6 +21,7 @@ DEPENDENCIES:
   - Alamofire
   - Charts
   - Kingfisher (~> 7.0)
+  - lottie-ios
   - Pastel
   - RxCocoa (= 6.5.0)
   - RxSwift (= 6.5.0)
@@ -31,6 +33,7 @@ SPEC REPOS:
     - Alamofire
     - Charts
     - Kingfisher
+    - lottie-ios
     - Pastel
     - RxCocoa
     - RxRelay
@@ -43,6 +46,7 @@ SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   Charts: 354f86803d11d9c35de280587fef50d1af063978
   Kingfisher: b9c2a4a4af2990a768445c277359b27bde287d71
+  lottie-ios: 809ecf2d460ed650a6aed7aa88b2ec45fab4779c
   Pastel: 814f081efbe2859c37e65ee44f396e6e5be88619
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
@@ -51,6 +55,6 @@ SPEC CHECKSUMS:
   SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 5885c940e9fa0a63ac79f051b248c0362857c82c
+PODFILE CHECKSUM: 215e279869363f08b0e34cde9bc37dbce27cbd30
 
 COCOAPODS: 1.11.3
