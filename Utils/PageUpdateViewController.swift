@@ -37,6 +37,10 @@ class PageUpdateViewController: UIViewController {
         self.closeModal()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+      }
+    
     private func closeModal(_ completed: ((String, String) -> Void)? = nil) {
         UIView.animate(withDuration: 0.3) {
             self.view.backgroundColor = .clear
