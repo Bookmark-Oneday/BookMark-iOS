@@ -45,8 +45,11 @@ class BookDetailViewModel {
                 if let date = data.history?.first?.date {
                     self?.firstReadDate.onNext(date.dateFormat(startOffset: 0, endOffset: 10, replacer: "."))
                 }
-                //                let total = data.history?.reduce(0) { result, x.time in result+x.time }
-                self?.totalReadingTime.onNext("12:23:00")
+                var totalTime = 0
+                data.history?.forEach {
+                    totalTime += $0.time
+                }
+                self?.totalReadingTime.onNext("".secondsFormat(seconds: totalTime))
             })
             .disposed(by: disposeBag)
         
@@ -64,6 +67,7 @@ class BookDetailViewModel {
             })
             .disposed(by: disposeBag)
     }
+    
     
     func deleteBook() {
         let request = DeleteBookModel(bookId: self.bookId)

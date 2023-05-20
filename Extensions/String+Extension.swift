@@ -14,4 +14,19 @@ extension String {
         let sliced = String(self[startIdx..<endIdx]).replacingOccurrences(of: "-", with: replacer)
         return sliced
     }
+    
+    func secondsFormat(seconds: Int) -> String {
+        var result = self
+        
+        let time = seconds / 3600
+        result += "\(time):"
+        
+        let min = (Double(seconds) / Double(3600)) - Double(time)
+        result += "\(Int(min * 60)):"
+        
+        let sec = (min * 60) - Double(Int(min * 60))
+        result += "\(Int(ceil(sec * 60)))"
+        
+        return result
+    }
 }
