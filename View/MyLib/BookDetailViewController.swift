@@ -92,6 +92,7 @@ class BookDetailViewController: UIViewController {
         
         bookDetailViewModel.readingPercent
             .observe(on: MainScheduler.instance)
+            .filter { !$0.isNaN && !$0.isInfinite }
             .map { "\(Int($0))%" }
             .bind(to: self.layout_bookdetail.label_untilFin_data.rx.text)
             .disposed(by: disposeBag)
