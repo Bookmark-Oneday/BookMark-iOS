@@ -20,6 +20,7 @@ protocol ApiRequest{
     var path : String { get }
     var parameters : Dictionary<String, Any>? {get}
     var headerParam: [String: String]? {get}
+    var body: Dictionary<String, Any>? {get}
 }
 
 extension ApiRequest {
@@ -34,7 +35,7 @@ extension ApiRequest {
             fatalError("url error")
         }
         
-        let request : URLRequest = {
+        var request : URLRequest = {
             var request = URLRequest(url: url)
             request.httpMethod = method.rawValue
             request.allHTTPHeaderFields = headerParam
@@ -42,6 +43,14 @@ extension ApiRequest {
             request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
             return request
         }()
+    
+        if let postData = self.body {
+            let postDataFormat = (postData.compactMap({ (key, value) -> String in
+              return "\(key)=\(value)"
+            }) as Array).joined(separator: "&")
+               
+            request.httpBody = postDataFormat.data(using: .utf8)
+        }
         
         return request
     }
@@ -59,7 +68,7 @@ class Network {
         return Session(configuration: configuration, serverTrustManager: serverTrustPolices)
     }()
     
-    func sendRequest(apiRequest: ApiRequest) -> Observable<Int> {
+    func sendRequestWithNoResponse(apiRequest: ApiRequest) -> Observable<Int> {
         return Observable<Int>.create { observer in
             guard let requestURL = URL(string: "https://api.bmonlner.me") else {
                 return Disposables.create()
@@ -76,7 +85,7 @@ class Network {
                     }
                     observer.onNext(code)
                 case .failure(let error):
-                    print("failed")
+                    print("network failed")
                     observer.onError(error)
                 }
                 observer.onCompleted()
@@ -104,11 +113,11 @@ class Network {
                         let model: T = try JSONDecoder().decode(T.self, from: data)
                         observer.onNext(model)
                     } catch let error {
-                        print("failed")
+                        print("decode failed")
                         observer.onError(error)
                     }
                 case .failure(let error):
-                    print("failed")
+                    print("network decode failed")
                     observer.onError(error)
                 }
                 observer.onCompleted()
@@ -124,7 +133,6 @@ class Network {
         return Observable<T>.create { observer in
             guard let requestURL = URL(string: "https://dapi.kakao.com") else {
                 return Disposables.create()
-                
             }
             
             let request = apiRequest.request(with: requestURL)

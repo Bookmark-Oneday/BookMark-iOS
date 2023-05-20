@@ -28,6 +28,8 @@ class BarcodeRecognizeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setNavigationCustom(title: "바코드 인식")
+        
         view.addSubview(barcodeView)
         barcodeView.frame = view.bounds
         barcodeView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

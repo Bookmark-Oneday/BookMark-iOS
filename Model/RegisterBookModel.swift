@@ -13,6 +13,7 @@ class RegisterBookModel: ApiRequest {
     var method: RequestType = .POST
     var path: String = "/v1/library/mylist/book"
     var parameters: Dictionary<String, Any>?
+    var body: Dictionary<String, Any>?
     
     init(title: String, authors: String, publisher: String, translators: String, thumbnail_url: String, isbn: String, total_page: String) {
         self.headerParam = ["user_id": "74d18bfc-14c5-46d2-a1a8-1eb627918859"]

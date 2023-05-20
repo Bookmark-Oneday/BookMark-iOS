@@ -21,6 +21,7 @@ class MyLibModel: ApiRequest {
     var method: RequestType = .GET
     var path: String = "/v1/library/mylist"
     var parameters: Dictionary<String, Any>?
+    var body: Dictionary<String, Any>?
     
     init(sortType: SortType = .latest) {
         self.parameters = ["sortType": sortType.rawValue, "perPage": "3", "continuousToken": "0"]

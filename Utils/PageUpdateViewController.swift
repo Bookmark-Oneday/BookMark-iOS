@@ -112,8 +112,8 @@ class PageUpdateView {
         label_slash.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(label_subtitle.snp.bottom).offset(26)
-            make.width.equalTo(27)
-            make.height.equalTo(13)
+            make.width.equalTo(13)
+            make.height.equalTo(27)
         }
         label_slash.image = UIImage(named: "slash")
         

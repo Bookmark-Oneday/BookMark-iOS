@@ -6,6 +6,7 @@
 //
 
 import RxSwift
+import RxCocoa
 
 class ConfirmBookViewModel {
     var bookImage = PublishSubject<String>()
@@ -50,7 +51,7 @@ class ConfirmBookViewModel {
     
     func registerBook(totalPage: String) {
         let request = RegisterBookModel(title: self.bookTitleText, authors: self.bookAuthorText, publisher: self.bookPublisherText, translators: self.bookTranslatorText, thumbnail_url: self.bookImageText, isbn: self.bookIsbn, total_page: totalPage)
-//        
+//
 //        Network().sendRequest(apiRequest: request)
 //            .subscribe(onNext: { rescode in
 //                print("rescode: \(rescode)")

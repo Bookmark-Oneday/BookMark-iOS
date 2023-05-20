@@ -149,7 +149,7 @@ class BookDetailView {
             make.centerX.equalTo(label_firstread)
             make.top.equalTo(label_firstread.snp.bottom).offset(10)
         }
-        label_firstread_data.setTxtAttribute("2022.01.09", size: 17, weight: .w600, txtColor: .black)
+        label_firstread_data.setTxtAttribute("-", size: 17, weight: .w600, txtColor: .black)
         
         label_totaltime.snp.makeConstraints() { make in
             make.leading.equalTo(layout_vertical.snp.trailing).offset(61)
@@ -161,7 +161,7 @@ class BookDetailView {
             make.centerX.equalTo(label_totaltime)
             make.top.equalTo(label_totaltime.snp.bottom).offset(10)
         }
-        label_totaltime_data.setTxtAttribute("12:28.00", size: 17, weight: .w600, txtColor: .black)
+        label_totaltime_data.setTxtAttribute("-", size: 17, weight: .w600, txtColor: .black)
     }
     
     private func initViews_part2(view: UIView) {

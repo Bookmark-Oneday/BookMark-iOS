@@ -7,6 +7,7 @@
 
 import RxSwift
 import RxCocoa
+import Alamofire
 
 class BookDetailViewModel {
     let disposeBag = DisposeBag()
@@ -21,8 +22,8 @@ class BookDetailViewModel {
     var currentPage = PublishSubject<Int>()
     var totalPage = PublishSubject<Int>()
     
-    var firstReadDate = Observable.just("2023.01.09")
-    var totalReadingTime = Observable.just("12:28.00")
+    var firstReadDate = PublishSubject<String>()
+    var totalReadingTime = PublishSubject<String>()
     
     var readingPercent = PublishSubject<Float>()
     var readingHistory = PublishSubject<[History]?>()
@@ -30,20 +31,25 @@ class BookDetailViewModel {
     init(bookId: String) {
         self.bookId = bookId
         let getApi: Observable<BookDetail> = Network().sendRequest(apiRequest: BookDetailModel(bookId: bookId))
-
+        
         getApi
             .map { $0.data }
             .subscribe(onNext: { [weak self] data in
                 self?.bookAuthor.onNext(data.authors[0])
                 self?.bookImage.onNext(data.titleImage)
                 self?.bookTitle.onNext(data.title)
-                self?.bookTranslator.onNext(data.translators[0])
+                self?.bookTranslator.onNext(data.translators.first ?? "")
                 self?.currentPage.onNext(data.current_page)
                 self?.totalPage.onNext(data.total_page)
                 self?.readingHistory.onNext(data.history)
+                if let date = data.history?.first?.date {
+                    self?.firstReadDate.onNext(date.dateFormat(startOffset: 0, endOffset: 10, replacer: "."))
+                }
+                //                let total = data.history?.reduce(0) { result, x.time in result+x.time }
+                self?.totalReadingTime.onNext("12:23:00")
             })
             .disposed(by: disposeBag)
-
+        
         Observable.zip(bookAuthor, bookTranslator)
             .map { "\($0) ◦ \($1) 번역" }
             .bind(onNext: { str in
@@ -61,22 +67,23 @@ class BookDetailViewModel {
     
     func deleteBook() {
         let request = DeleteBookModel(bookId: self.bookId)
-        Network().sendRequest(apiRequest: request)
+        Network().sendRequestWithNoResponse(apiRequest: request)
             .subscribe(onNext: { rescode in
                 
             })
+            .disposed(by: disposeBag)
     }
     
     func updatePage(currentPage: String, totalPage: String) {
         self.currentPage.onNext(Int(currentPage) ?? 0)
         self.totalPage.onNext(Int(totalPage) ?? 0)
         
-        let request = UpdatePageModel(bookId: self.bookId, currentPage: currentPage, total_page: totalPage)
-        Network().sendRequest(apiRequest: request)
+        let request = UpdatePageModel(bookId: self.bookId, currentPage: currentPage, totalPage: totalPage)
+        
+        Network().sendRequestWithNoResponse(apiRequest: request)
             .subscribe(onNext: { rescode in
-                print(rescode)
+                
             })
             .disposed(by: disposeBag)
     }
-    
 }

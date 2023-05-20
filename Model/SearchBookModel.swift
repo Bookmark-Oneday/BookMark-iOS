@@ -12,6 +12,7 @@ class SearchBookModel: ApiRequest {
     var method: RequestType = .GET
     var path: String = "/v3/search/book"
     var parameters: Dictionary<String, Any>?
+    var body: Dictionary<String, Any>?
     
     init(isbn: String) {
         self.parameters = ["target": "isbn", "query": isbn]
