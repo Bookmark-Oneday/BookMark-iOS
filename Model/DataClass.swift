@@ -83,3 +83,21 @@ struct BookMeta: Decodable {
     let is_end: Bool
     let pageable_count, total_count: Int
 }
+
+// MARK: - B.4
+struct StopWatch: Decodable {
+    let data: StopwatchData
+//    let meta: StopwatchMeta
+}
+
+struct StopwatchBook: Decodable {
+    let book_id: String
+    let history: [History]
+}
+
+struct StopwatchData: Decodable {
+    let user_id: String
+    let target_time: Int
+    let daily: Int
+    let book: StopwatchBook
+}

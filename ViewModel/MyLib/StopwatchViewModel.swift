@@ -19,22 +19,6 @@ class StopwatchViewModel {
         return timeElapsedSubject.asObservable()
     }
     
-//    var startPauseTitle: Observable<String> {
-//        return startPauseTitleSubject.asObservable()
-//    }
-    
-//    var startPauseColor: Observable<UIColor> {
-//        return startPauseColorSubject.asObservable()
-//    }
-    
-//    var resetButtonIsEnabled: Observable<Bool> {
-//        return resetButtonIsEnabledSubject.asObservable()
-//    }
-    
-//    var strokeColor: Observable<UIColor> {
-//        return strokeColorSubject.asObservable()
-//    }
-    
     var timeColor: Observable<UIColor> {
         return timeLabelColorSubject.asObservable()
     }
@@ -46,22 +30,28 @@ class StopwatchViewModel {
     private let timeElapsedSubject = BehaviorSubject<TimeInterval>(value: 0)
     private let totalTimeSubject = BehaviorSubject<TimeInterval>(value: 0)
     
-    private let disposeBag = DisposeBag()
-    private let stopwatch: Stopwatch
+    var durationFromAPI: BehaviorSubject<TimeInterval> = BehaviorSubject(value: 120)
     
-    private var isRunning = false {
+    let disposeBag = DisposeBag()
+    let stopwatch: Stopwatch
+    
+    var bookId: String = ""
+    var readHistory: [[String]] = [[""]]
+    
+    var isRunning = false {
         didSet {
+            
 //            startPauseTitleSubject.onNext(isRunning ? "Reset" : "Start")
 //            startPauseColorSubject.onNext(isRunning ? .systemRed : .systemGreen)
+            startPauseButtonImage.onNext(isRunning ? "resume" : "play")
+            
         }
     }
     
-//    private var startPauseTitleSubject = BehaviorSubject<String>(value: "Start")
-//    private var startPauseColorSubject = BehaviorSubject<UIColor>(value: .systemGreen)
-
-//    private let strokeColorSubject = PublishSubject<UIColor>()
     private let timeLabelColorSubject = PublishSubject<UIColor>()
     private let totalButtonColorSubject = PublishSubject<UIColor>()
+    
+    var startPauseButtonImage = BehaviorSubject<String>(value: "play")
     
     private var timerSubscription: Disposable?
     
@@ -70,12 +60,94 @@ class StopwatchViewModel {
     
     private var elapsedTimeCache: TimeInterval = 0
     
+    var stopwatchisRunning = BehaviorRelay<Bool>(value: false)
     
-    init(stopwatch: Stopwatch) {
-        self.stopwatch = stopwatch
-        scheduleDateCheck()
-    }
+    private var historyList: [History] = []
 
+    let historyListObservable: BehaviorSubject<[History]> = BehaviorSubject(value: [])
+    
+    let rowHeights = BehaviorSubject<Int>(value: 50)
+    let rowCount = BehaviorSubject<Int>(value: 0)
+    
+    
+    init(stopwatch: Stopwatch, bookId: String) {
+        self.stopwatch = stopwatch
+        self.bookId = bookId
+        scheduleDateCheck()
+        getData()
+        getHistoryData()
+    }
+    
+    func getData() {
+        let getApi: Observable<StopWatch> = Network().sendRequest(apiRequest: StopwatchModel(bookId: bookId))
+
+        getApi
+            .map { $0.data }
+            .subscribe(onNext: { [weak self] data in
+                
+                guard let strongSelf = self else { return }
+                
+                let dailyTime = TimeInterval(data.daily)
+                let targetTime = TimeInterval(data.target_time)
+
+                strongSelf.timeElapsedSubject.onNext(dailyTime)
+                strongSelf.totalTimeSubject.onNext(targetTime)
+                strongSelf.bookId = data.book.book_id
+                strongSelf.durationFromAPI.onNext(TimeInterval(targetTime))
+                                
+//                print(data.book.book_id)
+//                print(data.daily)
+//                print(data.target_time)
+                
+            })
+            .disposed(by: disposeBag)
+        
+    }
+    
+    func getHistoryData() {
+        let getApi: Observable<StopWatch> = Network().sendRequest(apiRequest: StopwatchModel(bookId: bookId))
+        
+        getApi
+            .map { $0.data.book.history }
+            .subscribe(onNext: { [weak self] historyList in
+                self?.historyList = historyList
+                self?.historyListObservable.onNext(historyList)
+                
+                print(historyList)
+                
+                historyList.forEach {
+                    print($0.date)
+                    print($0.time)
+                    print("---")
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func sendTime(readingTime: Int) {
+//        let request = SendTimeModel(bookId: self.bookId, readingTime: readingTime)
+//
+//        Network().sendRequest(apiRequest: request)
+//            .subscribe(onNext: { rescode in
+//
+//            })
+//            .disposed(by: disposeBag)
+        
+        let requestModel = SendTimeModel(bookId: bookId, readingTime: readingTime)
+        
+        Network().sendRequestWithNoResponse(apiRequest: requestModel)
+            .subscribe(
+                onNext: { statusCode in
+                    print("Server responded with status code: \(statusCode)")
+                },
+                onError: { error in
+                    print("An error occurred while sending the request: \(error)")
+                    
+                }
+            )
+            .disposed(by: disposeBag)
+    }
+    
     func startOrPause() {
         if isRunning {
             reset()
@@ -87,6 +159,8 @@ class StopwatchViewModel {
     
     func reset() {
         pause()
+        stopwatch.pause()
+        
         if Calendar.current.isDateInToday(startPauseDate ?? Date()) {
             let currentTime = try? timeElapsedSubject.value()
             totalTimeSubject.onNext((try! totalTimeSubject.value() ) + (currentTime ?? 0))
@@ -96,14 +170,6 @@ class StopwatchViewModel {
             elapsedTimeCache = 0
         }
     }
-    
-//    func changeStrokeColor() {
-//        strokeColorSubject.onNext(.systemBlue)
-//    }
-//
-//    func revertStrokeColor() {
-//        strokeColorSubject.onNext(.systemOrange)
-//    }
     
     func changeTimeLabelColor() {
         timeLabelColorSubject.onNext(.systemOrange)
@@ -134,11 +200,16 @@ class StopwatchViewModel {
     private func pause() {
         guard let startTime = startTime else { return }
         elapsedTimeCache += Date().timeIntervalSince(startTime)
+        
+        let elapsedTime = Int(stopwatch.elapsedTime)
+        // MARK: Send Time
+        sendTime(readingTime: elapsedTime)
+        
         timerSubscription?.dispose()
         timerSubscription = nil
     }
     
-    private func timeString(time: TimeInterval) -> String {
+    func timeString(time: TimeInterval) -> String {
         let hours = Int(time) / 3600
         let minutes = Int(time) / 60 % 60
         let seconds = Int(time) % 60
@@ -148,6 +219,23 @@ class StopwatchViewModel {
             return String(format: "%02d:%02d", hours, minutes)
         } else {
             return String(format: "%02d:%02d", minutes, seconds)
+        }
+    }
+    
+    func historyStringFormat(time: TimeInterval) -> String {
+        let hours = Int(time) / 3600
+        let minutes = Int(time) / 60 % 60
+        let seconds = Int(time) % 60
+        
+        if hours >= 1 {
+            return String(format: "%02dh %02dm", hours, minutes)
+        } else {
+            if (minutes != 0) {
+                return String(format: "%02dm", minutes)
+            }
+            else {
+                return String(format: "%02ds", seconds)
+            }
         }
     }
     
