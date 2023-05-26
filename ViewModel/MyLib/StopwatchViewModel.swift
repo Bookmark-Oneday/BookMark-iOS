@@ -60,6 +60,8 @@ class StopwatchViewModel {
     
     private var elapsedTimeCache: TimeInterval = 0
     
+    private var sendTimeSubscription: Disposable?
+    
     var stopwatchisRunning = BehaviorRelay<Bool>(value: false)
     
     private var historyList: [History] = []
@@ -90,7 +92,12 @@ class StopwatchViewModel {
                 let dailyTime = TimeInterval(data.daily)
                 let targetTime = TimeInterval(data.target_time)
 
-                strongSelf.timeElapsedSubject.onNext(dailyTime)
+//                strongSelf.timeElapsedSubject.onNext(dailyTime)
+                
+//                strongSelf.elapsedTimeCache = dailyTime
+                strongSelf.elapsedTimeCache += dailyTime
+                strongSelf.timeElapsedSubject.onNext(strongSelf.elapsedTimeCache)
+                
                 strongSelf.totalTimeSubject.onNext(targetTime)
                 strongSelf.bookId = data.book.book_id
                 strongSelf.durationFromAPI.onNext(TimeInterval(targetTime))
@@ -125,13 +132,6 @@ class StopwatchViewModel {
     }
     
     func sendTime(readingTime: Int) {
-//        let request = SendTimeModel(bookId: self.bookId, readingTime: readingTime)
-//
-//        Network().sendRequest(apiRequest: request)
-//            .subscribe(onNext: { rescode in
-//
-//            })
-//            .disposed(by: disposeBag)
         
         let requestModel = SendTimeModel(bookId: bookId, readingTime: readingTime)
         
@@ -145,6 +145,15 @@ class StopwatchViewModel {
                     
                 }
             )
+            .disposed(by: disposeBag)
+    }
+    
+    func deleteTime() {
+        let request = DeleteTimeModel(bookId: self.bookId)
+        Network().sendRequestWithNoResponse(apiRequest: request)
+            .subscribe(onNext: { rescode in
+                print(rescode)
+            })
             .disposed(by: disposeBag)
     }
     
@@ -195,16 +204,29 @@ class StopwatchViewModel {
                 let elapsedTime = Date().timeIntervalSince(startTime) + self.elapsedTimeCache
                 self.timeElapsedSubject.onNext(elapsedTime)
             })
+        sendTimeSubscription?.dispose()
     }
     
     private func pause() {
+//        guard let startTime = startTime else { return }
+//        let currentValue = try? timeElapsedSubject.value()
+//        elapsedTimeCache = currentValue ?? 0
+//        self.sendTimeSubscription = self.timeElapsedSubject.subscribe(onNext: { value in
+//            print("Value:", value)
+//            let elapsedTime = Int(value)
+//            self.sendTime(readingTime: elapsedTime)
+//        })
+//        timerSubscription?.dispose()
+//        timerSubscription = nil
+        
         guard let startTime = startTime else { return }
-        elapsedTimeCache += Date().timeIntervalSince(startTime)
-        
-        let elapsedTime = Int(stopwatch.elapsedTime)
-        // MARK: Send Time
-        sendTime(readingTime: elapsedTime)
-        
+        let currentValue = try? timeElapsedSubject.value() // 현재 Observable의 값을 가져옵니다.
+        let elapsedTime = (currentValue ?? 0) - elapsedTimeCache // 마지막으로 pause되었던 시간을 뺀다.
+        elapsedTimeCache = 0  // 여기서 elapsedTimeCache를 0으로 reset합니다.
+        self.sendTimeSubscription = self.timeElapsedSubject.subscribe(onNext: { [weak self] _ in
+            print(elapsedTime)
+            self?.sendTime(readingTime: Int(elapsedTime)) // elapsedTime만큼 읽었다는 것을 서버로 보낸다.
+        })
         timerSubscription?.dispose()
         timerSubscription = nil
     }
@@ -232,9 +254,12 @@ class StopwatchViewModel {
         } else {
             if (minutes != 0) {
                 return String(format: "%02dm", minutes)
-            }
-            else {
-                return String(format: "%02ds", seconds)
+            } else {
+                if seconds >= 10 {
+                    return String(format: "%02ds", seconds)
+                } else {
+                    return String(format: "%ds", seconds)
+                }
             }
         }
     }

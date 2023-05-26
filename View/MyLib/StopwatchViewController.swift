@@ -117,6 +117,28 @@ extension StopwatchViewController {
             
         }.disposed(by: disposeBag)
         
+        layout.layout_deleteAllView.button_deleteAll.rx.tap
+            .subscribe(onNext: { [weak self] in
+                let bottomSheet = BottomSheetHistoryViewController()
+                bottomSheet.deleteCompletion = {
+                    self?.didTapDeleteHistoryButton()
+                }
+                bottomSheet.modalPresentationStyle = .overFullScreen
+                self?.present(bottomSheet, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+//        btn_more.rx.tap
+//            .subscribe(onNext: { [weak self] in
+//                let bottomSheet = BottomSheetViewController()
+//                bottomSheet.deleteCompletion = {
+//                    self?.didTapDeleteBookButton()
+//                }
+//                bottomSheet.modalPresentationStyle = .overFullScreen
+//                self?.present(bottomSheet, animated: true)
+//            })
+//            .disposed(by: disposeBag)
+        
         
         
         layout.button_total.rx.controlEvent([.touchDown, .touchDragEnter]).bind { [weak self] in
@@ -133,7 +155,6 @@ extension StopwatchViewController {
             self?.layout.label_total.isHidden = true
         }.disposed(by: disposeBag)
         
-//MARK: Todo: Edit Duration
 //        let durationFromAPI: TimeInterval = 120
 //
 //        stopwatchVM.elapsedTimeValue
@@ -165,6 +186,17 @@ extension StopwatchViewController {
         stopwatchVM.totalButtonColor
             .bind(to: layout.button_total.rx.backgroundColor)
             .disposed(by: disposeBag)
+    }
+    
+    private func didTapDeleteHistoryButton() {
+        let deletion = CustomAlertViewController()
+        deletion.modalPresentationStyle = .overFullScreen
+        deletion.confirmCompletion = { [weak self] in
+            self?.stopwatchVM.deleteTime()
+            self?.navigationController?.popViewController(animated: true)
+        }
+        deletion.setAlertLabel(title: "기록 삭제", subtitle: "기록을 정말 삭제하겠습니까?", okButtonTitle: "삭제")
+        self.present(deletion, animated: true)
     }
 }
 
