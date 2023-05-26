@@ -44,7 +44,6 @@ extension StopwatchViewController {
     
     private func configure() {
         self.view.backgroundColor = .white
-//        self.view.layoutIfNeeded()
         self.layout.initViews(view: self.view)
 //        self.layout.layout_table.layout_timerHistories.delegate = self
 //        self.layout.layout_table.layout_timerHistories.dataSource = self
@@ -55,14 +54,6 @@ extension StopwatchViewController {
             .bind(to: layout.label_time.rx.text)
             .disposed(by: disposeBag)
         
-//        stopwatchVM.startPauseTitle
-//            .bind(to: layout.getStartStopButton().rx.title())
-//            .disposed(by: disposeBag)
-//
-//        stopwatchVM.startPauseColor
-//            .bind(to: layout.getStartStopButton().rx.backgroundColor)
-//            .disposed(by: disposeBag)
-        
         stopwatchVM.startPauseButtonImage
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] imageName in
@@ -70,10 +61,13 @@ extension StopwatchViewController {
             })
             .disposed(by: disposeBag)
         
-//        stopwatchVM.historyListObservable
-//            .bind(to: layout.layout_table.layout_timerHistories.rx.items(cellIdentifier: StopwatchHistoryTableViewCell.identifier, cellType: StopwatchHistoryTableViewCell.self)) { row, history, cell in
-//
-//            }
+        
+        //MARK: totalButton Img
+//        stopwatchVM.totalButtonImage
+//            .observe(on: MainScheduler.instance)
+//            .subscribe(onNext: { [weak self] imageName in
+//                self?.layout.button_total.setImage(UIImage(named: imageName), for: .normal)
+//            })
 //            .disposed(by: disposeBag)
         
         stopwatchVM.historyListObservable
@@ -98,22 +92,8 @@ extension StopwatchViewController {
             .disposed(by: disposeBag)
         
         
-//        stopwatchVM.historyListObservable
-//            .bind(to: layout.layout_table.layout_timerHistories.rx.items(cellIdentifier: StopwatchHistoryTableViewCell.identifier, cellType: StopwatchHistoryTableViewCell.self)) { row, history, cell in
-//                cell.label_date.text = history.date
-//                cell.label_time.text = String(history.time)
-//            }
-//            .disposed(by: disposeBag)
-//
-//
-//        layout.layout_table.layout_timerHistories.rx.setDelegate(self).disposed(by: disposeBag)
-
-        
-        
         layout.button_startStop.rx.tap.bind { [weak self] in
             self?.stopwatchVM.startOrPause()
-            
-//            layout.button_startStop.setImage(UIImage(named: self?.stopwatchVM.startPauseButtonImage), for: .normal)
             
         }.disposed(by: disposeBag)
         
@@ -142,29 +122,16 @@ extension StopwatchViewController {
         
         
         layout.button_total.rx.controlEvent([.touchDown, .touchDragEnter]).bind { [weak self] in
-//            self?.stopwatchVM.changeStrokeColor()
             self?.stopwatchVM.changeTimeLabelColor()
             self?.stopwatchVM.changeTotalButtonColor()
             self?.layout.label_total.isHidden = false
         }.disposed(by: disposeBag)
 
         layout.button_total.rx.controlEvent([.touchUpInside, .touchUpOutside, .touchCancel, .touchDragExit]).bind { [weak self] in
-//            self?.stopwatchVM.revertStrokeColor()
             self?.stopwatchVM.reverTimeLabelColor()
             self?.stopwatchVM.revertTotalButtonColor()
             self?.layout.label_total.isHidden = true
         }.disposed(by: disposeBag)
-        
-//        let durationFromAPI: TimeInterval = 120
-//
-//        stopwatchVM.elapsedTimeValue
-//            .map { elapsed -> CGFloat in
-//                let progress = elapsed / durationFromAPI
-//                return CGFloat(min(progress, 1.0))
-//            }
-//            .bind { [weak self] progress in
-//                self?.layout.layout_stopwatch.setProgress(progress)
-//            }.disposed(by: disposeBag)
         
         stopwatchVM.durationFromAPI
             .flatMapLatest { duration -> Observable<CGFloat> in

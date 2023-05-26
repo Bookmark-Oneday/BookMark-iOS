@@ -32,8 +32,6 @@ class StopwatchView: UIView {
             make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(436)
         }
-        //
-//        layout_main.backgroundColor = .systemGreen
         
         layout_main.addSubviews(label_time, button_total, button_startStop, label_total)
         
@@ -68,7 +66,8 @@ class StopwatchView: UIView {
         button_total.layer.cornerRadius = 33
         button_total.layer.borderColor = UIColor.lightOrange.cgColor
         button_total.layer.borderWidth = 3
-//        button_total.setImage(<#T##image: UIImage?##UIImage?#>, for: <#T##UIControl.State#>)
+        //MARK: totalButton Img
+//        button_total.setImage(UIImage(named: "total"), for: .normal)
         
         button_startStop.snp.makeConstraints{ make in
             make.height.width.equalTo(66)
@@ -204,12 +203,6 @@ extension Reactive where Base: StopwatchRunningView {
         }
     }
 }
-
-//enum StopwatchState {
-//    case initial
-//    case running
-//    case paused
-//}
 
 //MARK: -HistotyDeleteAllView
 class HistoryDeleteAllView {
